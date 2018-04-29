@@ -8,21 +8,8 @@
                 <span class="bottom"></span>
             </div>
             <a href="index.html" class="navbar-brand">
-                <b>MIMIN</b>
+                <b>ESCUELA VIRGEN DE GUADALUPE</b>
             </a>
-
-            <ul class="nav navbar-nav search-nav">
-                <li>
-                    <div class="search">
-                        <span class="fa fa-search icon-search" style="font-size:23px;"></span>
-                        <div class="form-group form-animate-text">
-                            <input type="text" class="form-text" required>
-                            <span class="bar"></span>
-                            <label class="label-search">Type anywhere to <b>Search</b> </label>
-                        </div>
-                    </div>
-                </li>
-            </ul>
 
             <ul class="nav navbar-nav navbar-right user-nav">
                 <li class="user-name"><span>Akihiko Avaron</span></li>
