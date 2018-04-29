@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'AlumnosController@alumno', function () {
     return view('404');
 });
