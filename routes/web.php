@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', 'AlumnosController@alumno', function () {
-    return view('404');
-});
+
+//Route::get('/', 'AlumnosController@alumno', function () {
+//    return view('404');
+//});
+
+Auth::routes();
+
+\App\Http\Controllers\AlumnosController::routes();

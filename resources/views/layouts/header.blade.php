@@ -8,7 +8,7 @@
                 <span class="bottom"></span>
             </div>
             <a href="index.html" class="navbar-brand">
-                <b>ESCUELA VIRGEN DE GUADALUPE</b>
+                <b>EVG</b>
             </a>
 
             <ul class="nav navbar-nav navbar-right user-nav">

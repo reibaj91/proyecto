@@ -4,7 +4,6 @@
 
 <head>
     @include('layouts.head')
-
 </head>
 
 <body id="mimin" class="dashboard">
