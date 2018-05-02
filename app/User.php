@@ -7,15 +7,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
+    protected $table = 'profesores';
+    protected $primaryKey = 'idUsuario';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'idUsuario',
+        'email',
+        'nombre',
+        'password',
+        'baja_temporal',
     ];
 
     /**
@@ -26,4 +30,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function seccion()
+    {
+        return $this->hasOne('App/Secciones');
+    }
+
+    public function etapas()
+    {
+        return $this->hasMany('App/Etapas');
+    }
+
+    public function profesores_perfiles()
+    {
+        return $this->hasMany('App/ProfesoresPerfiles');
+    }
 }

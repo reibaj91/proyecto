@@ -18,4 +18,11 @@
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'HomeController@logout')->name('logout');
+
 \App\Http\Controllers\AlumnosController::routes();
+
+
+Route::get('/home', 'HomeController@index')->name('home');
