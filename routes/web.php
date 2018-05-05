@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'HomeController@logout')->name('logout');
 
 \App\Http\Controllers\AlumnosController::routes();
-
-
-Route::get('/home', 'HomeController@index')->name('home');
+\App\Http\Controllers\ProfesoresController::routes();
+\App\Http\Controllers\ProfesoresPerfilesController::routes();
+\App\Http\Controllers\SeccionesController::routes();
+\App\Http\Controllers\CursosController::routes();
+\App\Http\Controllers\EtapasController::routes();
+\App\Http\Controllers\PerfilesController::routes();

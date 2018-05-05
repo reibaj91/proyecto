@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Alumnos;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -18,7 +17,7 @@ class AlumnosController extends Controller
     public function index(){
         $alumnos = Alumnos::all();
 
-        return view('alumnos.index')->with('alumnos',$alumnos);
+        return view('alumnos.alumnos')->with('alumnos',$alumnos);
     }
 
 }
