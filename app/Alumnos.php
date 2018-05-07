@@ -12,8 +12,12 @@ class Alumnos extends Model
 
         'nia',
         'nombreCompleto',
-        'telefono',
+        'dni',
+        'fecha_nacimiento',
         'sexo',
+        'telefono',
+        'telefono_urgencia',
+        'email',
         'idSeccion',
         'created_at',
         'updated_at'

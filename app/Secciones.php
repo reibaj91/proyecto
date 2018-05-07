@@ -23,7 +23,7 @@ class Secciones extends Model
     }
 
     public function profesores(){
-        return $this->hasOne('App/Profesores');
+        return $this->hasOne('App/User');
     }
 
     public function alumnos(){

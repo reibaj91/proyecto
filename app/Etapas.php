@@ -23,7 +23,7 @@ class Etapas extends Model
     }
 
     public function profesores(){
-        return $this->belongsTo('App/Profesores');
+        return $this->belongsTo('App/User');
     }
 
     public function subetapas(){

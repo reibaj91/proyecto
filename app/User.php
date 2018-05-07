@@ -21,6 +21,9 @@ class User extends Authenticatable
         'nombre',
         'password',
         'baja_temporal',
+        'created_at',
+        'updated_at',
+        'remember_token'
     ];
 
     /**
@@ -46,4 +49,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App/ProfesoresPerfiles');
     }
+
+
 }
