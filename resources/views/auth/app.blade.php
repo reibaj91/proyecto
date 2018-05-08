@@ -11,12 +11,12 @@
 <head>
     @include('layouts.head')
     <style>
-        body{
+        body {
             background-image: url("/asset/img/fondo.jpg");
+            background-position: center center;
             background-repeat: no-repeat;
-            width: 100%;
-            height: auto;
-            background-size:cover;
+            background-attachment: fixed;
+            background-size: cover;
         }
     </style>
 </head>
