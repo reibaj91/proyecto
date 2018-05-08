@@ -22,6 +22,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'HomeController@logout')->name('logout');
 
+
+Route::get('/login/{provider}', 'SocialAuthController@redirectToProvider');
+Route::get('/login/{provider}/callback', 'SocialAuthController@handleProviderCallback');
+
 \App\Http\Controllers\AlumnosController::routes();
 \App\Http\Controllers\ProfesoresController::routes();
 \App\Http\Controllers\ProfesoresPerfilesController::routes();

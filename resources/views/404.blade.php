@@ -10,16 +10,16 @@
   <title>Miminium</title>
 
   <!-- start: Css -->
-  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/asset/css/bootstrap.min.css">
 
   <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
-  <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
-  <link href="asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/asset/css/plugins/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/asset/css/plugins/simple-line-icons.css"/>
+  <link rel="stylesheet" type="text/css" href="/asset/css/plugins/animate.min.css"/>
+  <link href="/asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
-  <link rel="shortcut icon" href="asset/img/logomi.png">
+  <link rel="shortcut icon" href="/asset/img/logomi.png">
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,7 +44,7 @@
     <!-- start: Content -->
     <center>
       <div class="page-404 animated flipInX">
-        <img src="asset/img/404Error.png" class="img-responsive imagen"/><br>
+        <img src="/asset/img/404Error.png" class="img-responsive imagen"/><br>
         <button class="btn btn-primary" href="#">
           Volver
         </button>
@@ -54,18 +54,18 @@
   </div>
 
 <!-- start: Javascript -->
-<script src="asset/js/jquery.min.js"></script>
-<script src="asset/js/jquery.ui.min.js"></script>
-<script src="asset/js/bootstrap.min.js"></script>
+<script src="/asset/js/jquery.min.js"></script>
+<script src="/asset/js/jquery.ui.min.js"></script>
+<script src="/asset/js/bootstrap.min.js"></script>
 
 
 <!-- plugins -->
-<script src="asset/js/plugins/moment.min.js"></script>
-<script src="asset/js/plugins/jquery.nicescroll.js"></script>
+<script src="/asset/js/plugins/moment.min.js"></script>
+<script src="/asset/js/plugins/jquery.nicescroll.js"></script>
 
 
 <!-- custom -->
-<script src="asset/js/main.js"></script>
+<script src="/asset/js/main.js"></script>
 <script type="text/javascript">
 </script>
 <!-- end: Javascript -->

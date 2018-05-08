@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID', '331788553342-3shndmrjs5pl46b520afrlmggnbh23nb.apps.googleusercontent.com'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', 'iaXdnU0hsIyRInvJvwoX7JLA'),
+        'redirect' => 'http://proyectoimplantacion.com/login/google/callback',
+    ],
+
 ];
