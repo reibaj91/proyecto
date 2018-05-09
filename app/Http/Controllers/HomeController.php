@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 
 class HomeController extends Controller
 {
@@ -24,7 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::all();
+        if ($user == null) {
+            return view ('admin.createAdmin');
+        } else {
+            return view('home');
+        }
     }
 
     public function logout(){

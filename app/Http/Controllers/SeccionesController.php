@@ -12,6 +12,9 @@ class SeccionesController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'secciones'], function (){
             Route::get('/', 'SeccionesController@index')->name('secciones');
+
+            Route::post('store', 'SeccionesController@store')->name('secciones.store');
+            Route::post('pre-validar', 'SeccionesController@preValidar')->name('secciones.pre-validar');
         });
     }
 
@@ -19,5 +22,40 @@ class SeccionesController extends Controller
         $secciones = Secciones::all();
 
         return view('secciones.secciones')->with('secciones',$secciones);
+    }
+
+    public function preValidar(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        return response("Válido", 200);
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validator($request->all())->validate();
+
+        try {
+            DB::beginTransaction();
+            User::create([
+                'idSeccion' => $request->idSeccion,
+                'nombre' => $request->name,
+                'tutor' => $request->tutor,
+                'idCurso' => $request->idCurso,
+
+            ]);
+
+            DB::commit();
+            Session::flash('message', "Seccion creada con éxito");
+
+            return redirect( route('secciones.alta'));
+
+        } catch (\Exception $e) {
+            $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
+            DB::rollBack();
+
+            return back()->withInput();
+        }
     }
 }

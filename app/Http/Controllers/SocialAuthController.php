@@ -15,6 +15,7 @@ class SocialAuthController extends Controller
 
     public function handleProviderCallback($provider) {
         try {
+
             $user = Socialite::driver($provider)->stateless()->user();
             $createUser = User::where('email', '=', $user->email)->get()->first();
             if($createUser != null) {
