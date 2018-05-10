@@ -39,11 +39,9 @@ class EtapasController extends Controller
         try {
             DB::beginTransaction();
             User::create([
-                'codEtapa' => $request->codEtapa,
                 'nombre' => $request->name,
                 'coordinador' => $request->coordinador,
                 'etapapp' => $request->etapapp,
-
             ]);
 
             DB::commit();
