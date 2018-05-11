@@ -23,12 +23,15 @@ class ProfesoresController extends Controller
         });
     }
 
+
     public function index()
     {
-        $profesores = Profesores::all();
+        $profesores = User::all();
 
-        return view('profesores.profesores')->with('profesores', $profesores);
+        return view('profesores.profesores', compact('profesores'));
     }
+
+
 
     public function alta()
     {

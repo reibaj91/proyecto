@@ -187,27 +187,27 @@
                 responsive: true,
                 showTooltips: true,
                 multiTooltipTemplate: "< %= value %>",
-                     maintainAspectRatio: false
-                });
+                maintainAspectRatio: false
+            });
 
-                var ctx3 = $(".bar-chart")[0].getContext("2d");
-                window.myLine = new Chart(ctx3).Bar(barChartData, {
-                     responsive: true,
-                        showTooltips: true
-                });
+            var ctx3 = $(".bar-chart")[0].getContext("2d");
+            window.myLine = new Chart(ctx3).Bar(barChartData, {
+                responsive: true,
+                showTooltips: true
+            });
 
-                var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
-                window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
-                    responsive : true,
-                    showTooltips: true
-                });
+            var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
+            window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
+                responsive: true,
+                showTooltips: true
+            });
 
-            };
+        };
 
         //  end:  Chart =============
 
         // start: Calendar =========
-         $('.dashboard .calendar').fullCalendar({
+        $('.dashboard .calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -273,7 +273,7 @@
 
         // start: Maps============
 
-          jQuery('.maps').vectorMap({
+        jQuery('.maps').vectorMap({
             map: 'world_en',
             backgroundColor: null,
             color: '#fff',
@@ -288,5 +288,22 @@
 
         // end: Maps==============
 
-      })(jQuery);
-     </script>
+    })(jQuery);
+
+
+</script>
+<!-- start: Javascript -->
+
+
+<!-- plugins -->
+<script src="/asset/js/plugins/jquery.datatables.min.js"></script>
+<script src="/asset/js/plugins/datatables.bootstrap.min.js"></script>
+
+
+<!-- custom -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datatables-example').DataTable();
+    });
+</script>
+<!-- end: Javascript -->

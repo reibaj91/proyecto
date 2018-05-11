@@ -14,7 +14,7 @@
                 <ul class="nav nav-list tree">
                     <li><a href="dashboard-v1.blade.php">Importar</a></li>
                     <li><a href="{{route('profesores.alta')}}">Alta</a></li>
-                    <li><a href="dashboard-v2.blade.php">Editar</a></li>
+                    <li><a href="{{route('profesores')}}">Editar</a></li>
                     <li><a href="dashboard-v2.blade.php">Baja</a></li>
                 </ul>
             </li>
