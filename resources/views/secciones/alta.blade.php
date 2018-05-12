@@ -28,7 +28,7 @@
         @endif
         <div class="col-md-10 col-md-offset-1 panel">
             <div class="col-md-12 panel-heading">
-                <h4>Añadir Profesor</h4>
+                <h4>Añadir Sección</h4>
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">
@@ -45,15 +45,35 @@
                                 <span class="bar"></span>
                                 <label for="name">Nombre</label>
                             </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="tutor" name="tutor" required aria-required="true">
-                                <span class="bar"></span>
-                                <label for="tutor">Tutor</label>
-                            </div>
-                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="idCurso" name="idCurso" required aria-required="true">
-                               <span class="bar"></span>
-                               <label for="idCurso">Curso</label>
+                           <div class="form-group">
+                               <label for="seccion">Tutor</label>
+                               <select class="form-control " id="tutor" name="tutor" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
+                           </div>
+                           <div class="form-group">
+                               <label for="seccion">Curso</label>
+                               <select class="form-control " id="idCurso" name="idCurso" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
                            </div>
                         </div>
 

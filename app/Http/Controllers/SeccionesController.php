@@ -12,6 +12,7 @@ class SeccionesController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'secciones'], function (){
             Route::get('/', 'SeccionesController@index')->name('secciones');
+            Route::get('alta', 'SeccionesController@alta')->name('secciones.create');
 
             Route::post('store', 'SeccionesController@store')->name('secciones.store');
             Route::post('pre-validar', 'SeccionesController@preValidar')->name('secciones.pre-validar');
@@ -23,6 +24,13 @@ class SeccionesController extends Controller
 
         return view('secciones.secciones')->with('secciones',$secciones);
     }
+
+    public function alta()
+    {
+
+        return view('secciones.alta');
+    }
+
 
     public function preValidar(Request $request)
     {

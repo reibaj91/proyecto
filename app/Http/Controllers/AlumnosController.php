@@ -11,6 +11,7 @@ class AlumnosController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'alumnos'], function (){
             Route::get('/', 'AlumnosController@index')->name('alumnos');
+            Route::get('nuevo', 'AlumnosController@nuevo')->name('alumnos.nuevo');
 
             Route::post('store', 'AlumnosController@store')->name('alumnos.store');
             Route::post('pre-validar', 'AlumnosController@preValidar')->name('alumnos.pre-validar');
@@ -23,8 +24,13 @@ class AlumnosController extends Controller
         return view('alumnos.alumnos')->with('alumnos',$alumnos);
     }
 
+    public function nuevo()
+    {
+        return view('alumnos.alta');
+    }
 
-    public function preValidar(Request $request)
+
+     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
 

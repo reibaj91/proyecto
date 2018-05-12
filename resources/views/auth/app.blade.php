@@ -9,7 +9,6 @@
 <!-- BEGIN HEAD -->
 
 <head>
-    @include('layouts.head')
     <style>
         body {
             background-image: url("/asset/img/fondo.jpg");
@@ -19,6 +18,8 @@
             background-size: cover;
         }
     </style>
+    @include('layouts.head')
+
 </head>
 <!-- END HEAD -->
 

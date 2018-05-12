@@ -9,8 +9,7 @@ use App\User;
 class SocialAuthController extends Controller
 {
     public function redirectToProvider($provider) {
-
-        return Socialite::driver($provider)->redirect();
+               return Socialite::driver($provider)->redirect();
     }
 
     public function handleProviderCallback($provider) {
@@ -18,6 +17,7 @@ class SocialAuthController extends Controller
 
             $user = Socialite::driver($provider)->stateless()->user();
             $createUser = User::where('email', '=', $user->email)->get()->first();
+
             if($createUser != null) {
                 auth()->login($createUser, true);
 

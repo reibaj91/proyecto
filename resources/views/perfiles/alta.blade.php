@@ -28,7 +28,7 @@
         @endif
         <div class="col-md-10 col-md-offset-1 panel">
             <div class="col-md-12 panel-heading">
-                <h4>Añadir Profesor</h4>
+                <h4>Añadir Perfil</h4>
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">

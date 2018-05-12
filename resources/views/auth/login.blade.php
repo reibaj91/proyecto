@@ -12,6 +12,7 @@
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-4">
                                 <a href="{{ url('login/google') }}" class="btn btn-google"><i class="fa fa-google"></i> Google</a>
+
                             </div>
                         </div>
                         {{--<input id="email" type="text"--}}

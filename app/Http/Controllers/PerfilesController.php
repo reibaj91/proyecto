@@ -12,6 +12,7 @@ class PerfilesController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'Perfiles'], function (){
             Route::get('/', 'PerfilesController@index')->name('perfiles');
+            Route::get('nuevo', 'PerfilesController@nuevo')->name('perfiles.nuevo');
 
             Route::post('store', 'PerfilesController@store')->name('perfiles.store');
             Route::post('pre-validar', 'PerfilesController@preValidar')->name('perfiles.pre-validar');
@@ -22,6 +23,12 @@ class PerfilesController extends Controller
         $perfiles = Perfiles::all();
 
         return view('perfiles.perfiles')->with('perfiles',$perfiles);
+    }
+
+    public function nuevo()
+    {
+
+        return view('perfiles.alta');
     }
 
     public function preValidar(Request $request)

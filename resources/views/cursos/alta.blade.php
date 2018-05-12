@@ -45,11 +45,21 @@
                                <span class="bar"></span>
                                <label for="name">Nombre</label>
                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="codEtapa" name="codEtapa" required aria-required="true">
-                                <span class="bar"></span>
-                                <label for="codEtapa">Etapa</label>
-                            </div>
+                           <div class="form-group">
+                               <label for="seccion">Etapa</label>
+                               <select class="form-control " id="codEtapa" name="codEtapa" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
+                           </div>
                         </div>
 
                         <div class="col-md-12">

@@ -12,6 +12,7 @@ class CursosController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'Cursos'], function (){
             Route::get('/', 'CursosController@index')->name('cursos');
+            Route::get('crear', 'CursosController@crear')->name('cursos.crear');
 
             Route::post('store', 'CursosController@store')->name('cursos.store');
             Route::post('pre-validar', 'CursosController@preValidar')->name('cursos.pre-validar');
@@ -22,6 +23,10 @@ class CursosController extends Controller
         $cursos = Cursos::all();
 
         return view('cursos.cursos')->with('cursos',$cursos);
+    }
+
+    public function crear() {
+        return view ('cursos.alta');
     }
 
     public function preValidar(Request $request)

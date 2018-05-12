@@ -75,10 +75,20 @@
                                <span class="bar"></span>
                                <label for="email">Email</label>
                            </div>
-                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="seccion" name="seccion" required aria-required="true">
-                               <span class="bar"></span>
+                           <div class="form-group">
                                <label for="seccion">Sección</label>
+                               <select class="form-control " id="seccion" name="seccion" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
                            </div>
                         </div>
 

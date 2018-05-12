@@ -12,6 +12,7 @@ class EtapasController extends Controller
     static function routes(){
         Route::group(['prefix'=> 'Etapas'], function (){
             Route::get('/', 'EtapasController@index')->name('etapas');
+            Route::get('crear', 'EtapasController@create')->name('etapas.create');
 
             Route::post('store', 'EtapasController@store')->name('etapas.store');
             Route::post('pre-validar', 'EtapasController@preValidar')->name('etapas.pre-validar');
@@ -22,6 +23,10 @@ class EtapasController extends Controller
         $etapas = Etapas::all();
 
         return view('etapas.etapas')->with('etapas',$etapas);
+    }
+
+    public function create() {
+        return view ('etapas.alta');
     }
 
     public function preValidar(Request $request)

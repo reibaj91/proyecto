@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">
-                    <form class="cmxform" id="signupForm" method="post" action="{{route('aplicacion.store')}}" novalidate="novalidate">
+                    <form class="cmxform" id="signupForm" method="post" action="{{route('aplicaciones.store')}}" novalidate="novalidate">
                         @csrf
                        <div class="col-md-12">
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
@@ -50,7 +50,21 @@
                                <span class="bar"></span>
                                <label for="urlbase">URL</label>
                            </div>
-
+                           <div class="form-group">
+                               <label for="seccion">Perfiles</label>
+                               <select class="form-control" multiple="multiple" id="perfil" name="perfil" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
+                           </div>
                         </div>
 
                         <div class="col-md-12">
@@ -80,7 +94,7 @@
             var data = form.serializeArray();
             data.push({name: '_token', value: "{{Session::token()}}"});
             $.ajax({
-                url: '{{ route('aplicacion.pre-validar') }}',
+                url: '{{ route('aplicaciones.pre-validar') }}',
                 data: data,
                 type: 'post',
                 success: function (data) {

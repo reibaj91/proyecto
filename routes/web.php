@@ -33,3 +33,4 @@ Route::get('/login/{provider}/callback', 'SocialAuthController@handleProviderCal
 \App\Http\Controllers\CursosController::routes();
 \App\Http\Controllers\EtapasController::routes();
 \App\Http\Controllers\PerfilesController::routes();
+\App\Http\Controllers\AplicacionesController::routes();

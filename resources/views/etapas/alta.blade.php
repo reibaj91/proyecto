@@ -40,15 +40,35 @@
                                 <span class="bar"></span>
                                 <label for="name">Nombre</label>
                             </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="coordinador" name="coordinador" required aria-required="true">
-                                <span class="bar"></span>
-                                <label for="coordinador">Coordinador</label>
-                            </div>
-                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="etapapp" name="etapapp" required aria-required="true">
-                               <span class="bar"></span>
-                               <label for="etapapp">Etapa</label>
+                           <div class="form-group">
+                               <label for="seccion">Coordinador</label>
+                               <select class="form-control " id="coordinador" name="coordinador" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
+                           </div>
+                           <div class="form-group">
+                               <label for="seccion">Etapa</label>
+                               <select class="form-control " id="etapapp" name="etapapp" required aria-required="true">
+                                   <option>option one</option>
+                                   <option>option two</option>
+                                   <option>option three</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                                   <option>option four</option>
+                               </select>
                            </div>
                        </div>
 
