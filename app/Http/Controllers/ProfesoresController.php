@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
+
 class ProfesoresController extends Controller
 {
     static function routes()
@@ -17,7 +18,10 @@ class ProfesoresController extends Controller
         Route::group(['prefix' => 'profesores'], function () {
             Route::get('/', 'ProfesoresController@index')->name('profesores');
             Route::get('alta', 'ProfesoresController@alta')->name('profesores.alta');
+            Route::get('importar', 'ProfesoresController@importar')->name('profesores.importar');
 
+
+            Route::post('import', 'ProfesoresController@import')->name('profesores.import');
             Route::post('store', 'ProfesoresController@store')->name('profesores.store');
             Route::post('pre-validar', 'ProfesoresController@preValidar')->name('profesores.pre-validar');
         });
@@ -31,6 +35,11 @@ class ProfesoresController extends Controller
         return view('profesores.profesores', compact('profesores'));
     }
 
+    public function importar()
+    {
+
+        return view('profesores.importar');
+    }
 
 
     public function alta()
@@ -38,6 +47,13 @@ class ProfesoresController extends Controller
 
         return view('profesores.alta');
     }
+
+    public function import(Request $request)
+    {
+        $excel=$request->file;
+        dd($excel);
+    }
+
 
     protected function validator(array $data)
     {

@@ -67,8 +67,7 @@
                                                             <button class="btn btn-round btn-primary">
                                                                 <div>
                                                                     <span style="padding: 0 7px">Editar</span>
-                                                                    <span class="ink animate"
-                                                                          style="height: 86px; width: 86px; top: -28px; left: 34px;"></span>
+
                                                                 </div>
                                                             </button>
                                                         </div>
@@ -76,8 +75,7 @@
                                                             <button class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
-                                                                    <span class="ink animate"
-                                                                          style="height: 86px; width: 86px; top: -28px; left: 34px;"></span>
+
                                                                 </div>
                                                             </button>
                                                         </div>
