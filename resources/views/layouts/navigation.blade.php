@@ -57,7 +57,7 @@
                 <ul class="nav nav-list tree">
                     <li><a href="formelement.blade.php">Importar</a></li>
                     <li><a href="{{route('alumnos.nuevo')}}">Alta</a></li>
-                    <li><a href="#">Editar</a></li>
+                    <li><a href="{{route('alumnos')}}">Editar</a></li>
                     <li><a href="#">Baja</a></li>
                 </ul>
             </li>
