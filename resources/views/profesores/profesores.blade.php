@@ -11,6 +11,11 @@
                 </div>
             </div>
         </div>
+        @if(Session::has('message'))
+            <div style="width: 250px; margin: 1em auto;" class="alert  {{ Session::get('alert-class', 'alert-success') }}"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>{{ Session::get('message') }}</div>
+        @endif
         <div class="col-md-12 top-20 padding-0">
             <div class="col-md-12">
                 <div class="panel">
@@ -49,7 +54,7 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
-                                                    style="width: 123px;">Opciones
+                                                    style="width: 123px;">Acciones
                                                 </th>
                                             </tr>
                                             </thead>

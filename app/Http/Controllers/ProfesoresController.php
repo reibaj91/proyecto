@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use SpreadsheetReader;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class ProfesoresController extends Controller
 {
@@ -50,8 +52,42 @@ class ProfesoresController extends Controller
 
     public function import(Request $request)
     {
-        $excel=$request->file;
-        dd($excel);
+
+
+        $file = $request->file('file');
+
+        $request->validate([
+            'file' => 'mimes:xlsx',
+        ]);
+
+        $path = $file->path();
+
+
+
+        try {
+            DB::beginTransaction();
+            $users = (new FastExcel)->import($path, function ($line) {
+                if ($line['Nombre'] != "") {
+                    return User::create([
+                        'nombre' => $line['Nombre'],
+                        'email' => $line['Correo']
+                    ]);
+                }
+            });
+
+            DB::commit();
+            Session::flash('message', "Profesores creados con éxito");
+
+            return redirect(route('profesores'));
+
+        } catch (\Exception $e) {
+            Session::flash('message', "No se ha podido importar a los profesores");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
+        return redirect(route('profesores'));
     }
 
 
@@ -66,7 +102,8 @@ class ProfesoresController extends Controller
 
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|unique:profesores,email'
+            'email' => 'required|unique:profesores,email',
+            'file' => 'mimes:xlsx',
         ], $mensajes);
     }
 
@@ -92,7 +129,7 @@ class ProfesoresController extends Controller
             DB::commit();
             Session::flash('message', "Profesor creado con éxito");
 
-            return redirect( route('profesores.alta'));
+            return redirect(route('profesores.alta'));
 
         } catch (\Exception $e) {
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
