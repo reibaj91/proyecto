@@ -25,7 +25,7 @@
                 </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('etapas.create')}}">Nueva</a></li>
-                    <li><a href="boxed.blade.php">Editar</a></li>
+                    <li><a href="{{route('etapas')}}">Editar</a></li>
                     <li><a href="boxed.blade.php">Eliminar</a></li>
                     <li><a href="boxed.blade.php">Asignar coordinador</a></li>
                 </ul>
@@ -37,7 +37,7 @@
                 </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('cursos.crear')}}">Nuevo</a></li>
-                    <li><a href="morris.blade.php">Editar</a></li>
+                    <li><a href="{{route('cursos')}}">Editar</a></li>
                     <li><a href="flot.blade.php">Eliminar</a></li>
                     <li><a href="sparkline.blade.php">Asignar etapa</a></li>
                 </ul>
@@ -47,7 +47,7 @@
                 <ul class="nav nav-list tree">
                     <li><a href="#">Importar</a></li>
                     <li><a href="{{route('secciones.create')}}">Alta</a></li>
-                    <li><a href="typography.blade.php">Editar</a></li>
+                    <li><a href="{{route('secciones')}}">Editar</a></li>
                     <li><a href="icons.blade.php">Baja</a></li>
                     <li><a href="buttons.blade.php">Asignar curso</a></li>
                     <li><a href="media.blade.php">Asignar tutor</a></li>

@@ -31,19 +31,31 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 162px;">Nombre
+                                                    style="width: 162px;">NIA
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: 264px;">email
+                                                    style="width: 264px;">Nombre
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
-                                                    style="width: 123px;">Baja
+                                                    style="width: 123px;">Fecha de Nacimiento
+                                                </th>
+                                                <th class="sorting text-center" tabindex="0"
+                                                    aria-controls="datatables-example"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Office: activate to sort column ascending"
+                                                    style="width: 123px;">Email
+                                                </th>
+                                                <th class="sorting text-center" tabindex="0"
+                                                    aria-controls="datatables-example"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Office: activate to sort column ascending"
+                                                    style="width: 123px;">Clase
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
@@ -54,14 +66,18 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($profesores as $p)
+                                            @foreach($alumnos as $a)
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1 text-center"
-                                                        style="vertical-align: middle">{{$p->nombre}}</td>
+                                                        style="vertical-align: middle">{{$a->nia}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$p->email}}</td>
+                                                        style="vertical-align: middle">{{$a->nombre}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$p->baja_temporal}}</td>
+                                                        style="vertical-align: middle">{{$a->fechaNacimiento}}</td>
+                                                    <td class="text-center"
+                                                        style="vertical-align: middle">{{$a->email}}</td>
+                                                    <td class="text-center"
+                                                        style="vertical-align: middle">{{$a->idSeccion}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
                                                             <button class="btn btn-round btn-primary">
@@ -75,7 +91,6 @@
                                                             <button class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
-
                                                                 </div>
                                                             </button>
                                                         </div>
