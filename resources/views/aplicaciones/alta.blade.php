@@ -46,23 +46,16 @@
                                <label for="icono">Icono</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="urlbase" name="urlbase" required aria-required="true">
+                               <input type="text" class="form-text" id="url" name="url" required aria-required="true">
                                <span class="bar"></span>
-                               <label for="urlbase">URL</label>
+                               <label for="url">URL</label>
                            </div>
                            <div class="form-group">
                                <label for="seccion">Perfiles</label>
                                <select class="form-control" multiple="multiple" id="perfil" name="perfil" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($perfiles as $p)
+                                       <option>{{$p->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                         </div>
@@ -107,7 +100,6 @@
                 }
             });
         }
-
     </script>
 @endsection
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Perfiles;
 use App\Aplicaciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +28,9 @@ class AplicacionesController extends Controller
 
     public function nueva()
     {
+        $perfiles = Perfiles::all();
 
-        return view('aplicaciones.alta');
+        return view('aplicaciones.alta')->with('perfiles',$perfiles);
     }
 
     public function preValidar(Request $request)
@@ -48,7 +50,7 @@ class AplicacionesController extends Controller
             User::create([
                 'nombre' => $request->name,
                 'icono' => $request->icono,
-                'URL' => $request->urlbase,
+                'URL' => $request->url,
             ]);
 
             DB::commit();

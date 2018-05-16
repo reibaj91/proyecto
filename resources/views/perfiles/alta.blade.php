@@ -36,11 +36,6 @@
                         @csrf
                        <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="tipo" name="tipo" required aria-required="true">
-                               <span class="bar"></span>
-                               <label for="tipo">Tipo</label>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="name" name="name" required aria-required="true">
                                 <span class="bar"></span>
                                 <label for="name">Nombre</label>

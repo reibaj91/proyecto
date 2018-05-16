@@ -20,4 +20,8 @@ class Perfiles extends Model
     public function profesores_perfiles(){
         return $this->hasMany('App/ProfesoresPerfiles');
     }
+
+    public function perfilapp(){
+        return $this->hasMany('App/PerfilApp');
+    }
 }

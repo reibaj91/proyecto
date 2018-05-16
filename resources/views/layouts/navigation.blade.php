@@ -64,14 +64,14 @@
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-users"></span> Perfiles  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('perfiles.nuevo')}}">Nuevo</a></li>
-                    <li><a href="handsontable.blade.php">Editar</a></li>
+                    <li><a href="{{route('perfiles')}}">Editar</a></li>
                     <li><a href="tablestatic.blade.php">Eliminar</a></li>
                 </ul>
             </li>
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('aplicaciones.nueva')}}">Nuevo</a></li>
-                    <li><a href="handsontable.blade.php">Editar</a></li>
+                    <li><a href="{{route('aplicaciones')}}">Editar</a></li>
                     <li><a href="tablestatic.blade.php">Eliminar</a></li>
                 </ul>
             </li>

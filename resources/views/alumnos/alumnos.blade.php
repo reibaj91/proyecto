@@ -71,7 +71,7 @@
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$a->nia}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$a->nombre}}</td>
+                                                        style="vertical-align: middle">{{$a->nombreCompleto}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->fechaNacimiento}}</td>
                                                     <td class="text-center"

@@ -43,31 +43,17 @@
                            <div class="form-group">
                                <label for="seccion">Coordinador</label>
                                <select class="form-control " id="coordinador" name="coordinador" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($profesores as $p)
+                                       <option>{{$p->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                            <div class="form-group">
                                <label for="seccion">Etapa</label>
                                <select class="form-control " id="etapapp" name="etapapp" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($etapas as $e)
+                                       <option>{{$e->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                        </div>

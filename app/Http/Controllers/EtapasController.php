@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Etapas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,10 @@ class EtapasController extends Controller
     }
 
     public function create() {
-        return view ('etapas.alta');
+        $profesores = User::all();
+        $etapas = Etapas::all();
+
+        return view ('etapas.alta')->with('profesores',$profesores)->with('etapas',$etapas);
     }
 
     public function preValidar(Request $request)
