@@ -12,7 +12,9 @@
             </div>
         </div>
         @if(Session::has('message'))
-            <div style="width: 250px; margin: 1em auto;" class="alert  {{ Session::get('alert-class', 'alert-success') }}"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <div style="width: 250px; margin: 1em auto;"
+                 class="alert  {{ Session::get('alert-class', 'alert-success') }}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>{{ Session::get('message') }}</div>
         @endif
@@ -60,7 +62,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($profesores as $p)
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" id="{{$p->idUsuario}}">
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$p->nombre}}</td>
                                                     <td class="text-center"
@@ -77,11 +79,10 @@
                                                             </button>
                                                         </div>
                                                         <div style="margin-top: 7px;">
-                                                            <button class="btn btn-round btn-danger">
-                                                                <div>
-                                                                    <span>Eliminar</span>
-
-                                                                </div>
+                                                            <button onclick="borrar({{$p->idUsuario}},'{{$p->nombre}}');" class="btn btn-round btn-danger">
+                                                                    <div>
+                                                                        <span>Eliminar</span>
+                                                                    </div>
                                                             </button>
                                                         </div>
                                                     </td>
@@ -99,7 +100,40 @@
         </div>
     </div>
     </div>
+
 @endsection
 @section('scripts')
-@endsection
+    <script>
+        function borrar(id,nombre) {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Vas a borrar a "+nombre,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
 
+                $.ajax({
+                    url: '{{route('profesores.delete')}}',
+                    method: "post",
+                    data: {
+                        "id": id,
+                        "_token": "{{Session::token()}}"
+                    },
+                    success: function (data) {
+                        $("#"+id).remove();
+                        swal(
+                            'Borrado!',
+                            'Has borrado a '+nombre,
+                            'success'
+                        )
+                    }
+                });
+            }
+        })
+        }
+    </script>
+@endsection

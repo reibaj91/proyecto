@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth.app')
 @section('cuerpo')
     <div id="content">
         <div class="panel box-shadow-none content-header">
@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <form class="cmxform" id="signupForm" method="post" action="{{route('profesores.store')}}" novalidate="novalidate">
                         @csrf
-                       <div class="col-md-12">
+                        <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="name" name="name" required aria-required="true">
                                 <span class="bar"></span>
@@ -45,16 +45,16 @@
                                 <span class="bar"></span>
                                 <label for="email">Email</label>
                             </div>
-    </div>
+                        </div>
 
-    <div class="col-md-12">
-        <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
-    </div>
-    </form>
+                        <div class="col-md-12">
+                            <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
+                        </div>
+                    </form>
 
-    </div>
-    </div>
-    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('scripts')

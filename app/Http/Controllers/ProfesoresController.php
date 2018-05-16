@@ -22,7 +22,7 @@ class ProfesoresController extends Controller
             Route::get('alta', 'ProfesoresController@alta')->name('profesores.alta');
             Route::get('importar', 'ProfesoresController@importar')->name('profesores.importar');
 
-
+            Route::post('borrar','ProfesoresController@delete')->name('profesores.delete');
             Route::post('import', 'ProfesoresController@import')->name('profesores.import');
             Route::post('store', 'ProfesoresController@store')->name('profesores.store');
             Route::post('pre-validar', 'ProfesoresController@preValidar')->name('profesores.pre-validar');
@@ -62,11 +62,16 @@ class ProfesoresController extends Controller
 
         $path = $file->path();
 
+        $users=User::where('idUsuario','<>',1);
 
+        $users->delete();
 
         try {
             DB::beginTransaction();
             $users = (new FastExcel)->import($path, function ($line) {
+
+
+
                 if ($line['Nombre'] != "") {
                     return User::create([
                         'nombre' => $line['Nombre'],
@@ -74,7 +79,6 @@ class ProfesoresController extends Controller
                     ]);
                 }
             });
-
             DB::commit();
             Session::flash('message', "Profesores creados con éxito");
 
@@ -103,7 +107,6 @@ class ProfesoresController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|unique:profesores,email',
-            'file' => 'mimes:xlsx',
         ], $mensajes);
     }
 
@@ -137,6 +140,29 @@ class ProfesoresController extends Controller
 
             return back()->withInput();
         }
+    }
+
+    public function delete(Request $request){
+
+        $user = User::findOrFail($request->id);
+
+        try {
+            DB::beginTransaction();
+
+            $user->delete();
+
+            DB::commit();
+            $request->session()->flash('success', "Profesor eliminado con Éxito");
+
+            return redirect(route('profesores'));
+
+        } catch (\Exception $e) {
+            $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
     }
 
 }

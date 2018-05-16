@@ -307,3 +307,41 @@
     });
 </script>
 <!-- end: Javascript -->
+
+
+<script>
+    function borrarProfesor(id, nombre) {
+        swal({
+            title: '¿Estás seguro?',
+            text: "Vas a borrar a " + nombre,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Borrar'
+        }).then((result) => {
+            if(result.value
+    )
+        {
+
+            $.ajax({
+                url: '{{route('profesores.delete')}}',
+                method: "post",
+                data: {
+                    "id": id,
+                    "_token": "{{Session::token()}}"
+                },
+                success: function (data) {
+                    swal(
+                        'Borrado!',
+                        'Has borrado a ' + nombre,
+                        'success'
+                    )
+                }
+            });
+        }
+    });
+    }
+</script>
+
+@yield('scripts')

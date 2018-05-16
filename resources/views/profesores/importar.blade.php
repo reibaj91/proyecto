@@ -52,35 +52,6 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
-        var mandar = false;
 
-        function continuar(e) {
-            if (!mandar) {
-                e.preventDefault();
-                validarDatos();
-            }
-        }
-
-        function validarDatos() {
-            var form = $('#signupForm');
-            var data = form.serializeArray();
-            data.push({name: '_token', value: "{{Session::token()}}"});
-            $.ajax({
-                url: '{{ route('profesores.pre-validar') }}',
-                data: data,
-                type: 'post',
-                success: function (data) {
-                    mandar = true;
-                    $("button").add;
-                    $("#signupForm").submit();
-                },
-                error: function (result) {
-                    displayFieldErrors(result.responseJSON.errors);
-                }
-            });
-        }
-
-    </script>
 @endsection
 
