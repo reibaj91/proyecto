@@ -71,12 +71,12 @@
                                                         style="vertical-align: middle">{{$p->baja_temporal}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <button class="btn btn-round btn-primary">
+                                                            <a href="{{route('profesores.editar',[$p->idUsuario])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     <span style="padding: 0 7px">Editar</span>
 
                                                                 </div>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                         <div style="margin-top: 7px;">
                                                             <button onclick="borrar({{$p->idUsuario}},'{{$p->nombre}}');" class="btn btn-round btn-danger">

@@ -22,6 +22,9 @@ class ProfesoresController extends Controller
             Route::get('alta', 'ProfesoresController@alta')->name('profesores.alta');
             Route::get('importar', 'ProfesoresController@importar')->name('profesores.importar');
 
+            Route::get('editar/{id}', 'ProfesoresController@editar')->name('profesores.editar')->where('id','[0-9]+');
+            Route::post('edit', 'ProfesoresController@edit')->name('profesores.edit');
+
             Route::post('borrar','ProfesoresController@delete')->name('profesores.delete');
             Route::post('import', 'ProfesoresController@import')->name('profesores.import');
             Route::post('store', 'ProfesoresController@store')->name('profesores.store');
@@ -41,6 +44,44 @@ class ProfesoresController extends Controller
     {
 
         return view('profesores.importar');
+    }
+
+    public function editar($id)
+    {
+        $user = User::where('idUsuario', $id)->first();
+
+        return view('profesores.editar', [
+            'user' => $user
+        ]);
+    }
+
+    public function edit(Request $request){
+
+        $this->validatorEdit($request->all())->validate();
+
+        $user =User::findOrFail($request->id);
+
+
+        try{
+            DB::beginTransaction();
+
+            $user->nombre = $request->nombre;
+            $user->email=$request->email;
+
+            $user->save();
+
+            DB::commit();
+            Session::flash('message', "Profesor editado con éxito");
+
+            return redirect(route('profesores'));
+        } catch (\Exception $e) {
+            Session::flash('message', "No se ha podido editar al profesor");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
+        return redirect(route('profesores'));
     }
 
 
@@ -69,8 +110,6 @@ class ProfesoresController extends Controller
         try {
             DB::beginTransaction();
             $users = (new FastExcel)->import($path, function ($line) {
-
-
 
                 if ($line['Nombre'] != "") {
                     return User::create([
@@ -105,12 +144,34 @@ class ProfesoresController extends Controller
         ];
 
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|unique:profesores,email',
+            'nombre' => 'required|max:255|unique:profesores,nombre',
+            'email' => 'email|required|unique:profesores,email',
         ], $mensajes);
     }
 
     public function preValidar(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        return response("Válido", 200);
+    }
+
+    protected function validatorEdit(array $data)
+    {
+        $mensajes = [
+//            'name.required' => "Debe escribir el nombre del profesor",
+//            'email.required' => "Debe introducir el correo del profesor",
+//            'email.email' => "El correo debe tener un formato correcto",
+//            'email.email' => "El correo debe ser unico",
+        ];
+
+        return Validator::make($data, [
+            'nombre' => 'required|max:255|unique:profesores,nombre,' . $data['id'].',idUsuario',
+            'email' => 'email|required|unique:profesores,email,' . $data['id'].',idUsuario',
+        ], $mensajes);
+    }
+
+    public function preValidarEdit(Request $request)
     {
         $this->validator($request->all())->validate();
 
@@ -125,7 +186,7 @@ class ProfesoresController extends Controller
         try {
             DB::beginTransaction();
             User::create([
-                'nombre' => $request->name,
+                'nombre' => $request->nombre,
                 'email' => $request->email,
             ]);
 
