@@ -93,8 +93,6 @@ class ProfesoresController extends Controller
 
     public function import(Request $request)
     {
-
-
         $file = $request->file('file');
 
         $request->validate([
@@ -136,17 +134,11 @@ class ProfesoresController extends Controller
 
     protected function validator(array $data)
     {
-        $mensajes = [
-//            'name.required' => "Debe escribir el nombre del profesor",
-//            'email.required' => "Debe introducir el correo del profesor",
-//            'email.email' => "El correo debe tener un formato correcto",
-//            'email.email' => "El correo debe ser unico",
-        ];
 
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:profesores,nombre',
             'email' => 'email|required|unique:profesores,email',
-        ], $mensajes);
+        ]);
     }
 
     public function preValidar(Request $request)
@@ -158,17 +150,10 @@ class ProfesoresController extends Controller
 
     protected function validatorEdit(array $data)
     {
-        $mensajes = [
-//            'name.required' => "Debe escribir el nombre del profesor",
-//            'email.required' => "Debe introducir el correo del profesor",
-//            'email.email' => "El correo debe tener un formato correcto",
-//            'email.email' => "El correo debe ser unico",
-        ];
-
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:profesores,nombre,' . $data['id'].',idUsuario',
             'email' => 'email|required|unique:profesores,email,' . $data['id'].',idUsuario',
-        ], $mensajes);
+        ]);
     }
 
     public function preValidarEdit(Request $request)

@@ -78,16 +78,9 @@
                            <div class="form-group">
                                <label for="seccion">Sección</label>
                                <select class="form-control " id="seccion" name="seccion" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($secciones as $s)
+                                       <option>{{$s->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                         </div>

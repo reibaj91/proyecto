@@ -24,9 +24,8 @@
                 </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('etapas.create')}}">Nueva</a></li>
-                    <li><a href="{{route('etapas')}}">Editar</a></li>
-                    <li><a href="boxed.blade.php">Eliminar</a></li>
-                    <li><a href="boxed.blade.php">Asignar coordinador</a></li>
+                    <li><a href="{{route('etapas')}}">Listado Etapas</a></li>
+                    <li><a href="boxed.blade.php">¿Asignar coordinador?</a></li>
                 </ul>
             </li>
             <li class="ripple">

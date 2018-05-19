@@ -55,24 +55,34 @@
                                             </thead>
                                             <tbody>
                                             @foreach($etapas as $e)
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" id="{{$e->codEtapa}}">
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$e->nombre}}</td>
-                                                    <td class="text-center"
-                                                        style="vertical-align: middle">{{$e->coordinador}}</td>
-                                                    <td class="text-center"
-                                                        style="vertical-align: middle">{{$e->etapapp}}</td>
+                                                    <td class="text-center" style="vertical-align: middle">
+                                                        @if($e->coordinador==null)
+                                                            No tiene coordinador
+                                                        @else
+                                                            {{$e->nombreCoordinador->nombre}}
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center" style="vertical-align: middle">
+                                                        @if($e->etapapp==null)
+                                                            No pertenece a ninguna etapa
+                                                        @else
+                                                            {{$e->etapaPrincipal->nombre}}
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <button class="btn btn-round btn-primary">
+                                                            <a href="{{route('etapas.editar',[$e->codEtapa])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     <span style="padding: 0 7px">Editar</span>
 
                                                                 </div>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                         <div style="margin-top: 7px;">
-                                                            <button class="btn btn-round btn-danger">
+                                                            <button onclick="borrar({{$e->codEtapa}},'{{$e->nombre}}');" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
                                                                 </div>
@@ -95,5 +105,38 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        function borrar(id,nombre) {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Vas a borrar a "+nombre,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
+
+                $.ajax({
+                    url: '{{route('etapas.delete')}}',
+                    method: "post",
+                    data: {
+                        "codEtapa": id,
+                        "_token": "{{Session::token()}}"
+                    },
+                    success: function (data) {
+                        $("#"+id).remove();
+                        swal(
+                            'Borrado!',
+                            'Has borrado a '+nombre,
+                            'success'
+                        )
+                    }
+                });
+            }
+        })
+        }
+    </script>
 @endsection
 

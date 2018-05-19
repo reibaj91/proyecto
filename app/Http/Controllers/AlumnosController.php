@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Secciones;
 use App\Alumnos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +28,9 @@ class AlumnosController extends Controller
 
     public function nuevo()
     {
-        return view('alumnos.alta');
+        $secciones = Secciones::all();
+
+        return view('alumnos.alta')->with('secciones',$secciones);
     }
 
 

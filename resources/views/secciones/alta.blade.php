@@ -48,31 +48,17 @@
                            <div class="form-group">
                                <label for="seccion">Tutor</label>
                                <select class="form-control " id="tutor" name="tutor" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($profesores as $p)
+                                       <option>{{$p->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                            <div class="form-group">
                                <label for="seccion">Curso</label>
                                <select class="form-control " id="idCurso" name="idCurso" required aria-required="true">
-                                   <option>option one</option>
-                                   <option>option two</option>
-                                   <option>option three</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
-                                   <option>option four</option>
+                                   @foreach($cursos as $c)
+                                       <option>{{$c->nombre}}</option>
+                                   @endforeach
                                </select>
                            </div>
                         </div>

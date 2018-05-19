@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Cursos;
 use App\Secciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +29,10 @@ class SeccionesController extends Controller
 
     public function alta()
     {
+        $profesores = User::all();
+        $cursos = Cursos::all();
 
-        return view('secciones.alta');
+        return view('secciones.alta')->with('profesores',$profesores)->with('cursos',$cursos);
     }
 
 
