@@ -14,8 +14,7 @@
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('profesores.importar')}}">Importar</a></li>
                     <li><a href="{{route('profesores.alta')}}">Alta</a></li>
-                    <li><a href="{{route('profesores')}}">Editar</a></li>
-                    <li><a href="dashboard-v2.blade.php">Baja</a></li>
+                    <li><a href="{{route('profesores')}}">Listado de Profesores</a></li>
                 </ul>
             </li>
             <li class="ripple">
@@ -36,9 +35,9 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                 </a>
                 <ul class="nav nav-list tree">
-                    <li><a href="{{route('cursos.crear')}}">Nuevo</a></li>
-                    <li><a href="{{route('cursos')}}">Editar</a></li>
-                    <li><a href="flot.blade.php">Eliminar</a></li>
+                    <li><a href="{{route('cursos.importar')}}">Importar</a></li>
+                    <li><a href="{{route('cursos.crear')}}">Crear</a></li>
+                    <li><a href="{{route('cursos')}}">Listado de Cursos</a></li>
                     <li><a href="sparkline.blade.php">Asignar etapa</a></li>
                 </ul>
             </li>

@@ -8,6 +8,9 @@ class Cursos extends Model
 {
     protected $table = 'cursos';
 
+    protected $primaryKey = 'idCurso';
+    public $incrementing = false;
+
     protected $fillable = [
 
         'idCurso',
@@ -16,6 +19,12 @@ class Cursos extends Model
         'created_at',
         'updated_at'
     ];
+
+
+
+    public function Etapa(){
+        return $this->hasOne(Etapas::class, 'codEtapa', 'codEtapa');
+    }
 
     public function seccion(){
         return $this->hasMany('App/Secciones');

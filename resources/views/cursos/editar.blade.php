@@ -4,9 +4,9 @@
         <div class="panel box-shadow-none content-header">
             <div class="panel-body">
                 <div class="col-md-12">
-                    <h3 class="animated fadeInLeft">Alta de Cursos</h3>
+                    <h3 class="animated fadeInLeft">Editar  Curso</h3>
                     <p class="animated fadeInDown">
-                        Cursos <span class="fa-angle-right fa"></span> Alta
+                        Cursos <span class="fa-angle-right fa"></span> Editar
                     </p>
                 </div>
             </div>
@@ -31,23 +31,23 @@
         @endif
         <div class="col-md-10 col-md-offset-1 panel">
             <div class="col-md-12 panel-heading">
-                <h4>Añadir Curso</h4>
+                <h4>Editar Curso</h4>
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">
-                    <form class="cmxform" id="signupForm" method="post" action="{{route('cursos.store')}}"
+                    <form class="cmxform" id="signupForm" method="post" action="{{route('cursos.edit')}}"
                           novalidate="novalidate">
                         @csrf
                         <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="Curso" name="Curso" required
-                                       aria-required="true" value="{{ old('Curso') }}">
+                                       aria-required="true" value="{{ $curso->idCurso }}">
                                 <span class="bar"></span>
                                 <label for="Curso">Curso</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required
-                                       aria-required="true" value="{{ old('nombre') }}">
+                                       aria-required="true" value="{{ $curso->nombre }}">
                                 <span class="bar"></span>
                                 <label for="nombre">Nombre</label>
                             </div>
@@ -57,14 +57,15 @@
                                         aria-required="true">
                                     <option value="{{null}}">Seleccione una Etapa</option>
                                     @foreach($etapas as $etapa)
-                                        <option value="{{$etapa->codEtapa}}" {{ old('codEtapa') == $etapa->codEtapa ? 'selected' : ''}}>{{$etapa->nombre}}</option>
+                                        <option value="{{$etapa->codEtapa}}" {{ $curso->codEtapa == $etapa->codEtapa ? 'selected' : ''}}>{{$etapa->nombre}}</option>
                                     @endforeach
                                 </select>
+                                <input type="hidden" value="{{$curso->idCurso}}" name="idCurso">
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
+                            <button class="btn btn-danger" onclick="continuar(event)">Editar</button>
                         </div>
                     </form>
 
