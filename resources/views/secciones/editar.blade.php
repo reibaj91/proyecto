@@ -4,9 +4,9 @@
         <div class="panel box-shadow-none content-header">
             <div class="panel-body">
                 <div class="col-md-12">
-                    <h3 class="animated fadeInLeft">Alta de Secciones</h3>
+                    <h3 class="animated fadeInLeft">Editar Sección</h3>
                     <p class="animated fadeInDown">
-                        Sección <span class="fa-angle-right fa"></span> Alta
+                        Sección <span class="fa-angle-right fa"></span> Editar
                     </p>
                 </div>
             </div>
@@ -31,23 +31,23 @@
         @endif
         <div class="col-md-10 col-md-offset-1 panel">
             <div class="col-md-12 panel-heading">
-                <h4>Añadir Sección</h4>
+                <h4>Editar Sección</h4>
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">
-                    <form class="cmxform" id="signupForm" method="post" action="{{route('secciones.store')}}"
+                    <form class="cmxform" id="signupForm" method="post" action="{{route('secciones.edit')}}"
                           novalidate="novalidate">
                         @csrf
                         <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="seccion" name="seccion" required
-                                       aria-required="true" value="{{ old('seccion') }}">
+                                       aria-required="true" value="{{ $secciones->idSeccion }}">
                                 <span class="bar"></span>
                                 <label for="seccion">Sección</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required
-                                       aria-required="true" value="{{ old('nombre') }}">
+                                       aria-required="true" value="{{ $secciones->nombre }}">
                                 <span class="bar"></span>
                                 <label for="nombre">Nombre</label>
                             </div>
@@ -56,6 +56,9 @@
                                 <select class="form-control " id="tutor" name="tutor" required
                                         aria-required="true">
                                     <option value="{{null}}">Seleccione un Tutor</option>
+                                    @if($secciones->tutor)
+                                        <option value="{{$secciones->tutor}}" selected>{{$secciones->Tutor->nombre}}</option>
+                                    @endif
                                     @foreach($tutores as $tutor)
                                         <option value="{{$tutor->idUsuario}}" {{ old('tutor') == $tutor->idUsuario ? 'selected' : ''}}>{{$tutor->nombre}}</option>
                                     @endforeach
@@ -67,15 +70,16 @@
                                         aria-required="true">
                                     <option value="{{null}}">Seleccione un Curso</option>
                                     @foreach($cursos as $curso)
-                                        <option value="{{$curso->idCurso}}" {{ old('curso') == $curso->idCurso ? 'selected' : ''}}>{{$curso->nombre}}</option>
+                                        <option value="{{$curso->idCurso}}" {{ $curso->idCurso == $secciones->idCurso ? 'selected' : ''}}>{{$curso->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
+                            <button class="btn btn-danger" onclick="continuar(event)">Editar</button>
                         </div>
+                        <input type="hidden" value="{{$secciones->idSeccion}}" name="idSeccion">
                     </form>
 
                 </div>

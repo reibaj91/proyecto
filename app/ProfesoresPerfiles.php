@@ -8,6 +8,9 @@ class ProfesoresPerfiles extends Model
 {
     protected $table = 'profesores_perfiles';
 
+    protected $primaryKey=['idUsuario','idPerfil'];
+    public $incrementing=false;
+
     protected $fillable = [
 
         'idUsuario',

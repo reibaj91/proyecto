@@ -43,12 +43,9 @@
             <li class="ripple"><a class="tree-toggle nav-header">
                     <span class="fa fa-book"></span> Secciones<span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
-                    <li><a href="#">Importar</a></li>
-                    <li><a href="{{route('secciones.create')}}">Alta</a></li>
-                    <li><a href="{{route('secciones')}}">Editar</a></li>
-                    <li><a href="icons.blade.php">Baja</a></li>
-                    <li><a href="buttons.blade.php">Asignar curso</a></li>
-                    <li><a href="media.blade.php">Asignar tutor</a></li>
+                    <li><a href="{{route('secciones.importar')}}">Importar</a></li>
+                    <li><a href="{{route('secciones.crear')}}">Alta</a></li>
+                    <li><a href="{{route('secciones')}}">Listado Secciones</a></li>
                 </ul>
             </li>
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-child"></span> Alumnos  <span class="fa-angle-right fa right-arrow text-right"></span> </a>

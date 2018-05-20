@@ -36,6 +36,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function perfil(){
+        return $this->hasMany(ProfesoresPerfiles::class, 'idUsuario', 'idUsuario');
+    }
+
+
     public function seccion()
     {
         return $this->hasOne('App/Secciones');

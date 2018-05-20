@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProfesoresPerfiles;
 use App\User;
 use App\Etapas;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ class EtapasController extends Controller
     public function edit(Request $request){
 
         $this->validatorEdit($request->all())->validate();
+        $etapa=Etapas::where('codEtapa','=',$request->id)->first();
 
         try{
             DB::beginTransaction();
@@ -67,6 +69,20 @@ class EtapasController extends Controller
                             'coordinador'=>$request->coordinador,
                             'etapapp'=>$request->etapapp
                         ]);
+
+
+
+            if($etapa->coordinador != $request->coordinador)
+            {
+//                $coordinador=ProfesoresPerfiles::where('idUsuario','=',$etapa->coordinador)->where('idPerfil','=',3)->first();
+
+                $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$etapa->coordinador.' and idPerfil=3');
+
+                ProfesoresPerfiles::create([
+                    'idUsuario' => $request->coordinador,
+                    'idPerfil' => 3,
+                ]);
+            }
 
             DB::commit();
             Session::flash('message', "Etapa editada con éxito");
@@ -110,6 +126,16 @@ class EtapasController extends Controller
                 'coordinador' => $request->coordinador,
                 'etapapp' => $request->etapapp,
             ]);
+
+            if ($request->coordinador)
+            {
+                $pp=ProfesoresPerfiles::create([
+                    'idUsuario' => $request->coordinador,
+                    'idPerfil' => 3,
+                ]);
+            }
+
+
 
             DB::commit();
             Session::flash('message', "Etapa creada con éxito");

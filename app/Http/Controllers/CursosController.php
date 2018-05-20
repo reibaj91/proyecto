@@ -148,7 +148,6 @@ class CursosController extends Controller
 
             return redirect(route('cursos'));
         } catch (\Exception $e) {
-            dd($e);
             Session::flash('message', "No se ha podido editar el Curso");
             DB::rollBack();
 
@@ -219,7 +218,7 @@ class CursosController extends Controller
             DB::commit();
             $request->session()->flash('success', "Curso eliminado con Éxito");
 
-            return redirect(route('profesores'));
+            return redirect(route('cursos'));
 
         } catch (\Exception $e) {
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());

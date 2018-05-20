@@ -61,8 +61,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <div class="hidden">{{$i=1}}</div>
                                             @foreach($cursos as $c)
-                                                <tr role="row" class="odd" id="{{$c->idCurso}}">
+                                                <tr role="row" class="odd" id="{{$i}}">
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$c->idCurso}}</td>
                                                     <td class="text-center"
@@ -85,7 +86,7 @@
                                                             </a>
                                                         </div>
                                                         <div style="margin-top: 7px;">
-                                                            <button onclick="borrar('{{$c->idCurso}}','{{$c->nombre}}');" class="btn btn-round btn-danger">
+                                                            <button onclick="borrar('{{$c->idCurso}}','{{$c->nombre}}',{{$i}});" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
                                                                 </div>
@@ -93,6 +94,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <div class="hidden">{{$i++}}</div>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -110,7 +112,7 @@
 @section('scripts')
     <script>
 
-        function borrar(id,nombre) {
+        function borrar(id,nombre,i) {
             swal({
                 title: '¿Estás seguro?',
                 text: "Vas a borrar a "+nombre,
@@ -130,7 +132,7 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+id).remove();
+                        $("#"+i).remove();
                         swal(
                             'Borrado!',
                             'Has borrado '+nombre,
