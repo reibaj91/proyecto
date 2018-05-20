@@ -36,50 +36,57 @@
                         @csrf
                        <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="nia" name="nia" required aria-required="true">
+                                <input type="text" class="form-text" id="nia" name="nia" value="{{old('nia')}}" required aria-required="true">
                                 <span class="bar"></span>
                                 <label for="nia">NIA</label>
                             </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="name" name="name" required aria-required="true">
+                               <input type="text" class="form-text" id="nombre" {{old('nombre')}} name="nombre" required aria-required="true">
                                <span class="bar"></span>
-                               <label for="name">Nombre</label>
+                               <label for="nombre">Nombre</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="dni" name="dni" required aria-required="true">
+                               <input type="text" class="form-text" {{old('dni')}} id="dni" name="dni" required aria-required="true">
                                <span class="bar"></span>
                                <label for="dni">DNI</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="fecha" name="fecha" required aria-required="true">
+                               <input type="date" class="form-text" {{old('feche')}} id="fecha" name="fecha" required aria-required="true">
                                <span class="bar"></span>
                                <label for="fecha">Fecha Nacimiento</label>
                            </div>
-                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="sexo" name="sexo" required aria-required="true">
-                               <span class="bar"></span>
-                               <label for="sexo">Sexo</label>
+                           <label for="sexo"><h4>Sexo</h4></label>
+                           <div class="form-animate-radio" style="padding-left:3em;">
+                               <label class="radio">
+                                   <input id="sexo" type="radio" name="sexo" value="H" checked="checked"/>
+                                   <span class="outer"><span class="inner"></span></span> Masculino
+                               </label><br>
+                               <label class="radio">
+                                   <input id="sexo" type="radio" name="sexo" value="M"/>
+                                   <span class="outer"><span class="inner"></span></span> Femenino
+                               </label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="telefono" name="telefono" required aria-required="true">
+                               <input type="text" class="form-text" {{old('telefono')}} id="telefono" name="telefono" required aria-required="true">
                                <span class="bar"></span>
                                <label for="telefono">Telefono</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="telefono_urgencia" name="telefono_urgencia" required aria-required="true">
+                               <input type="text" class="form-text" {{old('telefono_urgencia')}} id="telefono_urgencia" name="telefono_urgencia" required aria-required="true">
                                <span class="bar"></span>
                                <label for="telefono_urgencia">Telefono Urgencias</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="email" name="email" required aria-required="true">
+                               <input type="text" class="form-text" {{old('email')}} id="email" name="email" required aria-required="true">
                                <span class="bar"></span>
                                <label for="email">Email</label>
                            </div>
                            <div class="form-group">
                                <label for="seccion">Sección</label>
-                               <select class="form-control " id="seccion" name="seccion" required aria-required="true">
+                               <select class="form-control " id="seccion" {{old('seccion')}} name="seccion" required aria-required="true">
+                                   <option value="{{null}}">Elige Sección</option>
                                    @foreach($secciones as $s)
-                                       <option>{{$s->nombre}}</option>
+                                       <option value="{{$s->idSeccion}}">{{$s->nombre}}</option>
                                    @endforeach
                                </select>
                            </div>
@@ -96,36 +103,4 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
-        var mandar = false;
-
-        function continuar(e){
-            if(!mandar){
-                e.preventDefault();
-                validarDatos();
-            }
-        }
-
-        function validarDatos(){
-
-            var form = $('#signupForm');
-            var data = form.serializeArray();
-            data.push({name: '_token', value: "{{Session::token()}}"});
-            $.ajax({
-                url: '{{ route('alumnos.pre-validar') }}',
-                data: data,
-                type: 'post',
-                success: function (data) {
-                    mandar = true;
-                    $("button").add;
-                    $("#signupForm").submit();
-                },
-                error: function (result) {
-                    displayFieldErrors(result.responseJSON.errors);
-                }
-            });
-        }
-
-    </script>
 @endsection
-

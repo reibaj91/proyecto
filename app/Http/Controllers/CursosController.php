@@ -44,8 +44,6 @@ class CursosController extends Controller
 
     public function import(Request $request)
     {
-
-
         $file = $request->file('file');
 
         $request->validate([

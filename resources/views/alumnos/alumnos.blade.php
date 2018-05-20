@@ -66,8 +66,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <div class="hidden">{{$i=1}}</div>
                                             @foreach($alumnos as $a)
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" id="{{$i}}">
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$a->nia}}</td>
                                                     <td class="text-center"
@@ -77,18 +78,24 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->email}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$a->idSeccion}}</td>
+                                                        style="vertical-align: middle">
+                                                        @if($a->idSeccion==null)
+                                                            No tiene clase asignada
+                                                        @else
+                                                            {{$a->idSeccion}}
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <button class="btn btn-round btn-primary">
+                                                            <a href="{{route('alumnos.editar',[$a->nia])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     <span style="padding: 0 7px">Editar</span>
 
                                                                 </div>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                         <div style="margin-top: 7px;">
-                                                            <button class="btn btn-round btn-danger">
+                                                            <button onclick="borrar('{{$a->nia}}','{{$a->nombreCompleto}}',{{$i}});" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
                                                                 </div>
@@ -96,6 +103,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <div class="hidden">{{$i++}}</div>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -111,5 +119,38 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        function borrar(id,nombre,i) {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Vas a borrar a "+nombre,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
+
+                $.ajax({
+                    url: '{{route('alumnos.delete')}}',
+                    method: "post",
+                    data: {
+                        "id": id,
+                        "_token": "{{Session::token()}}"
+                    },
+                    success: function (data) {
+                        $("#"+i).remove();
+                        swal(
+                            'Borrado!',
+                            'Has borrado a '+nombre,
+                            'success'
+                        )
+                    }
+                });
+            }
+        })
+        }
+    </script>
 @endsection
 

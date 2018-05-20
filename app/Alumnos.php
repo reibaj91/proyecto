@@ -8,12 +8,15 @@ class Alumnos extends Model
 {
     protected $table = 'alumnos';
 
+    protected $primaryKey = 'nia';
+    public $incrementing = false;
+
     protected $fillable = [
 
         'nia',
         'nombreCompleto',
         'dni',
-        'fecha_nacimiento',
+        'fechaNacimiento',
         'sexo',
         'telefono',
         'telefono_urgencia',
