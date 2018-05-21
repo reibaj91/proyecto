@@ -67,9 +67,11 @@ class RegisterController extends Controller
             'nombre' => $data['name'],
             'email' => $data['email'],
         ]);
-        return ProfesoresPerfiles::created([
+        ProfesoresPerfiles::create([
             'idUsuario' => $user->idUsuario,
             'idPerfil' => 1,
         ]);
+
+        return $user;
     }
 }

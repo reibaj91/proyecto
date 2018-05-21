@@ -19,7 +19,7 @@ class SocialAuthController extends Controller
             $createUser = User::where('email', '=', $user->email)->get()->first();
 
             if($createUser != null) {
-                auth()->login($createUser, true);
+                auth()->login($createUser,true);
 
                 //TODO redirigir segun perfil
 

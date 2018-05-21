@@ -43,20 +43,20 @@
                                             </thead>
                                             <tbody>
                                             @foreach($perfiles as $p)
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" id="{{$p->idPerfil}}">
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$p->nombre}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <button class="btn btn-round btn-primary">
+                                                            <a href="{{route('perfiles.editar',[$p->idPerfil])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     <span style="padding: 0 7px">Editar</span>
 
                                                                 </div>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                         <div style="margin-top: 7px;">
-                                                            <button class="btn btn-round btn-danger">
+                                                            <button onclick="borrar({{$p->idPerfil}},'{{$p->nombre}}');" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     <span>Eliminar</span>
                                                                 </div>
@@ -79,5 +79,38 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        function borrar(id,nombre) {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Vas a borrar a "+nombre,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
+
+                $.ajax({
+                    url: '{{route('perfiles.delete')}}',
+                    method: "post",
+                    data: {
+                        "id": id,
+                        "_token": "{{Session::token()}}"
+                    },
+                    success: function (data) {
+                        $("#"+id).remove();
+                        swal(
+                            'Borrado!',
+                            'Has borrado a '+nombre,
+                            'success'
+                        )
+                    }
+                });
+            }
+        })
+        }
+    </script>
 @endsection
 

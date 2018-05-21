@@ -2,10 +2,11 @@
 <?php $content = \App\User::select('nombre')->get(); ?>
 @section('content')
 
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-top:10%;">
         <form method="POST" class="form-signin" action="{{ route('login') }}">
             {{ csrf_field() }}
             <div class="panel periodic-login">
+                <img src="\asset\img\logotipo.png" alt="logotipo evg" style="max-width:100%;">
                 <div class="panel-body text-center">
                     <div class="form-group form-animate-text">
                         @if($content=='[]')
