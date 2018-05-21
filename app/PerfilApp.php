@@ -8,8 +8,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 
-class PerfilApp
+class PerfilApp extends Model
 {
     protected $table = 'perfilapp';
 

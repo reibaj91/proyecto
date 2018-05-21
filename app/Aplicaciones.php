@@ -8,6 +8,7 @@ class Aplicaciones extends Model
 {
     protected $table = 'aplicaciones';
 
+    protected $primaryKey='idaplicacion';
     protected $fillable = [
 
         'idaplicacion',

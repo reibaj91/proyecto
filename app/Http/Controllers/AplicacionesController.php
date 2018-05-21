@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\PerfilApp;
 use App\Perfiles;
 use App\Aplicaciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class AplicacionesController extends Controller
 {
@@ -33,6 +37,15 @@ class AplicacionesController extends Controller
         return view('aplicaciones.alta')->with('perfiles',$perfiles);
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nombre' => 'required|max:255|unique:aplicaciones,nombre',
+            'url' => 'required|max:255|unique:aplicaciones,URL',
+            'icono' => 'required|mimes:jpeg,bmp,png'
+        ]);
+    }
+
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -45,20 +58,42 @@ class AplicacionesController extends Controller
 
         $this->validator($request->all())->validate();
 
+
         try {
             DB::beginTransaction();
-            User::create([
-                'nombre' => $request->name,
+            $aplicacion=Aplicaciones::create([
+                'nombre' => $request->nombre,
                 'icono' => $request->icono,
                 'URL' => $request->url,
             ]);
 
-            DB::commit();
-            Session::flash('message', "Curso creado con éxito");
 
-            return redirect( route('aplicaciones.alta'));
+            foreach ($request->perfil as $item)
+            {
+                PerfilApp::create([
+                    'idperfil' => $item,
+                    'idaplicacion' => $aplicacion->idaplicacion,
+                ]);
+            }
+
+
+
+            if ($request->hasFile('icono')) {
+                $imageName = $aplicacion->idaplicacion . '.' . $request->file('icono')->getClientOriginalExtension();
+
+                $request->file('icono')->move(base_path() . '/public/images/aplicaciones/', $imageName);$aplicacion->icono = $imageName;
+
+                $aplicacion->update();
+            }
+
+
+            DB::commit();
+            Session::flash('message', "Aplicación creada con éxito");
+
+            return redirect( route('aplicaciones.nueva'));
 
         } catch (\Exception $e) {
+            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 

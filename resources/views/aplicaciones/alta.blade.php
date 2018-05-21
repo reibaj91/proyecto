@@ -32,29 +32,31 @@
             </div>
             <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                 <div class="col-md-12">
-                    <form class="cmxform" id="signupForm" method="post" action="{{route('aplicaciones.store')}}" novalidate="novalidate">
+                    <form class="cmxform" id="signupForm" method="post" action="{{route('aplicaciones.store')}}" novalidate="novalidate" enctype="multipart/form-data">
                         @csrf
                        <div class="col-md-12">
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="name" name="name" required aria-required="true">
+                               <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true" value="{{old('nombre')}}">
                                <span class="bar"></span>
-                               <label for="name">Nombre</label>
+                               <label for="nombre">Nombre</label>
+                           </div>
+                           <div class="form-group ">
+
+                               <div class="form-group" >
+                                   <label for="icono"><h4>Icono</h4></label>
+                                   <input id="icono" type="file" class="form-control" name="icono" required>
+                               </div>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="icono" name="icono" required aria-required="true">
-                               <span class="bar"></span>
-                               <label for="icono">Icono</label>
-                           </div>
-                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="url" name="url" required aria-required="true">
+                               <input type="text" class="form-text" id="url" name="url" required aria-required="true" value="{{ old ('url')}}">
                                <span class="bar"></span>
                                <label for="url">URL</label>
                            </div>
                            <div class="form-group">
-                               <label for="seccion">Perfiles</label>
-                               <select class="form-control" multiple="multiple" id="perfil" name="perfil" required aria-required="true">
+                               <label for="perfil[]">Perfiles</label>
+                               <select class="form-control" multiple="multiple" id="perfil" name="perfil[]" required aria-required="true">
                                    @foreach($perfiles as $p)
-                                       <option>{{$p->nombre}}</option>
+                                       <option value="{{$p->idPerfil}}">{{$p->nombre}}</option>
                                    @endforeach
                                </select>
                            </div>
@@ -71,35 +73,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
-        var mandar = false;
-
-        function continuar(e){
-            if(!mandar){
-                e.preventDefault();
-                validarDatos();
-            }
-        }
-
-        function validarDatos(){
-
-            var form = $('#signupForm');
-            var data = form.serializeArray();
-            data.push({name: '_token', value: "{{Session::token()}}"});
-            $.ajax({
-                url: '{{ route('aplicaciones.pre-validar') }}',
-                data: data,
-                type: 'post',
-                success: function (data) {
-                    mandar = true;
-                    $("button").add;
-                    $("#signupForm").submit();
-                },
-                error: function (result) {
-                    displayFieldErrors(result.responseJSON.errors);
-                }
-            });
-        }
-    </script>
 @endsection
 
