@@ -80,7 +80,7 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
                                                         @if($a->idSeccion==null)
-                                                            No tiene clase asignada
+                                                            <span class="hidden">a </span>No tiene clase asignada
                                                         @else
                                                             {{$a->idSeccion}}
                                                         @endif

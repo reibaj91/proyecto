@@ -71,7 +71,7 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
                                                         @if($c->codEtapa==null)
-                                                            Sin asignar
+                                                            <span class="hidden">a </span>Sin asignar
                                                         @else
                                                             {{$c->Etapa->nombre}}
                                                         @endif

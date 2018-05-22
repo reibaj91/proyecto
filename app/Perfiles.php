@@ -8,6 +8,7 @@ class Perfiles extends Model
 {
     protected $table = 'perfiles';
     protected $primaryKey = 'idPerfil';
+    public $incrementing= false;
 
     protected $fillable = [
 
