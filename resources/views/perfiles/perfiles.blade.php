@@ -14,7 +14,16 @@
         <div class="col-md-12 top-20 padding-0">
             <div class="col-md-12">
                 <div class="panel">
-                    <div class="panel-heading"><h3>Perfiles</h3></div>
+                    <div class="panel-heading">
+                        <h3 style="display:inline-block;">
+                            Perfiles
+                        </h3>
+                        <a href="{{route('perfiles.nuevo')}}" style="display:inline; margin-left: 10px;">
+                            <button class=" btn btn-circle btn-mn btn-success" value="primary">
+                                <span class="fa fa-plus" title="Nuevo Perfil"></span>
+                            </button>
+                        </a>
+                    </div>
                     <div class="panel-body">
                         <div class="responsive-table">
                             <div id="datatables-example_wrapper"

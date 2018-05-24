@@ -77,7 +77,7 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
                                                         @if($c->tutor==null)
-                                                            Sin asignar
+                                                            <span class="hidden">a </span>Sin asignar
                                                         @else
                                                             {{$c->Tutor->nombre}}
                                                         @endif
@@ -85,7 +85,7 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
                                                         @if($c->idCurso==null)
-                                                            Sin asignar
+                                                            <span class="hidden">a </span>Sin asignar
                                                         @else
                                                             {{$c->Curso->nombre}}
                                                         @endif

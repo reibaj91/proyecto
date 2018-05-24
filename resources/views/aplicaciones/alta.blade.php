@@ -52,13 +52,11 @@
                                <span class="bar"></span>
                                <label for="url">URL</label>
                            </div>
-                           <div class="form-group">
-                               <label for="perfil[]">Perfiles</label>
-                               <select class="form-control" multiple="multiple" id="perfil" name="perfil[]" required aria-required="true">
-                                   @foreach($perfiles as $p)
-                                       <option value="{{$p->idPerfil}}">{{$p->nombre}}</option>
-                                   @endforeach
-                               </select>
+                           <div class="form-group form-animate-checkbox">
+                               <label>Perfiles</label><br>
+                               @foreach($perfiles as $p)
+                                   <input type="checkbox" class="checkbox" id="perfil" name="{{$p->nombre}}" value="{{$p->idPerfil}}"><label> {{$p->nombre}}</label><br>
+                               @endforeach
                            </div>
                         </div>
 

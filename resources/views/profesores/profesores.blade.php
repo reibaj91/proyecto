@@ -68,7 +68,13 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$p->email}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">@if($p->baja_temporal=='S')Si @else No @endif</td>
+                                                        style="vertical-align: middle">
+                                                        @if($p->baja_temporal=='N')
+                                                            No
+                                                        @else
+                                                            Si
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
                                                             <a href="{{route('profesores.editar',[$p->idUsuario])}}" class="btn btn-round btn-primary">

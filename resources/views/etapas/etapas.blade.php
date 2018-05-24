@@ -60,14 +60,14 @@
                                                         style="vertical-align: middle">{{$e->nombre}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         @if($e->coordinador==null)
-                                                            No tiene coordinador
+                                                            <span class="hidden">a </span>No tiene coordinador
                                                         @else
                                                             {{$e->nombreCoordinador->nombre}}
                                                         @endif
                                                     </td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         @if($e->etapapp==null)
-                                                            No pertenece a ninguna etapa
+                                                            <span class="hidden">a </span>No pertenece a ninguna etapa
                                                         @else
                                                             {{$e->etapaPrincipal->nombre}}
                                                         @endif
