@@ -68,20 +68,18 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$p->email}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$p->baja_temporal}}</td>
+                                                        style="vertical-align: middle">@if($p->baja_temporal=='S')Si @else No @endif</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
                                                             <a href="{{route('profesores.editar',[$p->idUsuario])}}" class="btn btn-round btn-primary">
                                                                 <div>
-                                                                    <span style="padding: 0 7px">Editar</span>
+                                                                    Editar
 
                                                                 </div>
                                                             </a>
-                                                        </div>
-                                                        <div style="margin-top: 7px;">
                                                             <button onclick="borrar({{$p->idUsuario}},'{{$p->nombre}}');" class="btn btn-round btn-danger">
                                                                     <div>
-                                                                        <span>Eliminar</span>
+                                                                        Eliminar
                                                                     </div>
                                                             </button>
                                                         </div>
