@@ -57,17 +57,18 @@
                                                         style="vertical-align: middle">{{$p->nombre}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <a href="{{route('perfiles.editar',[$p->idPerfil])}}" class="btn btn-round btn-primary">
+                                                            <a href="{{route('perfiles.editar',[$p->idPerfil])}}"
+                                                               class="btn btn-round btn-primary">
                                                                 <div>
-                                                                    <span style="padding: 0 7px">Editar</span>
+                                                                    Editar
 
                                                                 </div>
                                                             </a>
-                                                        </div>
-                                                        <div style="margin-top: 7px;">
-                                                            <button onclick="borrar({{$p->idPerfil}},'{{$p->nombre}}');" class="btn btn-round btn-danger">
+
+                                                            <button onclick="borrar({{$p->idPerfil}},'{{$p->nombre}}');"
+                                                                    class="btn btn-round btn-danger">
                                                                 <div>
-                                                                    <span>Eliminar</span>
+                                                                    Eliminar
                                                                 </div>
                                                             </button>
                                                         </div>
@@ -89,17 +90,19 @@
 @endsection
 @section('scripts')
     <script>
-        function borrar(id,nombre) {
+        function borrar(id, nombre) {
             swal({
                 title: '¿Estás seguro?',
-                text: "Vas a borrar a "+nombre,
+                text: "Vas a borrar a " + nombre,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Borrar'
-            }).then((result) => {
-                if (result.value) {
+            }).then((result) = > {
+                if(result.value
+        )
+            {
 
                 $.ajax({
                     url: '{{route('perfiles.delete')}}',
@@ -109,10 +112,10 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+id).remove();
+                        $("#" + id).remove();
                         swal(
                             'Borrado!',
-                            'Has borrado a '+nombre,
+                            'Has borrado a ' + nombre,
                             'success'
                         )
                     }

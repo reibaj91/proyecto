@@ -12,6 +12,7 @@ class Etapas extends Model
     protected $fillable = [
 
         'codEtapa',
+        'idEtapaColegio',
         'nombre',
         'coordinador',
         'etapapp',

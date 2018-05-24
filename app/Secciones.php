@@ -17,6 +17,7 @@ class Secciones extends Model
         'nombre',
         'tutor',
         'idCurso',
+        'idSeccionColegio',
         'created_at',
         'updated_at'
     ];

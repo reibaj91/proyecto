@@ -20,7 +20,7 @@ class User extends Authenticatable
         'idUsuario',
         'email',
         'nombre',
-        'password',
+        'tipo',
         'baja_temporal',
         'created_at',
         'updated_at',

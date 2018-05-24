@@ -13,7 +13,6 @@ class Perfiles extends Model
     protected $fillable = [
 
         'idPerfil',
-        'tipo',
         'nombre',
         'created_at',
         'updated_at'

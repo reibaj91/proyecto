@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "2a7dc0da2c2fb726e90cb2cefd3aa5c7",
@@ -905,16 +905,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v1.0.7",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "e3086ee8cb1f54a39ae8dcb72d1c37d10128997d"
+                "reference": "b22fe905fcefdffae76b011e27c7ac09e07e052b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/e3086ee8cb1f54a39ae8dcb72d1c37d10128997d",
-                "reference": "e3086ee8cb1f54a39ae8dcb72d1c37d10128997d",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/b22fe905fcefdffae76b011e27c7ac09e07e052b",
+                "reference": "b22fe905fcefdffae76b011e27c7ac09e07e052b",
                 "shasum": ""
             },
             "require": {
@@ -964,7 +964,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2018-05-17T13:42:07+00:00"
+            "time": "2018-04-16T12:10:37+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1739,16 +1739,16 @@
         },
         {
             "name": "rap2hpoutre/fast-excel",
-            "version": "v0.2.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/fast-excel.git",
-                "reference": "bbcaae8afc3a12cff1bd5b1fe1b2d53f3a74784c"
+                "reference": "83b2d15d0290858bff4c62b51d0eb5f6eff75dbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/bbcaae8afc3a12cff1bd5b1fe1b2d53f3a74784c",
-                "reference": "bbcaae8afc3a12cff1bd5b1fe1b2d53f3a74784c",
+                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/83b2d15d0290858bff4c62b51d0eb5f6eff75dbd",
+                "reference": "83b2d15d0290858bff4c62b51d0eb5f6eff75dbd",
                 "shasum": ""
             },
             "require": {
@@ -1782,7 +1782,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2018-05-17T13:12:25+00:00"
+            "time": "2018-05-07T20:16:33+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

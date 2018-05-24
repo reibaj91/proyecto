@@ -80,15 +80,13 @@
                                                         <div>
                                                             <a href="{{route('cursos.editar',[$c->idCurso])}}" class="btn btn-round btn-primary">
                                                                 <div>
-                                                                    <span style="padding: 0 7px">Editar</span>
+                                                                    Editar
 
                                                                 </div>
                                                             </a>
-                                                        </div>
-                                                        <div style="margin-top: 7px;">
                                                             <button onclick="borrar('{{$c->idCurso}}','{{$c->nombre}}',{{$i}});" class="btn btn-round btn-danger">
                                                                 <div>
-                                                                    <span>Eliminar</span>
+                                                                    Eliminar
                                                                 </div>
                                                             </button>
                                                         </div>
