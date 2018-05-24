@@ -40,6 +40,12 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
+                                                    style="width: 264px;">Número Identificación del Perfil
+                                                </th>
+                                                <th class="sorting text-center" tabindex="0"
+                                                    aria-controls="datatables-example"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
                                                     style="width: 264px;">Nombre
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
@@ -53,6 +59,8 @@
                                             <tbody>
                                             @foreach($perfiles as $p)
                                                 <tr role="row" class="odd" id="{{$p->idPerfil}}">
+                                                    <td class="text-center"
+                                                        style="vertical-align: middle">{{$p->idPerfil}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$p->nombre}}</td>
                                                     <td class="text-center" style="vertical-align: middle">

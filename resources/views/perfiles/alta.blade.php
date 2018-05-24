@@ -35,6 +35,11 @@
                     <form class="cmxform" id="signupForm" method="post" action="{{route('perfiles.store')}}" novalidate="novalidate">
                         @csrf
                        <div class="col-md-12">
+                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                               <input type="text" class="form-text" id="idperfil" name="idperfil" required aria-required="true">
+                               <span class="bar"></span>
+                               <label for="idperfil">Número Identificación del Perfil</label>
+                           </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true">
                                 <span class="bar"></span>
@@ -43,6 +48,7 @@
                        </div>
                         <div class="col-md-12">
                             <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
+                            <a href="{{route('perfiles')}}" class="btn btn-warning">Volver</a>
                         </div>
                     </form>
 
