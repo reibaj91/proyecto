@@ -40,9 +40,11 @@ class AplicacionesController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'idapp' => 'required|numeric|min:1|unique:aplicaciones,idaplicacion',
             'nombre' => 'required|max:255|unique:aplicaciones,nombre',
             'url' => 'required|max:255|unique:aplicaciones,URL',
-            'icono' => 'required|mimes:jpeg,bmp,png'
+            'icono' => 'required|mimes:jpeg,bmp,png',
+            'perfil' => 'required|min:1'
         ]);
     }
 
@@ -58,10 +60,10 @@ class AplicacionesController extends Controller
 
         $this->validator($request->all())->validate();
 
-
         try {
             DB::beginTransaction();
             $aplicacion=Aplicaciones::create([
+                'idaplicacion'=> $request->idapp,
                 'nombre' => $request->nombre,
                 'icono' => $request->icono,
                 'URL' => $request->url,

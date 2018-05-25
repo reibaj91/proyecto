@@ -36,6 +36,11 @@
                         @csrf
                        <div class="col-md-12">
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                               <input type="text" class="form-text" id="idapp" name="idapp" required aria-required="true" value="{{old('nombre')}}">
+                               <span class="bar"></span>
+                               <label for="idapp">Número Identificación de la Aplicación</label>
+                           </div>
+                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true" value="{{old('nombre')}}">
                                <span class="bar"></span>
                                <label for="nombre">Nombre</label>
@@ -54,9 +59,22 @@
                            </div>
                            <div class="form-group form-animate-checkbox">
                                <label>Perfiles</label><br>
-                               @foreach($perfiles as $p)
-                                   <input type="checkbox" class="checkbox" id="perfil" name="{{$p->nombre}}" value="{{$p->idPerfil}}"><label> {{$p->nombre}}</label><br>
-                               @endforeach
+                               <span class="hidden">{{$i=0}}</span>
+                               <table>
+                                   <tr>
+                                   @foreach($perfiles as $p)
+                                       @if($i==4)
+                                           </tr>
+                                            <tr>
+                                               <td><input type="checkbox" class="checkbox" id="perfil" name="perfil[]" value="{{$p->idPerfil}}"><label> {{$p->nombre}}</label></td>
+                                           <span class="hidden">{{$i=0}}</span>
+                                       @else
+                                           <td><input type="checkbox" class="checkbox" id="perfil" name="perfil[]" value="{{$p->idPerfil}}"><label> {{$p->nombre}}</label></td>
+                                       @endif
+                                       <span class="hidden">{{$i++}}</span>
+                                   @endforeach
+                                    </tr>
+                               </table>
                            </div>
                         </div>
 

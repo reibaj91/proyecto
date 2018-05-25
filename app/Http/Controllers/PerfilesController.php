@@ -94,6 +94,7 @@ class PerfilesController extends Controller
         try {
             DB::beginTransaction();
             Perfiles::create([
+                'idPerfil' => $request->idperfil,
                 'nombre' => $request->nombre,
 
             ]);
@@ -113,8 +114,8 @@ class PerfilesController extends Controller
 
     protected function validator(array $data)
     {
-
-        return Validator::make($data, [
+        return Validator::make($data, [#validacion del alta
+            'idperfil' => 'required|numeric|min:1|unique:perfiles,idPerfil',
             'nombre' => 'required|max:15|unique:perfiles,idPerfil',
         ]);
     }
