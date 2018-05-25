@@ -99,6 +99,14 @@
 @section('scripts')
     <script>
         function borrar(id, nombre) {
+            if(id==1 || id==2 || id==3){
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Este perfil no se puede borrar!',
+                })
+                return;
+            }
             swal({
                 title: '¿Estás seguro?',
                 text: "Vas a borrar a " + nombre,
@@ -107,10 +115,8 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Borrar'
-            }).then((result) = > {
-                if(result.value
-        )
-            {
+            }).then((result) => {
+                if(result.value) {
 
                 $.ajax({
                     url: '{{route('perfiles.delete')}}',

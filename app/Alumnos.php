@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Alumnos extends Model
 {
@@ -11,6 +12,9 @@ class Alumnos extends Model
     protected $primaryKey = 'nia';
     public $incrementing = false;
 
+    protected $appends = [
+        'fechaFormateada'
+    ];
     protected $fillable = [
 
         'nia',
@@ -28,5 +32,9 @@ class Alumnos extends Model
 
     public function seccion(){
         return $this->belongsTo('App/Secciones');
+    }
+
+    public function getFechaFormateadaAttribute() {
+        return Carbon::parse($this->fechaNacimiento)->format('d/m/Y');
     }
 }

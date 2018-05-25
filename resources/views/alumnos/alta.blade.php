@@ -41,17 +41,17 @@
                                 <label for="nia">NIA</label>
                             </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="nombre" {{old('nombre')}} name="nombre" required aria-required="true">
+                               <input type="text" class="form-text" id="nombre" value="{{old('nombre')}}" name="nombre" required aria-required="true">
                                <span class="bar"></span>
                                <label for="nombre">Nombre</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" {{old('dni')}} id="dni" name="dni" required aria-required="true">
+                               <input type="text" class="form-text" value="{{old('dni')}}" id="dni" name="dni" required aria-required="true">
                                <span class="bar"></span>
                                <label for="dni">DNI</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="date" class="form-text" {{old('feche')}} id="fecha" name="fecha" required aria-required="true">
+                               <input type="date" class="form-text" value="{{old('fecha')}}" id="fecha" name="fecha" required aria-required="true">
                                <span class="bar"></span>
                                <label for="fecha">Fecha Nacimiento</label>
                            </div>
@@ -67,23 +67,23 @@
                                </label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" {{old('telefono')}} id="telefono" name="telefono" required aria-required="true">
+                               <input type="text" class="form-text" value="{{old('telefono')}}" id="telefono" name="telefono" required aria-required="true">
                                <span class="bar"></span>
                                <label for="telefono">Telefono</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" {{old('telefono_urgencia')}} id="telefono_urgencia" name="telefono_urgencia" required aria-required="true">
+                               <input type="text" class="form-text" value="{{old('telefono_urgencia')}}" id="telefono_urgencia" name="telefono_urgencia" required aria-required="true">
                                <span class="bar"></span>
                                <label for="telefono_urgencia">Telefono Urgencias</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" {{old('email')}} id="email" name="email" required aria-required="true">
+                               <input type="text" class="form-text" value="{{old('email')}}" id="email" name="email" required aria-required="true">
                                <span class="bar"></span>
                                <label for="email">Email</label>
                            </div>
                            <div class="form-group">
                                <label for="seccion">Sección</label>
-                               <select class="form-control " id="seccion" {{old('seccion')}} name="seccion" required aria-required="true">
+                               <select class="form-control " id="seccion" value="{{old('seccion')}}" name="seccion" required aria-required="true">
                                    <option value="{{null}}">Elige Sección</option>
                                    @foreach($secciones as $s)
                                        <option value="{{$s->idSeccion}}">{{$s->nombre}}</option>
@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <button class="btn btn-danger" onclick="continuar(event)">Crear</button>
+                            <button class="btn btn-danger">Crear</button>
                         </div>
                     </form>
 

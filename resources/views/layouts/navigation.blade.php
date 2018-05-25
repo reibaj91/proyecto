@@ -25,7 +25,6 @@
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('etapas.create')}}">Nueva</a></li>
                     <li><a href="{{route('etapas')}}">Listado Etapas</a></li>
-                    <li><a href="boxed.blade.php">¿Asignar coordinador?</a></li>
                 </ul>
             </li>
             <li class="ripple">
@@ -37,7 +36,6 @@
                     <li><a href="{{route('cursos.importar')}}">Importar</a></li>
                     <li><a href="{{route('cursos.crear')}}">Crear</a></li>
                     <li><a href="{{route('cursos')}}">Listado de Cursos</a></li>
-                    <li><a href="sparkline.blade.php">Asignar etapa</a></li>
                 </ul>
             </li>
             <li class="ripple"><a class="tree-toggle nav-header">
@@ -46,6 +44,7 @@
                     <li><a href="{{route('secciones.importar')}}">Importar</a></li>
                     <li><a href="{{route('secciones.crear')}}">Alta</a></li>
                     <li><a href="{{route('secciones')}}">Listado Secciones</a></li>
+{{--                    <li><a href="{{route('secciones.tutores')}}">Asignar Tutores</a></li>--}}
                 </ul>
             </li>
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-child"></span> Alumnos  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
@@ -59,8 +58,7 @@
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('aplicaciones.nueva')}}">Nuevo</a></li>
-                    <li><a href="{{route('aplicaciones')}}">Editar</a></li>
-                    <li><a href="tablestatic.blade.php">Eliminar</a></li>
+                    <li><a href="{{route('aplicaciones')}}">Listado de Aplicaciones</a></li>
                 </ul>
             </li>
         </ul>
@@ -80,10 +78,9 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="dashboard-v1.blade.php">Importar</a></li>
-                        <li><a href="dashboard-v2.blade.php">Alta</a></li>
-                        <li><a href="dashboard-v2.blade.php">Editar</a></li>
-                        <li><a href="dashboard-v2.blade.php">Baja</a></li>
+                        <li><a href="{{route('profesores.importar')}}">Importar</a></li>
+                        <li><a href="{{route('profesores.alta')}}">Alta</a></li>
+                        <li><a href="{{route('profesores')}}">Listado de Profesores</a></li>
                     </ul>
                 </li>
                 <li class="ripple">
@@ -92,10 +89,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="topnav.blade.php">Nueva</a></li>
-                        <li><a href="boxed.blade.php">Editar</a></li>
-                        <li><a href="boxed.blade.php">Eliminar</a></li>
-                        <li><a href="boxed.blade.php">Asignar coordinador</a></li>
+                        <li><a href="{{route('etapas.create')}}">Nueva</a></li>
+                        <li><a href="{{route('etapas')}}">Listado Etapas</a></li>
                     </ul>
                 </li>
                 <li class="ripple">
@@ -104,10 +99,9 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="chartjs.blade.php">Nuevo</a></li>
-                        <li><a href="morris.blade.php">Editar</a></li>
-                        <li><a href="flot.blade.php">Eliminar</a></li>
-                        <li><a href="sparkline.blade.php">Asignar etapa</a></li>
+                        <li><a href="{{route('cursos.importar')}}">Importar</a></li>
+                        <li><a href="{{route('cursos.crear')}}">Crear</a></li>
+                        <li><a href="{{route('cursos')}}">Listado de Cursos</a></li>
                     </ul>
                 </li>
                 <li class="ripple">
@@ -116,12 +110,10 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="color.blade.php">Importar</a></li>
-                        <li><a href="weather.blade.php">Alta</a></li>
-                        <li><a href="typography.blade.php">Editar</a></li>
-                        <li><a href="icons.blade.php">Baja</a></li>
-                        <li><a href="buttons.blade.php">Asignar curso</a></li>
-                        <li><a href="media.blade.php">Asignar tutor</a></li>
+                        <li><a href="{{route('secciones.importar')}}">Importar</a></li>
+                        <li><a href="{{route('secciones.crear')}}">Alta</a></li>
+                        <li><a href="{{route('secciones')}}">Listado Secciones</a></li>
+{{--                        <li><a href="{{route('secciones.tutores')}}">Asignar Tutores</a></li>--}}
                     </ul>
                 </li>
                 <li class="ripple">
@@ -130,21 +122,16 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="formelement.blade.php">Importar</a></li>
-                        <li><a href="#">Alta</a></li>
-                        <li><a href="#">Editar</a></li>
-                        <li><a href="#">Baja</a></li>
+                        <li><a href="{{route('alumnos.importar')}}">Importar</a></li>
+                        <li><a href="{{route('alumnos.nuevo')}}">Alta</a></li>
+                        <li><a href="{{route('alumnos')}}">Listado Alumnos</a></li>
                     </ul>
                 </li>
-                <li class="ripple">
-                    <a class="tree-toggle nav-header">
-                        <span class="fa fa-users"></span> Perfiles
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                    </a>
+                <li class="ripple"><a href="{{route('perfiles')}}"><span class="fa fa-users"></span>Perfiles</a></li>
+                <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="datatables.blade.php">W</a></li>
-                        <li><a href="handsontable.blade.php">T</a></li>
-                        <li><a href="tablestatic.blade.php">F</a></li>
+                        <li><a href="{{route('aplicaciones.nueva')}}">Nuevo</a></li>
+                        <li><a href="{{route('aplicaciones')}}">Listado de Aplicaciones</a></li>
                     </ul>
                 </li>
             </ul>

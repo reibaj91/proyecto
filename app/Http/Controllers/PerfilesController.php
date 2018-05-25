@@ -132,6 +132,12 @@ class PerfilesController extends Controller
 
     public function delete(Request $request){
 
+        if($request->id ==1 || $request->id ==2 || $request->id ==3){
+            $request->session()->flash('warning', "Este perfil no se puede eliminar");
+
+            return redirect(route('perfiles'));
+        }
+
         $perfiles = Perfiles::where('idPerfil','=',$request->id);
 
         try {

@@ -160,10 +160,10 @@ class AlumnosController extends Controller
         return Validator::make($data, [
             'nia' => 'required|max:8|unique:alumnos,nia',
             'nombre' => 'required|max:255',
-            'dni' => 'required|max:9|unique:alumnos,dni',
+            'dni' => 'nullable|max:9|unique:alumnos,dni',
             'fecha' => 'required|date',
-            'telefono' => 'required|max:9',
-            'telefono_urgencia' => 'nullable|max:9',
+            'telefono' => 'required|numeric',
+            'telefono_urgencia' => 'nullable|numeric',
             'email' => 'email|required|unique:alumnos,email',
             'seccion' => 'required|max:7',
         ]);
@@ -178,8 +178,8 @@ class AlumnosController extends Controller
             'nombre' => 'required|max:255',
             'dni' => 'required|max:9|unique:alumnos,dni,"'. $data['id'].'",nia',
             'fecha' => 'required|date',
-            'telefono' => 'required|max:9',
-            'telefono_urgencia' => 'nullable|max:9',
+            'telefono' => 'required',
+            'telefono_urgencia' => 'nullable',
             'email' => 'email|required|unique:alumnos,email,"'. $data['id'].'",nia',
             'seccion' => 'required|max:7',
         ]);

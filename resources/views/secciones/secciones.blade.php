@@ -38,13 +38,19 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 162px;">Sección
+                                                    style="width: 100px;">Sección
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
                                                     style="width: 264px;">Nombre
+                                                </th>
+                                                <th class="sorting text-center" tabindex="0"
+                                                    aria-controls="datatables-example"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 132px;">Código del Colegio
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
@@ -68,37 +74,46 @@
                                             </thead>
                                             <tbody>
                                             <div class="hidden">{{$i=1}}</div>
-                                            @foreach($secciones as $c)
+                                            @foreach($secciones as $s)
                                                 <tr role="row" class="odd" id="{{$i}}" >
                                                     <td class="sorting_1 text-center"
-                                                        style="vertical-align: middle">{{$c->idSeccion}}</td>
+                                                        style="vertical-align: middle">{{$s->idSeccion}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$c->nombre}}</td>
+                                                        style="vertical-align: middle">{{$s->nombre}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
-                                                        @if($c->tutor==null)
+                                                        @if($s->idSeccionColegio==null)
+                                                            <span class="hidden">a </span>Sin código
+                                                        @else
+                                                            {{$s->idSeccionColegio}}
+                                                        @endif
+
+                                                    </td>
+                                                    <td class="text-center"
+                                                        style="vertical-align: middle">
+                                                        @if($s->tutor==null)
                                                             <span class="hidden">a </span>Sin asignar
                                                         @else
-                                                            {{$c->Tutor->nombre}}
+                                                            {{$s->Tutor->nombre}}
                                                         @endif
                                                     </td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">
-                                                        @if($c->idCurso==null)
+                                                        @if($s->idCurso==null)
                                                             <span class="hidden">a </span>Sin asignar
                                                         @else
-                                                            {{$c->Curso->nombre}}
+                                                            {{$s->Curso->nombre}}
                                                         @endif
                                                     </td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <a href="{{route('secciones.editar',[$c->idSeccion])}}" class="btn btn-round btn-primary">
+                                                            <a href="{{route('secciones.editar',[$s->idSeccion])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     Editar
 
                                                                 </div>
                                                             </a>
-                                                            <button onclick="borrar('{{$c->idSeccion}}','{{$c->nombre}}',{{$i}});" class="btn btn-round btn-danger">
+                                                            <button onclick="borrar('{{$s->idSeccion}}','{{$s->nombre}}',{{$i}});" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     Eliminar
                                                                 </div>

@@ -51,6 +51,12 @@
                                 <span class="bar"></span>
                                 <label for="nombre">Nombre</label>
                             </div>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                <input type="text" class="form-text" id="idSeccionColegio" name="idSeccionColegio" required
+                                       aria-required="true" value="{{ old('idSeccionColegio') }}">
+                                <span class="bar"></span>
+                                <label for="idSeccionColegio">Código Sección del Colegio</label>
+                            </div>
                             <div class="form-group">
                                 <label for="tutor">Tutor</label>
                                 <select class="form-control " id="tutor" name="tutor" required

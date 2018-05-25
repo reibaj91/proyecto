@@ -52,7 +52,7 @@
                                 <label for="dni">DNI</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="date" class="form-text" id="fecha" name="fecha" required aria-required="true" value="{{$alumnos->fechaNacimiento}}">
+                                <input type="date" class="form-text" id="fecha" name="fecha" required aria-required="true" value="{{date('Y-m-d', strtotime($alumnos->fechaNacimiento))}}">
                                 <span class="bar"></span>
                                 <label for="fecha">Fecha Nacimiento</label>
                             </div>

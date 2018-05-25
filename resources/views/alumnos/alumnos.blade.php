@@ -31,13 +31,13 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 162px;">NIA
+                                                    style="width: 100px;">NIA
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: 264px;">Nombre
+                                                    style="width: 200px;">Nombre
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
@@ -74,7 +74,7 @@
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->nombreCompleto}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$a->fechaNacimiento}}</td>
+                                                        style="vertical-align: middle">{{$a->fechaFormateada}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->email}}</td>
                                                     <td class="text-center"

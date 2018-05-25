@@ -170,6 +170,7 @@ class SeccionesController extends Controller
 
             $seccion->idSeccion = $request->seccion;
             $seccion->nombre = $request->nombre;
+            $seccion->idSeccionColegio = $request->idSeccionColegio;
             $seccion->tutor = $request->tutor;
             $seccion->idCurso = $request->curso;
             $seccion->save();
@@ -203,17 +204,11 @@ class SeccionesController extends Controller
 
     protected function validator(array $data)
     {
-        $mensajes = [
-//            'name.required' => "Debe escribir el nombre del profesor",
-//            'email.required' => "Debe introducir el correo del profesor",
-//            'email.email' => "El correo debe tener un formato correcto",
-//            'email.email' => "El correo debe ser unico",
-        ];
-
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:secciones,nombre',
             'seccion' => 'required|max:7|unique:secciones,idSeccion',
-        ], $mensajes);
+            'idSeccionColegio' => 'nullable|max:8|unique:secciones,idSeccionColegio',
+        ]);
     }
 
     public function preValidar(Request $request)
@@ -234,9 +229,9 @@ class SeccionesController extends Controller
             $seccion = Secciones::create([
                 'idSeccion' => $request->seccion,
                 'nombre' => $request->nombre,
+                'idSeccionColegio' => $request->idSeccionColegio,
                 'tutor' => $request->tutor,
                 'idCurso' => $request->curso,
-
             ]);
 
 
