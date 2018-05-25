@@ -37,7 +37,16 @@ class EtapasController extends Controller
     }
 
     public function create() {
-        $profesores = User::all();
+        $profesores = DB::table('profesores')
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('profesores_perfiles')
+                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->where('idPerfil', '=', 3);
+            })
+            ->get();
+
+
         $etapas = Etapas::all();
 
         return view ('etapas.alta')->with('profesores',$profesores)->with('etapas',$etapas);
@@ -47,7 +56,14 @@ class EtapasController extends Controller
     {
         $etapas = Etapas::where('codEtapa', $codEtapa)->first();
         $etapapp = Etapas::all();
-        $profesores = User::all();
+        $profesores = DB::table('profesores')
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('profesores_perfiles')
+                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->where('idPerfil', '=', 3);
+            })
+            ->get();
         return view('etapas.editar', [
             'etapas' => $etapas,
             'profesores' => $profesores,
@@ -65,6 +81,7 @@ class EtapasController extends Controller
 
             Etapas::where('codEtapa','=',$request->id)
                         ->update([
+                            'idEtapaColegio' => $request->codigo,
                             'nombre'=>$request->nombre,
                             'coordinador'=>$request->coordinador,
                             'etapapp'=>$request->etapapp
@@ -74,7 +91,6 @@ class EtapasController extends Controller
 
             if($etapa->coordinador != $request->coordinador)
             {
-//                $coordinador=ProfesoresPerfiles::where('idUsuario','=',$etapa->coordinador)->where('idPerfil','=',3)->first();
 
                 $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$etapa->coordinador.' and idPerfil=3');
 
@@ -89,7 +105,6 @@ class EtapasController extends Controller
 
             return redirect(route('etapas'));
         } catch (\Exception $e) {
-            dd($e);
             Session::flash('message', "No se ha podido editar la etapa");
             DB::rollBack();
 
@@ -104,6 +119,7 @@ class EtapasController extends Controller
 
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:etapas,nombre',
+            'codigo' => 'max:7',
         ]);
     }
 
@@ -122,6 +138,7 @@ class EtapasController extends Controller
         try {
             DB::beginTransaction();
             Etapas::create([
+                'idEtapaColegio' => $request->codigo,
                 'nombre' => $request->nombre,
                 'coordinador' => $request->coordinador,
                 'etapapp' => $request->etapapp,
@@ -160,10 +177,14 @@ class EtapasController extends Controller
     public function delete(Request $request){
 
 
-        $etapas = Etapas::where('codEtapa','=',$request->codEtapa);
+        $etapas = Etapas::where('codEtapa','=',$request->codEtapa)->first();
+
+        $delete = DB::delete('delete from profesores_perfiles where idUsuario='.$etapas->coordinador.' and idPerfil=3');
 
         try {
             DB::beginTransaction();
+
+
 
             $etapas->delete();
 

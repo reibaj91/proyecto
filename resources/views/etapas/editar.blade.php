@@ -36,6 +36,11 @@
                         @csrf
                         <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                <input type="text" class="form-text" id="codigo" name="codigo" required aria-required="true" value="{{ $etapas->idEtapaColegio }} ">
+                                <span class="bar"></span>
+                                <label for="codigo">Código de Etapa del Colegio</label>
+                            </div>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true" value="{{ $etapas->nombre }}">
                                 <span class="bar"></span>
                                 <label for="nombre">Nombre</label>
@@ -45,6 +50,9 @@
                                 <label for="seccion">Coordinador</label>
                                 <select class="form-control " id="coordinador" name="coordinador" required aria-required="true">
                                     <option value="{{null}}">Sin coordinador</option>
+                                    @if($etapas->coordinador)
+                                        <option value="{{$etapas->coordinador}}" selected>{{$etapas->nombreCoordinador->nombre}}</option>
+                                    @endif
                                     @foreach($profesores as $p)
                                         <option value="{{$p->idUsuario}}" {{  $p->idUsuario == $etapas->coordinador ? 'selected' : '' }}>{{$p->nombre}}</option>
                                     @endforeach

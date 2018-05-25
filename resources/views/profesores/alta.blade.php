@@ -43,7 +43,7 @@
                                 <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true"
                                        value="{{ old('nombre') }}">
                                 <span class="bar"></span>
-                                <label for="nombre">Nombre</label>
+                                <label for="nombre">Apellidos, Nombre</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="email" name="email" required
