@@ -101,15 +101,6 @@ class ProfesoresController extends Controller
 
         $path = $file->path();
 
-//        $users = User::whereNotExists(function ($query) {
-//                $query->select(DB::raw(1))
-//                    ->from('profesores_perfiles')
-//                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario');
-//            })->get();
-//
-//        for ($i=0; $i<count($users);$i++)
-//            User::destroy($users[$i]->idUsuario);
-
 
         try {
             DB::beginTransaction();
@@ -143,7 +134,7 @@ class ProfesoresController extends Controller
 
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:profesores,nombre',
-            'email' => 'email|required|unique:profesores,email',
+            'email' => 'email|required|regex:[.+@evg\.es]|unique:profesores,email',
         ]);
     }
 

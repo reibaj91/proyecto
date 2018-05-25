@@ -37,6 +37,11 @@
                     <form class="cmxform" id="signupForm" method="post" action="{{route('etapas.store')}}" novalidate="novalidate">
                        @csrf
                        <div class="col-md-12">
+                           <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                               <input type="text" class="form-text" id="codigo" name="codigo" required aria-required="true" value="{{ old('codigo') }} ">
+                               <span class="bar"></span>
+                               <label for="codigo">Código de Etapa del Colegio</label>
+                           </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required aria-required="true" value="{{ old('nombre') }} ">
                                 <span class="bar"></span>

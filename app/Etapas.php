@@ -9,6 +9,9 @@ class Etapas extends Model
 {
     protected $table = 'etapas';
 
+    protected $primaryKey='codEtapa';
+
+
     protected $fillable = [
 
         'codEtapa',
