@@ -74,6 +74,10 @@
     </div>
 @endsection
 @section('scripts')
-
+    <script>
+        $(document).ready(function(){
+            $('#codEtapa').select2();
+        });
+    </script>
 @endsection
 

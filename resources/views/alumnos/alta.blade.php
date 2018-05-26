@@ -103,4 +103,9 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#seccion').select2();
+        });
+    </script>
 @endsection

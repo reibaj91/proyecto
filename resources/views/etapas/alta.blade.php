@@ -49,7 +49,7 @@
                             </div>
                            <div class="form-group">
                                <label for="seccion">Coordinador</label>
-                               <select class="form-control select2" id="coordinador" name="coordinador">
+                               <select class="form-control" id="coordinador" name="coordinador">
                                     <option value="{{null}}">Sin coordinador</option>
                                    @foreach($profesores as $p)
                                        <option value="{{$p->idUsuario}}" {{ old('coordinador') == $p->idUsuario ? 'selected' : '' }}>{{$p->nombre}}</option>
@@ -58,7 +58,7 @@
                            </div>
                            <div class="form-group">
                                <label for="seccion">Etapa a la que pertenece</label>
-                               <select class="form-control " id="etapapp" name="etapapp" required aria-required="true">
+                               <select class="form-control" id="etapapp" name="etapapp" required aria-required="true">
                                    <option value="{{null}}">Sin etapa principal</option>
                                    @foreach($etapas as $e)
                                        <option value="{{$e->codEtapa}}" {{ old('etapapp') == $e->codEtapa ? 'selected' : '' }}>{{$e->nombre}}</option>

@@ -90,6 +90,13 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#tutor').select2();
+            $('#curso').select2();
+
+        });
+    </script>
 
 @endsection
 
