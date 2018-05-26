@@ -23,6 +23,7 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                 </a>
                 <ul class="nav nav-list tree">
+                    <li><a href="{{route('etapas.importar')}}">Importar</a></li>
                     <li><a href="{{route('etapas.create')}}">Nueva</a></li>
                     <li><a href="{{route('etapas')}}">Listado Etapas</a></li>
                 </ul>

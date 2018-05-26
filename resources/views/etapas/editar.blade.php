@@ -82,5 +82,11 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#coordinador').select2();
+            $('#etapapp').select2();
+        });
+    </script>
 @endsection
 

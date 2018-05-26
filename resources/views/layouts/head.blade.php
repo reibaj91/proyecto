@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="/asset/css/plugins/fullcalendar.min.css"/>
 <link href="/asset/css/style.css" rel="stylesheet">
 <!-- end: Css -->
+<link rel="stylesheet" type="text/css" href="/asset/css/plugins/select2.min.css"/>
 
 <link rel="shortcut icon" href="/asset/img/logomi.png">
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

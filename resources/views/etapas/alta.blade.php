@@ -49,7 +49,7 @@
                             </div>
                            <div class="form-group">
                                <label for="seccion">Coordinador</label>
-                               <select class="form-control " id="coordinador" name="coordinador" required aria-required="true">
+                               <select class="form-control select2" id="coordinador" name="coordinador">
                                     <option value="{{null}}">Sin coordinador</option>
                                    @foreach($profesores as $p)
                                        <option value="{{$p->idUsuario}}" {{ old('coordinador') == $p->idUsuario ? 'selected' : '' }}>{{$p->nombre}}</option>
@@ -78,5 +78,12 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#coordinador').select2();
+            $('#etapapp').select2();
+        });
+    </script>
+
 @endsection
 

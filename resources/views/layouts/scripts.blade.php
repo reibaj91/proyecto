@@ -13,6 +13,7 @@
 <script src="/asset/js/plugins/jquery.vmap.sampledata.js"></script>
 <script src="/asset/js/plugins/chart.min.js"></script>
 
+<script src="/asset/js/plugins/select2.full.min.js"></script>
 
 <!-- custom -->
 <script src="/asset/js/main.js"></script>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class EtapasController extends Controller
 {
@@ -22,6 +23,10 @@ class EtapasController extends Controller
 
             Route::get('editar/{codEtapa}', 'EtapasController@editar')->name('etapas.editar')->where('codEtapa','[0-9]+');
             Route::post('edit', 'EtapasController@edit')->name('etapas.edit');
+
+            Route::get('importar','EtapasController@importar')->name('etapas.importar');
+            Route::post('import','EtapasController@import')->name('etapas.import');
+
 
             Route::post('borrar','EtapasController@delete')->name('etapas.delete');
 
@@ -35,6 +40,63 @@ class EtapasController extends Controller
 
         return view('etapas.etapas', compact('etapas'));
     }
+
+
+    public function importar()
+    {
+
+        return view('etapas.importar');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+
+        $request->validate([
+            'file' => 'mimes:xlsx',
+        ]);
+
+        $path = $file->path();
+
+        $etapas=Etapas::all();
+
+        if ($etapas!="[]"){
+            DB::table('etapas')->delete();
+        }
+
+
+        try {
+            DB::beginTransaction();
+            (new FastExcel)->import($path, function ($line) {
+                if ($line['Etapa padre']=="")
+                {
+                    $etapapp=null;
+                }else{
+                    $etapapp=$line['Etapa padre'];
+                }
+                if ($line['CodigoColegio'] != "") {
+                    return Etapas::create([
+                        'idEtapaColegio' => $line['CodigoColegio'],
+                        'nombre' => $line['Nombre etapa'],
+                        'etapapp' => $etapapp
+                    ]);
+                }
+            });
+            DB::commit();
+            Session::flash('message', "Etapas creadas con éxito");
+
+            return redirect(route('etapas'));
+
+        } catch (\Exception $e) {
+            dd($e);
+            Session::flash('message', "No se ha podido importar las Etapas");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+    }
+
+
 
     public function create() {
         $profesores = DB::table('profesores')
@@ -184,7 +246,7 @@ class EtapasController extends Controller
         try {
             DB::beginTransaction();
 
-
+            $delete = DB::delete('delete from profesores_perfiles where idUsuario='.$etapas->coordinador.' and idPerfil=3');
 
             $etapas->delete();
 

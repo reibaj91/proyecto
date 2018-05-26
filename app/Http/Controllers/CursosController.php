@@ -63,10 +63,11 @@ class CursosController extends Controller
             DB::beginTransaction();
             (new FastExcel)->import($path, function ($line) {
 //                dd($line);
-                if ($line['Grupo'] != "") {
+                if ($line['CodigoColegio'] != "") {
                     return Cursos::create([
-                        'idCurso' => $line['Grupo'],
-                        'nombre' => $line['Curso']
+                        'idCursoColegio' => $line['CodigoColegio'],
+                        'nombre' => $line['Nombre curso'],
+                        'codEtapa' => $line['CodEtapa']
                     ]);
                 }
             });
@@ -76,6 +77,7 @@ class CursosController extends Controller
             return redirect(route('cursos'));
 
         } catch (\Exception $e) {
+            dd($e);
             Session::flash('message', "No se ha podido importar los cursos");
             DB::rollBack();
 
