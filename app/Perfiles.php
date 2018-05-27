@@ -18,6 +18,8 @@ class Perfiles extends Model
         'updated_at'
     ];
 
+
+
     public function profesores_perfiles(){
         return $this->hasMany('App/ProfesoresPerfiles');
     }

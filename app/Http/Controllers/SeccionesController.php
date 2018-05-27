@@ -69,7 +69,8 @@ class SeccionesController extends Controller
                 if ($line['Grupo'] != "") {
                     return Secciones::create([
                         'idSeccion' => $line['Grupo'],
-                        'nombre' => $line['Nombre']
+                        'nombre' => $line['Sección'],
+                        'idSeccionColegio' => $line['Codigo Colegio'],
                     ]);
                 }
             });

@@ -51,6 +51,7 @@
             <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-child"></span> Alumnos  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{route('alumnos.importar')}}">Importar</a></li>
+                    <li><a href="{{route('alumnos.importarparcial')}}">Importación Parcial</a></li>
                     <li><a href="{{route('alumnos.nuevo')}}">Alta</a></li>
                     <li><a href="{{route('alumnos')}}">Listado Alumnos</a></li>
                 </ul>
@@ -124,6 +125,7 @@
                     </a>
                     <ul class="nav nav-list tree">
                         <li><a href="{{route('alumnos.importar')}}">Importar</a></li>
+                        <li><a href="{{route('alumnos.importarparcial')}}">Importación Parcial</a></li>
                         <li><a href="{{route('alumnos.nuevo')}}">Alta</a></li>
                         <li><a href="{{route('alumnos')}}">Listado Alumnos</a></li>
                     </ul>

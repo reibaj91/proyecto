@@ -41,7 +41,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="Curso" name="Curso" required
-                                       aria-required="true" value="{{ $curso->idCurso }}">
+                                       aria-required="true" value="{{ $curso->idCursoColegio }}">
                                 <span class="bar"></span>
                                 <label for="Curso">Curso</label>
                             </div>

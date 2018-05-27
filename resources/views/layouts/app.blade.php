@@ -12,9 +12,21 @@
 
 <div  class="container-fluid mimin-wrapper">
 
-    @include('layouts.navigation')
+    @if(App\user::perfiles()->first())
+        @include('layouts.navigation')
+    @else
+        <style>
+            #content{
+                padding-left: 0;
+            }
+        </style>
+    @endif
+
     @yield('cuerpo')
+
     @include('layouts.right-side')
+
+
 </div>
 
 @include('layouts.scripts')

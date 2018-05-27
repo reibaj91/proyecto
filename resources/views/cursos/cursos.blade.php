@@ -65,7 +65,7 @@
                                             @foreach($cursos as $c)
                                                 <tr role="row" class="odd" id="{{$i}}">
                                                     <td class="sorting_1 text-center"
-                                                        style="vertical-align: middle">{{$c->idCurso}}</td>
+                                                        style="vertical-align: middle">{{$c->idCursoColegio}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$c->nombre}}</td>
                                                     <td class="text-center"

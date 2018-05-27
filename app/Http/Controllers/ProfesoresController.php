@@ -22,7 +22,7 @@ class ProfesoresController extends Controller
             Route::get('alta', 'ProfesoresController@alta')->name('profesores.alta');
             Route::get('importar', 'ProfesoresController@importar')->name('profesores.importar');
 
-            Route::get('editar/{id}', 'ProfesoresController@editar')->name('profesores.editar')->where('id','[0-9]+');
+            Route::get('editar/{id}', 'ProfesoresController@editar')->name('profesores.editar');
             Route::post('edit', 'ProfesoresController@edit')->name('profesores.edit');
 
             Route::post('borrar','ProfesoresController@delete')->name('profesores.delete');

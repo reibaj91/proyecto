@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -36,9 +37,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function scopePerfiles($query){
+        return $query->whereHas('perfil', function ($query)  {
+            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->where('profesores_perfiles.idPerfil', '=', [1,4]);
+        });
+    }
+
+
     public function perfil(){
         return $this->hasMany(ProfesoresPerfiles::class, 'idUsuario', 'idUsuario');
     }
+
 
 
     public function seccion()

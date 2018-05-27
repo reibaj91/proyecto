@@ -23,11 +23,13 @@ class AlumnosController extends Controller
             Route::get('/', 'AlumnosController@index')->name('alumnos');
             Route::get('nuevo', 'AlumnosController@nuevo')->name('alumnos.nuevo');
             Route::get('importar', 'AlumnosController@importar')->name('alumnos.importar');
+            Route::get('importar-parcial', 'AlumnosController@importarparcial')->name('alumnos.importarparcial');
             Route::get('editar/{id}', 'AlumnosController@editar')->name('alumnos.editar')->where('id', '[0-9]+');
             Route::post('edit', 'AlumnosController@edit')->name('alumnos.edit');
 
             Route::post('borrar', 'AlumnosController@delete')->name('alumnos.delete');
             Route::post('importar', 'AlumnosController@importTotal')->name('alumnos.import');
+            Route::post('importar-parcial', 'AlumnosController@importParcial')->name('alumnos.importparcial');
 
             Route::post('store', 'AlumnosController@store')->name('alumnos.store');
             Route::post('pre-validar', 'AlumnosController@preValidar')->name('alumnos.pre-validar');
@@ -45,6 +47,12 @@ class AlumnosController extends Controller
     {
 
         return view('alumnos.importar');
+    }
+
+    public function importarparcial()
+    {
+
+        return view('alumnos.importarparcial');
     }
 
     public function nuevo()
@@ -133,8 +141,8 @@ class AlumnosController extends Controller
                             'telefono' => $line['Teléfono'],
                             'telefono_urgencia' => $line['Teléfono de urgencia'],
                             'email' => $line['Correo electrónico'],
+                            'idSeccion' => $line['Grupo'],
                             'sexo' => $line['Sexo'],
-
                         ]);
                     }
                 }
@@ -145,6 +153,63 @@ class AlumnosController extends Controller
             return redirect(route('alumnos'));
 
         } catch (\Exception $e) {
+            dd($e);
+            Session::flash('message', "No se ha podido importar a los alumnos");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
+        return redirect(route('alumnos'));
+    }
+
+
+    public function importParcial(Request $request)
+    {
+        $file = $request->file('file');
+
+        $request->validate([
+            'file' => 'mimes:xlsx',
+        ]);
+
+        $path = $file->path();
+
+
+        try {
+            DB::beginTransaction();
+            $alumnos = (new FastExcel)->import($path, function ($line) {
+                if ($line['Alumno'] != "") {
+
+                    $alumno=Alumnos::where('nia','=',$line['Nº Id. Escolar'])->first();
+                     if ($alumno!=null && ($line['Estado Matrícula'] == 'Obtiene Título' ||
+                        $line['Estado Matrícula'] == 'Anulada' ||
+                        $line['Estado Matrícula'] == 'Trasladada')) {
+                         $alumno->delete();
+                     }elseif ($alumno==null && ($line['Estado Matrícula'] != 'Obtiene Título' &&
+                         $line['Estado Matrícula'] != 'Anulada' &&
+                         $line['Estado Matrícula'] != 'Trasladada')) {
+                         return Alumnos::create([
+                             'nombreCompleto' => $line['Alumno'],
+                             'nia' => $line['Nº Id. Escolar'],
+                             'dni' => $line['DNI/Pasaporte'],
+                             'fechaNacimiento' => ($line['Fecha de nacimiento'])->format('Y-m-d'),
+                             'telefono' => $line['Teléfono'],
+                             'telefono_urgencia' => $line['Teléfono de urgencia'],
+                             'email' => $line['Correo electrónico'],
+                             'idSeccion' => $line['Grupo'],
+                             'sexo' => $line['Sexo'],
+                         ]);
+                     }
+
+                    }
+            });
+            DB::commit();
+            Session::flash('message', "Alumnos creados con éxito");
+
+            return redirect(route('alumnos'));
+
+        } catch (\Exception $e) {
+            dd($e);
             Session::flash('message', "No se ha podido importar a los alumnos");
             DB::rollBack();
 
@@ -156,7 +221,6 @@ class AlumnosController extends Controller
 
     protected function validator(array $data)
     {
-
         return Validator::make($data, [
             'nia' => 'required|max:8|unique:alumnos,nia',
             'nombre' => 'required|max:255',
@@ -169,10 +233,8 @@ class AlumnosController extends Controller
         ]);
     }
 
-
     protected function validatorEdit(array $data)
     {
-
         return Validator::make($data, [
             'nia' => 'required|max:8|unique:alumnos,nia,"'. $data['id'].'",nia',
             'nombre' => 'required|max:255',
@@ -194,7 +256,6 @@ class AlumnosController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         try {
@@ -241,7 +302,6 @@ class AlumnosController extends Controller
         } catch (\Exception $e) {
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
-
             return back()->withInput();
         }
 

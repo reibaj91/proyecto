@@ -116,7 +116,7 @@ class CursosController extends Controller
 
 
         return Validator::make($data, [
-            'Curso' => 'required|max:255|unique:cursos,idCurso, "'.$data['idCurso'].'" ,idCurso',
+            'Curso' => 'required|max:255|unique:cursos,idCursoColegio, "'.$data['idCurso'].'" ,idCurso',
             'nombre' => 'required|unique:cursos,nombre, "'.$data['idCurso'].'" ,idCurso',
         ], $mensajes);
     }
@@ -138,7 +138,7 @@ class CursosController extends Controller
         try{
             DB::beginTransaction();
 
-            $curso->idCurso = $request->Curso;
+            $curso->idCursoColegio = $request->Curso;
             $curso->nombre=$request->nombre;
             $curso->codEtapa=$request->codEtapa;
             $curso->save();
@@ -187,7 +187,7 @@ class CursosController extends Controller
         try {
             DB::beginTransaction();
             Cursos::create([
-                'idCurso' => $request->Curso,
+                'idCursoColegio' => $request->Curso,
                 'nombre' => $request->nombre,
                 'codEtapa' => $request->codEtapa,
             ]);
@@ -198,6 +198,7 @@ class CursosController extends Controller
             return redirect( route('cursos.crear'));
 
         } catch (\Exception $e) {
+            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 
