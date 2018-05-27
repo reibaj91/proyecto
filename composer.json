@@ -10,6 +10,7 @@
         "laravel/framework": "5.6.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
+        "laravolt/avatar": "^2.0",
         "nuovo/spreadsheet-reader": "^0.5.11",
         "rap2hpoutre/fast-excel": "^0.2.0"
     },

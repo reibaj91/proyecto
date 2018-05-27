@@ -122,8 +122,8 @@ class AlumnosController extends Controller
             DB::beginTransaction();
             $alumnos = (new FastExcel)->import($path, function ($line) {
                 if ($line['Alumno'] != "") {
-                    if ($line['Estado Matrícula'] != 'Obtiene Título' &&
-                        $line['Estado Matrícula'] != 'Anulada' &&
+                    if ($line['Estado Matrícula'] != 'Obtiene Título' ||
+                        $line['Estado Matrícula'] != 'Anulada' ||
                         $line['Estado Matrícula'] != 'Trasladada') {
                         return Alumnos::create([
                             'nombreCompleto' => $line['Alumno'],
@@ -246,5 +246,4 @@ class AlumnosController extends Controller
         }
 
     }
-
 }

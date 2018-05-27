@@ -55,22 +55,23 @@
                                             </thead>
                                             <tbody>
                                             @foreach($aplicaciones as $a)
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" id="{{$a->idaplicacion}}">
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->nombre}}</td>
                                                     <td class="text-center"
-                                                        style="vertical-align: middle">{{$a->icono}}</td>
+                                                        style="vertical-align: middle">
+                                                        <div><img src='/images/aplicaciones/{{$a->icono}}'></div></td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$a->URL}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
                                                         <div>
-                                                            <button class="btn btn-round btn-primary">
+                                                            <a href="{{route('aplicaciones.editar',[$a->idaplicacion])}}" class="btn btn-round btn-primary">
                                                                 <div>
                                                                     Editar
 
                                                                 </div>
-                                                            </button>
-                                                            <button class="btn btn-round btn-danger">
+                                                            </a>
+                                                            <button onclick="borrar('{{$a->idaplicacion}}','{{$a->nombre}}');" class="btn btn-round btn-danger">
                                                                 <div>
                                                                     Eliminar
                                                                 </div>
@@ -93,5 +94,38 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        function borrar(id,nombre) {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Vas a borrar a "+nombre,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
+
+                $.ajax({
+                    url: '{{route('aplicaciones.delete')}}',
+                    method: "post",
+                    data: {
+                        "id": id,
+                        "_token": "{{Session::token()}}"
+                    },
+                    success: function (data) {
+                        $("#"+id).remove();
+                        swal(
+                            'Borrado!',
+                            'Has borrado a '+nombre,
+                            'success'
+                        )
+                    }
+                });
+            }
+        })
+        }
+    </script>
 @endsection
 

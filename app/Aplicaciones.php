@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PerfilApp;
 
 class Aplicaciones extends Model
 {
@@ -10,6 +11,7 @@ class Aplicaciones extends Model
 
     protected $primaryKey='idaplicacion';
     public $incrementing=false;
+
     protected $fillable = [
 
         'idaplicacion',
@@ -21,6 +23,10 @@ class Aplicaciones extends Model
     ];
 
     public function perfiles(){
-        return $this->hasMany('App/Perfiles');
+        return $this->hasMany(PerfilApp::class, 'idaplicacion', 'idaplicacion');
+    }
+
+    public function scopeChecked($query,$idapp,$idperfil){
+        return $query->join('perfilapp','perfilapp.idaplicacion','=','aplicaciones.idaplicacion')->where('perfilapp.idaplicacion','=',$idapp)->where('perfilapp.idperfil','=',$idperfil);
     }
 }

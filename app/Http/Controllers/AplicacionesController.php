@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class AplicacionesController extends Controller
 {
@@ -18,6 +19,11 @@ class AplicacionesController extends Controller
         Route::group(['prefix'=> 'Aplicaciones'], function (){
             Route::get('/', 'AplicacionesController@index')->name('aplicaciones');
             Route::get('nueva', 'AplicacionesController@nueva')->name('aplicaciones.nueva');
+
+            Route::get('editar/{id}', 'AplicacionesController@editar')->name('aplicaciones.editar')->where('id', '[0-9]+');
+            Route::post('edit', 'AplicacionesController@edit')->name('aplicaciones.edit');
+
+            Route::post('borrar', 'AplicacionesController@delete')->name('aplicaciones.delete');
 
             Route::post('store', 'AplicacionesController@store')->name('aplicaciones.store');
             Route::post('pre-validar', 'AplicacionesController@preValidar')->name('aplicaciones.pre-validar');
@@ -37,15 +43,102 @@ class AplicacionesController extends Controller
         return view('aplicaciones.alta')->with('perfiles',$perfiles);
     }
 
+    public function editar($id)
+    {
+        $aplicaciones = Aplicaciones::where('idaplicacion', $id)->first();
+        $perfiles= Perfiles::all();
+        $perfilapp= PerfilApp::where('idaplicacion', $id);
+        return view('aplicaciones.editar', [
+            'aplicaciones' => $aplicaciones,
+            'perfiles' => $perfiles,
+            'perfilapp' =>$perfilapp,
+        ]);
+    }
+
+    public function edit(Request $request)
+    {
+
+        $this->validatorEdit($request->all())->validate();
+
+        $aplicaciones = Aplicaciones::where('idaplicacion','=',$request->id)->first();
+
+        DB::delete('delete from perfilapp where idaplicacion='.$aplicaciones->idaplicacion);
+
+        if ($request->hasFile('icono')) {
+            $filename = public_path(). '/images/aplicaciones/' . $aplicaciones->icono;
+            File::delete($filename);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $aplicaciones->idaplicacion = $request->idapp;
+            $aplicaciones->nombre = $request->nombre;
+            if($request->icono != null)
+                $aplicaciones->icono = $request->icono;
+
+            $aplicaciones->URL = $request->url;
+
+
+            if ($request->hasFile('icono')) {
+                $imageName = $aplicaciones->idaplicacion . '.' . $request->file('icono')->getClientOriginalExtension();
+
+                $request->file('icono')->move(base_path() . '/public/images/aplicaciones/', $imageName);$aplicaciones->icono = $imageName;
+
+                $aplicaciones->update();
+            }
+
+            $aplicaciones->save();
+
+            foreach ($request->perfil as $item)
+            {
+                PerfilApp::create([
+                    'idperfil' => $item,
+                    'idaplicacion' => $request->idapp,
+                ]);
+            }
+
+            DB::commit();
+            Session::flash('message', "Aplicación editada con éxito");
+
+            return redirect(route('aplicaciones'));
+        } catch (\Exception $e) {
+            dd($e);
+            Session::flash('message', "No se ha podido editar la aplicación");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
+        return redirect(route('aplicaciones'));
+    }
+
+    protected function validatorEdit(array $data)
+    {
+        $mesanje = [
+            'icono.dimensions'=>'El tamaño de los iconos debe ser entre 50x50 y 100x100 pixeles'];
+
+        return Validator::make($data, [
+            'idapp' => 'required|numeric|min:1|unique:aplicaciones,idaplicacion,'.$data['id'].',idaplicacion',
+            'nombre' => 'required|max:255|unique:aplicaciones,nombre,'.$data['id'].',idaplicacion',
+//            'icono' => 'nullable|mimes:jpeg,bmp,png|dimensions:max_width=100,max_height=100,min_width=50,min_height=50',
+            'url' => 'required|max:255|unique:aplicaciones,URL,'.$data['id'].',idaplicacion',
+            'perfil' => 'required|min:1'
+        ],$mesanje);
+    }
+
     protected function validator(array $data)
     {
+        $mesanje = [
+            'icono.dimensions'=>'El tamaño de los iconos debe ser entre 50x50 y 100x100 pixeles'];
+
         return Validator::make($data, [
             'idapp' => 'required|numeric|min:1|unique:aplicaciones,idaplicacion',
             'nombre' => 'required|max:255|unique:aplicaciones,nombre',
+            'icono' => 'required|mimes:jpeg,bmp,png|dimensions:max_width=100,max_height=100,min_width=50,min_height=50',
             'url' => 'required|max:255|unique:aplicaciones,URL',
-            'icono' => 'required|mimes:jpeg,bmp,png',
             'perfil' => 'required|min:1'
-        ]);
+        ],$mesanje);
     }
 
     public function preValidar(Request $request)
@@ -95,6 +188,29 @@ class AplicacionesController extends Controller
             return redirect( route('aplicaciones.nueva'));
 
         } catch (\Exception $e) {
+            $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+    }
+
+    public function delete(Request $request){
+
+        $aplicaciones = Aplicaciones::findOrFail($request->id);
+        try {
+            DB::beginTransaction();
+
+            DB::delete('delete from perfilapp where idaplicacion='.$aplicaciones->idaplicacion);
+
+            $aplicaciones->delete();
+
+            DB::commit();
+            $request->session()->flash('success', "Aplicación eliminada con éxito");
+
+            return redirect(route('aplicaciones'));
+
+        } catch (\Exception $e) {
             dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
@@ -102,4 +218,5 @@ class AplicacionesController extends Controller
             return back()->withInput();
         }
     }
+
 }
