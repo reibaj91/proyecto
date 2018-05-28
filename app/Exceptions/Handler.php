@@ -58,11 +58,11 @@ class Handler extends ExceptionHandler
             switch ($e->getStatusCode()) {
                 // not found
                 case 404:
-                    return response()->view('errors.404',[],404);
+                    return response()->view('404',[],404);
                 break;
                 // internal server error
                 case '500':
-                    return response()->view('errors.500',[],500);    
+                    return response()->view('500',[],500);    
                 break;
                 default:
                     return $this->renderHttpException($e);
