@@ -9,6 +9,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class PerfilApp extends Model
 {
@@ -23,10 +24,18 @@ class PerfilApp extends Model
     ];
 
     public function aplicaciones(){
-        return $this->belongsTo('App/Aplicaciones');
+        return $this->belongsTo(Aplicaciones::class, 'idaplicacion','idaplicacion');
     }
 
     public function perfiles(){
-        return $this->belongsTo('App/Perfiles');
+        return $this->belongsTo(Perfiles::class, 'idPerfil','idperfil');
+    }
+
+    public function scopeAplicacionesUsuario($query){
+        return $query->whereHas('perfiles',function ($query){
+           $query->whereHas('profesores_perfiles',function ($query){
+               $query->where('idUsuario',Auth::id());
+           }) ;
+        });
     }
 }

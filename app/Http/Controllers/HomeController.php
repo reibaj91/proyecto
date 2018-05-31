@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Aplicaciones;
+use App\PerfilApp;
+use App\Perfiles;
+use App\ProfesoresPerfiles;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,7 +33,9 @@ class HomeController extends Controller
         if ($user == null) {
             return view ('admin.createAdmin');
         } else {
-            return view('home');
+            $aplicaciones= PerfilApp::aplicacionesUsuario()->with('aplicaciones')->get();
+//            dd($aplicaciones);
+            return view('home',['aplicaciones'=>$aplicaciones]);
         }
     }
 

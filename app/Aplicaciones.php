@@ -29,4 +29,6 @@ class Aplicaciones extends Model
     public function scopeChecked($query,$idapp,$idperfil){
         return $query->join('perfilapp','perfilapp.idaplicacion','=','aplicaciones.idaplicacion')->where('perfilapp.idaplicacion','=',$idapp)->where('perfilapp.idperfil','=',$idperfil);
     }
+
+
 }

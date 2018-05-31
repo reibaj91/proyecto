@@ -1,9 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.inicio')
 @section('cuerpo')
     <div id="content">
-
-            <div class="col-mt-5"><h1>Bienvenido {{Auth::user()->nombre}}</h1></div>
-
+        @foreach($aplicaciones as $a)
+          <span class="ruta" onclick="enlace('{{$a->aplicaciones->URL}}')">
+            {{$a->aplicaciones->icono}}
+            {{$a->aplicaciones->nombre}}
+          </span>
+        @endforeach
     </div>
 @endsection
+@section('scripts')
+    <script>
+        function enlace(url) {
+            location.href="http://"+url;
+        }
+    </script>
 
+@endsection
