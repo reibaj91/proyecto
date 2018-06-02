@@ -128,12 +128,45 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+id).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado a '+nombre,
-                            'success'
-                        )
+                        if(data!='sep' && data!='sp' && data!='pe' && data!='se' && data!='s' &&
+                            data!='p' && data!='e'){
+                            $("#"+id).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado a '+nombre,
+                                'success'
+                            )
+                        }else {
+                            switch (data) {
+                                case 'sep':
+                                    texto="Este profesor lo tiene asignado alguna sección, etapa y perfil";
+                                    break;
+                                case 'sp':
+                                    texto="Este profesor lo tiene asignado alguna sección y algún perfil";
+                                    break;
+                                case 'pe':
+                                    texto="Este profesor lo tiene asignado algún perfil y alguna etapa";
+                                    break;
+                                case 'se':
+                                    texto="Este profesor lo tiene asignado alguna sección y etapa";
+                                    break;
+                                case 's':
+                                    texto="Este profesor lo tiene asignado alguna sección";
+                                    break;
+                                case 'p':
+                                    texto="Este profesor lo tiene asignado perfil";
+                                    break;
+                                case 'e':
+                                    texto="Este profesor tiene asignado alguna etapa";
+                                    break;
+                            }
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                texto,
+                                'warning'
+                            )
+                        }
+
                     }
                 });
             }

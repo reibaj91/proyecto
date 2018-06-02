@@ -99,7 +99,7 @@
 @section('scripts')
     <script>
         function borrar(id, nombre) {
-            if(id==1 || id==2 || id==3){
+            if(id==1 || id==2 || id==3 || id==4 || id==5 || id==6){
                 swal({
                     type: 'error',
                     title: 'Oops...',
@@ -126,12 +126,31 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#" + id).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado a ' + nombre,
-                            'success'
-                        )
+                        if(data!='pp' && data!='pa' && data!='ppa'){
+                            $("#" + id).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado a ' + nombre,
+                                'success'
+                            )
+                        } else {
+                            switch (data){
+                                case 'ppa':
+                                    texto="Este perfil lo tiene asignado algún profesor y alguna aplicación"
+                                    break;
+                                case 'pp':
+                                    texto="Este perfil lo tiene asignado algún profesor";
+                                    break;
+                                case 'pa':
+                                    texto="Este perfil lo tiene asignado alguna aplicación"
+                            }
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                texto,
+                                'warning'
+                            )
+                        }
+
                     }
                 });
             }

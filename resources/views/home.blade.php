@@ -3,9 +3,9 @@
     <div id="content">
         @foreach($aplicaciones as $a)
           <span class="ruta" onclick="enlace('{{$a->aplicaciones->URL}}')">
-            {{$a->aplicaciones->icono}}
-            {{$a->aplicaciones->nombre}}
-          </span>
+            <img src="images/aplicaciones/{{$a->aplicaciones->icono}}" style="cursor: pointer"><br>
+              <span style="cursor: pointer">{{$a->aplicaciones->nombre}}</span>
+          </span><br>
         @endforeach
     </div>
 @endsection

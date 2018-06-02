@@ -198,6 +198,13 @@ class AplicacionesController extends Controller
     public function delete(Request $request){
 
         $aplicaciones = Aplicaciones::findOrFail($request->id);
+
+        $perfilapp=PerfilApp::where('idaplicacion',$aplicaciones->idaplicacion)->get();
+
+        if(count($perfilapp)!=0){
+            return 'pa';
+        }
+
         try {
             DB::beginTransaction();
 

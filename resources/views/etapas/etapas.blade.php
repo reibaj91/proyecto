@@ -131,12 +131,20 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+id).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado a '+nombre,
-                            'success'
-                        )
+                        if(data!='c'){
+                            $("#"+id).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado a '+nombre,
+                                'success'
+                            )
+                        } else {
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                'Este etapa esta asignada a algún curso',
+                                'warning'
+                            )
+                        }
                     }
                 });
             }

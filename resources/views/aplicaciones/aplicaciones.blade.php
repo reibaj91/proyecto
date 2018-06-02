@@ -115,12 +115,21 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+id).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado a '+nombre,
-                            'success'
-                        )
+                        if(data!='pa'){
+                            $("#"+id).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado a '+nombre,
+                                'success'
+                            )
+                        } else {
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                'Esta aplicación la tiene asignada algún perfil',
+                                'warning'
+                            )
+                        }
+
                     }
                 });
             }

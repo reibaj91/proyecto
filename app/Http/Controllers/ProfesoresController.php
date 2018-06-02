@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Etapas;
 use App\Profesores;
+use App\ProfesoresPerfiles;
+use App\Secciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use PharIo\Manifest\EmailTest;
 use SpreadsheetReader;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -188,6 +192,38 @@ class ProfesoresController extends Controller
     public function delete(Request $request){
 
         $user = User::findOrFail($request->id);
+
+        $seccion=Secciones::where('tutor',$user->idUsuario)->get();
+        $perfiluser=ProfesoresPerfiles::where('idUsuario',$user->idUsuario)->get();
+        $etapas=Etapas::where('coordinador',$user->idUsuario)->get();
+
+        if(count($seccion)!=0 && count($perfiluser)!=0 && count($etapas)!=0){
+            return 'sep';
+        }
+
+        if(count($seccion)!=0 && count($perfiluser)!=0){
+            return 'sp';
+        }
+
+        if(count($perfiluser)!=0 && count($etapas)!=0){
+            return 'pe';
+        }
+
+        if(count($seccion)!=0 && count($etapas)!=0){
+            return 'se';
+        }
+
+        if(count($seccion)!=0){
+            return 's';
+        }
+
+        if(count($perfiluser)!=0){
+            return 'p';
+        }
+
+        if(count($etapas)!=0){
+            return 'e';
+        }
 
         try {
             DB::beginTransaction();

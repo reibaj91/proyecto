@@ -16,7 +16,7 @@ class Cursos extends Model
         'idCurso',
         'nombre',
         'codEtapa',
-        'idCursoColegio',
+        'codCursoColegio',
         'created_at',
         'updated_at'
     ];

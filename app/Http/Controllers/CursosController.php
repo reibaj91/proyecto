@@ -66,7 +66,7 @@ class CursosController extends Controller
 //                dd($line);
                 if ($line['CodigoColegio'] != "") {
                     return Cursos::create([
-                        'idCursoColegio' => $line['CodigoColegio'],
+                        'codCursoColegio' => $line['CodigoColegio'],
                         'nombre' => $line['Nombre curso'],
                         'codEtapa' => $line['CodEtapa']
                     ]);
@@ -117,7 +117,7 @@ class CursosController extends Controller
 
 
         return Validator::make($data, [
-            'Curso' => 'required|max:255|unique:cursos,idCursoColegio, "'.$data['idCurso'].'" ,idCurso',
+            'Curso' => 'required|max:255|unique:cursos,codCursoColegio, "'.$data['idCurso'].'" ,idCurso',
             'nombre' => 'required|unique:cursos,nombre, "'.$data['idCurso'].'" ,idCurso',
         ], $mensajes);
     }
@@ -139,7 +139,7 @@ class CursosController extends Controller
         try{
             DB::beginTransaction();
 
-            $curso->idCursoColegio = $request->Curso;
+            $curso->codCursoColegio = $request->Curso;
             $curso->nombre=$request->nombre;
             $curso->codEtapa=$request->codEtapa;
             $curso->save();
@@ -188,7 +188,7 @@ class CursosController extends Controller
         try {
             DB::beginTransaction();
             Cursos::create([
-                'idCursoColegio' => $request->Curso,
+                'codCursoColegio' => $request->Curso,
                 'nombre' => $request->nombre,
                 'codEtapa' => $request->codEtapa,
             ]);
@@ -211,7 +211,6 @@ class CursosController extends Controller
     public function delete(Request $request){
 
         $curso = Cursos::where('idCurso',$request->id)->first();
-
 
         $seccion=Secciones::where('idCurso',$curso->idCurso)->get();
 

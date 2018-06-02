@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\PerfilApp;
 use App\Perfiles;
+use App\ProfesoresPerfiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -132,13 +134,28 @@ class PerfilesController extends Controller
 
     public function delete(Request $request){
 
-        if($request->id ==1 || $request->id ==2 || $request->id ==3){
+        if($request->id ==1 || $request->id ==2 || $request->id ==3 || $request->id ==4 || $request->id ==5 || $request->id ==6){
             $request->session()->flash('warning', "Este perfil no se puede eliminar");
 
             return redirect(route('perfiles'));
         }
 
-        $perfiles = Perfiles::where('idPerfil','=',$request->id);
+        $perfiles = Perfiles::where('idPerfil','=',$request->id)->first();
+
+        $proper=ProfesoresPerfiles::where('idPerfil',$perfiles->idPerfil)->get();
+        $perfilapp=PerfilApp::where('idPerfil',$perfiles->idPerfil)->get();
+
+        if(count($proper)!=0 && count($perfilapp)!=0){
+            return 'ppa';
+        }
+
+        if(count($proper)!=0){
+            return 'pp';
+        }
+
+        if(count($perfilapp)!=0){
+            return 'pa';
+        }
 
         try {
             DB::beginTransaction();

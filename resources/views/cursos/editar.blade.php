@@ -41,9 +41,9 @@
                         <div class="col-md-12">
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="Curso" name="Curso" required
-                                       aria-required="true" value="{{ $curso->idCursoColegio }}">
+                                       aria-required="true" value="{{ $curso->codCursoColegio }}">
                                 <span class="bar"></span>
-                                <label for="Curso">Curso</label>
+                                <label for="Curso">Código del Curso</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required

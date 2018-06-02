@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Alumnos;
 use App\Cursos;
 use App\ProfesoresPerfiles;
 use App\Secciones;
@@ -61,7 +62,6 @@ class SeccionesController extends Controller
         if ($secciones != "[]") {
             DB::table('secciones')->delete();
         }
-
 
         try {
             DB::beginTransaction();
@@ -179,7 +179,9 @@ class SeccionesController extends Controller
 
             if($tutor != $request->tutor)
             {
-                $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$tutor.' and idPerfil=2');
+                if($tutor!=null){
+                    $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$tutor.' and idPerfil=2');
+                }
 
                 if ($request->tutor!=null)
                 {
@@ -270,7 +272,13 @@ class SeccionesController extends Controller
     public function delete(Request $request)
     {
 
-        $seccion = Secciones::where('idSeccion', $request->id);
+        $seccion = Secciones::where('idSeccion',$request->id)->first();
+
+        $alumnos = Alumnos::where('idSeccion',$seccion->idSeccion)->get();
+
+        if(count($alumnos)!=0){
+            return 'al';
+        }
 
         try {
             DB::beginTransaction();
@@ -283,6 +291,7 @@ class SeccionesController extends Controller
             return redirect(route('secciones'));
 
         } catch (\Exception $e) {
+            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 

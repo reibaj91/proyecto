@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cursos;
 use App\ProfesoresPerfiles;
 use App\User;
 use App\Etapas;
@@ -153,13 +154,15 @@ class EtapasController extends Controller
 
             if($etapa->coordinador != $request->coordinador)
             {
-
-                $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$etapa->coordinador.' and idPerfil=3');
-
-                ProfesoresPerfiles::create([
-                    'idUsuario' => $request->coordinador,
-                    'idPerfil' => 3,
-                ]);
+                if($etapa->coordinador!=null){
+                    $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$etapa->coordinador.' and idPerfil=3');
+                }
+                if($request->coordinador!=null) {
+                    ProfesoresPerfiles::create([
+                        'idUsuario' => $request->coordinador,
+                        'idPerfil' => 3,
+                    ]);
+                }
             }
 
             DB::commit();
@@ -167,6 +170,7 @@ class EtapasController extends Controller
 
             return redirect(route('etapas'));
         } catch (\Exception $e) {
+            dd($e);
             Session::flash('message', "No se ha podido editar la etapa");
             DB::rollBack();
 
@@ -241,13 +245,17 @@ class EtapasController extends Controller
 
         $etapas = Etapas::where('codEtapa','=',$request->codEtapa)->first();
 
-        $delete = DB::delete('delete from profesores_perfiles where idUsuario='.$etapas->coordinador.' and idPerfil=3');
+        $cursos = Cursos::where('codEtapa','=',$etapas->codEtapa)->get();
+
+        if(count($cursos)!=0){
+            return 'c';
+        }
 
         try {
             DB::beginTransaction();
-
-            $delete = DB::delete('delete from profesores_perfiles where idUsuario='.$etapas->coordinador.' and idPerfil=3');
-
+            if($etapas->coordinador!=null) {
+                $delete = DB::delete('delete from profesores_perfiles where idUsuario=' . $etapas->coordinador . ' and idPerfil=3');
+            }
             $etapas->delete();
 
             DB::commit();

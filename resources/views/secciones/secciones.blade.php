@@ -38,13 +38,13 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 100px;">Sección
+                                                    style="width: 126px;">Cod. Sec. de Rayuela
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: 264px;">Nombre
+                                                    style="width: 200px;">Nombre
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
@@ -68,7 +68,7 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
-                                                    style="width: 123px;">Opciones
+                                                    style="width: 150px;">Opciones
                                                 </th>
                                             </tr>
                                             </thead>
@@ -159,12 +159,21 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function(data) {
-                        $("#"+i).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado '+nombre,
-                            'success'
-                        )
+                        if(data!='al'){
+                            $("#"+i).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado '+nombre,
+                                'success'
+                            )
+                        }else {
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                'Esta sección esta asignada a algún alumno',
+                                'warning'
+                            )
+                        }
+
                     }
                 });
             }

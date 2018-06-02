@@ -43,7 +43,7 @@
                                 <input type="text" class="form-text" id="seccion" name="seccion" required
                                        aria-required="true" value="{{ $secciones->idSeccion }}">
                                 <span class="bar"></span>
-                                <label for="seccion">Sección</label>
+                                <label for="seccion">Código Sección de Rayuela</label>
                             </div>
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input type="text" class="form-text" id="nombre" name="nombre" required

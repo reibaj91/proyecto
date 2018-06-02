@@ -38,7 +38,7 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 162px;">Curso
+                                                    style="width: 162px;">Código del Curso
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
@@ -65,7 +65,7 @@
                                             @foreach($cursos as $c)
                                                 <tr role="row" class="odd" id="{{$i}}">
                                                     <td class="sorting_1 text-center"
-                                                        style="vertical-align: middle">{{$c->idCursoColegio}}</td>
+                                                        style="vertical-align: middle">{{$c->codCursoColegio}}</td>
                                                     <td class="text-center"
                                                         style="vertical-align: middle">{{$c->nombre}}</td>
                                                     <td class="text-center"
@@ -140,9 +140,9 @@
                         }else{
                             swal(
                                 'No se ha podido borrar '+nombre+'!',
-                                'Este curso a alguna sección',
+                                'Este curso esta asignado a alguna sección',
                                 'warning'
-                        )
+                            )
                         }
 
                     }
