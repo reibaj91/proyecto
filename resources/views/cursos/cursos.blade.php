@@ -130,12 +130,21 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        $("#"+i).remove();
-                        swal(
-                            'Borrado!',
-                            'Has borrado '+nombre,
-                            'success'
+                        if(data!='s'){
+                            $("#"+i).remove();
+                            swal(
+                                'Borrado!',
+                                'Has borrado '+nombre,
+                                'success'
                         )
+                        }else{
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                'Este curso a alguna sección',
+                                'warning'
+                        )
+                        }
+
                     }
                 });
             }

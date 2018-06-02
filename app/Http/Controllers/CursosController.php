@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cursos;
 use App\Etapas;
+use App\Secciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -209,8 +210,14 @@ class CursosController extends Controller
 
     public function delete(Request $request){
 
-        $curso = Cursos::where('idCurso',$request->id);
+        $curso = Cursos::where('idCurso',$request->id)->first();
 
+
+        $seccion=Secciones::where('idCurso',$curso->idCurso)->get();
+
+        if(count($seccion)!=0){
+            return 's';
+        }
         try {
             DB::beginTransaction();
 
