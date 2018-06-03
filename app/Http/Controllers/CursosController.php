@@ -53,6 +53,21 @@ class CursosController extends Controller
 
         $path = $file->path();
 
+        $secciones=Secciones::where('idCurso','<>',null)->get();
+        if ($secciones != "[]") {
+            foreach ($secciones as $seccion)
+            {
+                DB::beginTransaction();
+
+                $seccion->idCurso = null;
+
+                $seccion->save();
+
+                DB::commit();
+            }
+        }
+
+
         $curso=Cursos::all();
 
         if ($curso!="[]"){

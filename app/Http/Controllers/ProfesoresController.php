@@ -103,7 +103,49 @@ class ProfesoresController extends Controller
             'file' => 'mimes:xlsx',
         ]);
 
+        $profesoresperfiles=ProfesoresPerfiles::where('idPerfil','<>',1);
+        if ($profesoresperfiles != "[]") {
+            DB::beginTransaction();
+            $profesoresperfiles->delete();
+            DB::commit();
+        }
+
+        $etapas=Etapas::where('coordinador','<>',null)->get();
+        if ($etapas != "[]") {
+            foreach ($etapas as $etapa)
+            {
+                DB::beginTransaction();
+
+                $etapa->coordinador = null;
+
+                $etapa->save();
+
+                DB::commit();
+            }
+        }
+
+        $secciones=Secciones::where('tutor','<>',null)->get();
+        if ($secciones != "[]") {
+            foreach ($secciones as $seccion)
+            {
+                DB::beginTransaction();
+
+                $seccion->tutor = null;
+
+                $seccion->save();
+
+                DB::commit();
+            }
+        }
+
+        $profesores=User::where('idUsuario','<>',1);
+        if ($profesores != "[]") {
+            DB::beginTransaction();
+            $profesores->delete();
+            DB::commit();
+        }
         $path = $file->path();
+
 
 
         try {
@@ -123,6 +165,7 @@ class ProfesoresController extends Controller
             return redirect(route('profesores'));
 
         } catch (\Exception $e) {
+            dd($e);
             Session::flash('message', "No se ha podido importar a los profesores");
             DB::rollBack();
 

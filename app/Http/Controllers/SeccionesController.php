@@ -59,7 +59,15 @@ class SeccionesController extends Controller
 
         $secciones = Secciones::all();
 
+
+        if (Alumnos::where('idSeccion','<>',null)->get()){
+            Session::flash('message', "No se han podido importar las secciones porque existen alumnos asociados a alguna sección");
+
+            return redirect(route('secciones.importar'));
+        }
+
         if ($secciones != "[]") {
+            if (count)
             DB::table('secciones')->delete();
         }
 

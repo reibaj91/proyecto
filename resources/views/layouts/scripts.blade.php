@@ -308,7 +308,90 @@
     });
 </script>
 <!-- end: Javascript -->
+<script>
 
+
+
+    function inicio() {
+        var hoy = new Date();
+        var dd = hoy.getDate();
+        var mm = hoy.getMonth()+1;
+        swal({
+            title: '¿Estás seguro?',
+            text: "Este proceso borrará los alumnos, profesores, secciones",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Borrar'
+        }).then((result) => {
+            if (result.value) {
+                if((mm<=6 && dd<=19)&&(mm>=9&& dd>=21)){
+                    swal({
+                        title: '¿Desea continuar?',
+                        text: "No es una fecha habitual para realizar esta operación",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Borrar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                        $.ajax({
+                            url: '#',
+                            method: "post",
+                            data: {
+                                "_token": "{{Session::token()}}"
+                            },
+                            success: function (data) {
+                                swal(
+                                    'Terminado!',
+                                    'Has iniciado un nuevo curso',
+                                    'success'
+                                )
+                            }
+                        });
+                    }
+                })
+
+                }
+        }
+    })
+    }
+
+
+    function eliGestor() {
+        swal({
+            title: '¿Estás seguro?',
+            text: "Vas a borrar el gestor de la aplicación",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Borrar'
+        }).then((result) => {
+            if (result.value) {
+
+            $.ajax({
+                url: '{{route('gestor.eliminar')}}',
+                method: "post",
+                data: {
+                    "_token": "{{Session::token()}}"
+                },
+                success: function (data) {
+                    swal(
+                        'Borrado!',
+                        'Has borrado al gestor',
+                        'success'
+                    )
+                    setTimeout('document.location.reload()',1500);
+                }
+            });
+        }
+    })
+    }
+</script>
 
 <script>
     function borrarProfesor(id, nombre) {

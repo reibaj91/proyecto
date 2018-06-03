@@ -40,18 +40,35 @@
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                 <input id="file" type="file" class="form-control" name="file" required>
                             </div>
-
-                            <div class="col-md-12">
-                                <button class="btn btn-danger" onclick="continuar(event)">Importar</button>
-                            </div>
                         </div>
                     </form>
+                    <div class="col-md-12">
+                        <button class="btn btn-danger" onclick="continuar()">Importar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+    <script>
+        function continuar() {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Este proceso borrará a todos los alumnos",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Borrar'
+            }).then((result) => {
+                if (result.value) {
 
+                document.getElementById("signupForm").submit();
+
+            }
+        })
+        }
+    </script>
 @endsection
 

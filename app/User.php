@@ -44,11 +44,22 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeGestor($query){
+        return $query->whereHas('perfil', function ($query)  {
+            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->where('profesores_perfiles.idPerfil', '=', 4);
+        });
+    }
+
+    public function scopeAdministrador($query){
+        return $query->whereDoesntHave('perfil', function ($query)  {
+            $query->where('profesores_perfiles.idPerfil', '=', [1,4]);
+        });
+    }
+
 
     public function perfil(){
         return $this->hasMany(ProfesoresPerfiles::class, 'idUsuario', 'idUsuario');
     }
-
 
 
     public function seccion()

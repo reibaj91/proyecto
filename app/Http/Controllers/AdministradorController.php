@@ -18,5 +18,21 @@ class AdministradorController extends Controller
         return view('admin.index');
     }
 
+    public function inicio()
+    {
+        $profesoresperfiles=ProfesoresPerfiles::where('idPerfil','<>',1);
+        if ($profesoresperfiles != "[]") {
+            DB::beginTransaction();
+            $profesoresperfiles->delete();
+            DB::commit();
+        }
+
+        $profesores=User::where('idUsuario','<>',1);
+        if ($profesores != "[]") {
+            DB::beginTransaction();
+            $profesores->delete();
+            DB::commit();
+        }
+    }
 
 }
