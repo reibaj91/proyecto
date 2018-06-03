@@ -49,6 +49,13 @@ class SeccionesController extends Controller
 
     public function import(Request $request)
     {
+        if($request->file==null){
+            Session::flash('message', "Debe seleccionar un archivo");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
         $file = $request->file('file');
 
         $request->validate([
@@ -59,8 +66,8 @@ class SeccionesController extends Controller
 
         $secciones = Secciones::all();
 
-
-        if (Alumnos::where('idSeccion','<>',null)->get()){
+        $alumnos= Alumnos::whereNotNull('idSeccion')->get();
+        if ($alumnos!='[]'){
             Session::flash('message', "No se han podido importar las secciones porque existen alumnos asociados a alguna sección");
 
             return redirect(route('secciones.importar'));

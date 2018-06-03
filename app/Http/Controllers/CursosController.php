@@ -45,6 +45,13 @@ class CursosController extends Controller
 
     public function import(Request $request)
     {
+        if($request->file==null){
+            Session::flash('message', "Debe seleccionar un archivo");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
         $file = $request->file('file');
 
         $request->validate([

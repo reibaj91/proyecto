@@ -8,7 +8,11 @@
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Miminium</title>
-
+  <script>
+      function volver() {
+          window.history.back();
+      }
+  </script>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="/asset/css/bootstrap.min.css">
 
@@ -45,7 +49,7 @@
     <center>
       <div class="page-404 animated flipInX">
         <img src="/asset/img/404Error.png" class="img-responsive imagen"/><br>
-        <button class="btn btn-primary" href="#">
+        <button class="btn btn-primary" onclick="volver()">
           Volver
         </button>
       </div>
@@ -71,3 +75,6 @@
 <!-- end: Javascript -->
 </body>
 </html>
+
+
+

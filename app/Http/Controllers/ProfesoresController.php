@@ -65,12 +65,16 @@ class ProfesoresController extends Controller
 
         $user =User::findOrFail($request->id);
 
+        if(!isset($request->baja_temporal)){
+            $request->baja_temporal='N';
+        }
 
         try{
             DB::beginTransaction();
 
             $user->nombre = $request->nombre;
-            $user->email=$request->email;
+            $user->email = $request->email;
+            $user->baja_temporal= $request->baja_temporal;
 
             $user->save();
 
@@ -97,6 +101,12 @@ class ProfesoresController extends Controller
 
     public function import(Request $request)
     {
+        if($request->file==null){
+            Session::flash('message', "Debe seleccionar un archivo");
+            DB::rollBack();
+            return back()->withInput();
+        }
+
         $file = $request->file('file');
 
         $request->validate([
@@ -144,9 +154,8 @@ class ProfesoresController extends Controller
             $profesores->delete();
             DB::commit();
         }
+
         $path = $file->path();
-
-
 
         try {
             DB::beginTransaction();
@@ -165,7 +174,6 @@ class ProfesoresController extends Controller
             return redirect(route('profesores'));
 
         } catch (\Exception $e) {
-            dd($e);
             Session::flash('message', "No se ha podido importar a los profesores");
             DB::rollBack();
 
@@ -196,7 +204,7 @@ class ProfesoresController extends Controller
     {
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:profesores,nombre,' . $data['id'].',idUsuario',
-            'email' => 'email|required|unique:profesores,email,' . $data['id'].',idUsuario',
+            'email' => 'email|required|regex:[.+@evg\.es]|unique:profesores,email,' . $data['id'].',idUsuario',
         ]);
     }
 

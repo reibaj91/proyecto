@@ -112,11 +112,27 @@ class AlumnosController extends Controller
 
     public function importTotal(Request $request)
     {
+        if($request->file==null){
+            Session::flash('message', "Debe seleccionar un archivo");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
         $file = $request->file('file');
 
         $request->validate([
             'file' => 'mimes:xlsx',
         ]);
+
+        $secciones= Secciones::all();
+
+        if($secciones=='[]'){
+            Session::flash('message', "Debe importar primero las secciones");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
 
         $path = $file->path();
 
@@ -166,6 +182,13 @@ class AlumnosController extends Controller
 
     public function importParcial(Request $request)
     {
+        if($request->file==null){
+            Session::flash('message', "Debe seleccionar un archivo");
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
         $file = $request->file('file');
 
         $request->validate([
@@ -209,7 +232,6 @@ class AlumnosController extends Controller
             return redirect(route('alumnos'));
 
         } catch (\Exception $e) {
-            dd($e);
             Session::flash('message', "No se ha podido importar a los alumnos");
             DB::rollBack();
 

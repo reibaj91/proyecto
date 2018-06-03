@@ -46,8 +46,12 @@
                                 <label for="email">Email</label>
                                 <input type="hidden" name="id" value="{{$user->idUsuario}}">
                             </div>
+                            <div class="form-group form-animate-checkbox" style="margin-top:40px !important;">
+                                <label for="baja_temporal">Situación</label><br>
+                                <input type="checkbox" class="checkbox" id="baja_temporal" name="baja_temporal" value="S" {{ $user->baja_temporal=='S' ? 'checked' : '' }}><label>Baja temporal</label></td>
+                                <span class="bar"></span>
+                            </div>
                         </div>
-
                         <div class="col-md-12">
                             <button class="btn btn-danger">Editar</button>
                         </div>
