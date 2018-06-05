@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Alumnos;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 class AdministradorController extends Controller
@@ -10,6 +12,7 @@ class AdministradorController extends Controller
     {
         Route::group(['prefix' => 'gestion'], function () {
             Route::get('/', 'AdministradorController@index')->name('gestion');
+            Route::get('inicio', 'AdministradorController@inicio')->name('gestion.inicio');
         });
     }
 
@@ -20,19 +23,10 @@ class AdministradorController extends Controller
 
     public function inicio()
     {
-        $profesoresperfiles=ProfesoresPerfiles::where('idPerfil','<>',1);
-        if ($profesoresperfiles != "[]") {
-            DB::beginTransaction();
-            $profesoresperfiles->delete();
-            DB::commit();
-        }
 
-        $profesores=User::where('idUsuario','<>',1);
-        if ($profesores != "[]") {
-            DB::beginTransaction();
-            $profesores->delete();
-            DB::commit();
-        }
+        DB::table('alumnos')->delete();
+
+
     }
 
 }

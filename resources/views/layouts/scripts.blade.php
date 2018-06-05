@@ -318,7 +318,7 @@
         var mm = hoy.getMonth()+1;
         swal({
             title: '¿Estás seguro?',
-            text: "Este proceso borrará los alumnos, profesores, secciones",
+            text: "Este proceso borrará los alumnos, inscripciones y más datos que pueden ser utilizados a posteriori",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -339,8 +339,8 @@
                         if (result.value) {
 
                         $.ajax({
-                            url: '#',
-                            method: "post",
+                            url: '{{route('gestion.inicio')}}',
+                            method: "get",
                             data: {
                                 "_token": "{{Session::token()}}"
                             },
@@ -355,6 +355,21 @@
                     }
                 })
 
+                }else{
+                    $.ajax({
+                        url: '{{route('gestion.inicio')}}',
+                        method: "get",
+                        data: {
+                            "_token": "{{Session::token()}}"
+                        },
+                        success: function (data) {
+                            swal(
+                                'Terminado!',
+                                'Has iniciado un nuevo curso',
+                                'success'
+                            )
+                        }
+                    });
                 }
         }
     })

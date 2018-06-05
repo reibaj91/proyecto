@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function scopePerfiles($query){
         return $query->whereHas('perfil', function ($query)  {
-            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->where('profesores_perfiles.idPerfil', '=', [1,4]);
+            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->whereIn('profesores_perfiles.idPerfil', [1,4]);
         });
     }
 
@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function scopeAdministrador($query){
         return $query->whereDoesntHave('perfil', function ($query)  {
-            $query->where('profesores_perfiles.idPerfil', '=', [1,4]);
+            $query->whereIn('profesores_perfiles.idPerfil', '=', [1,4]);
         });
     }
 

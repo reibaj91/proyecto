@@ -161,6 +161,11 @@ class AlumnosController extends Controller
                             'sexo' => $line['Sexo'],
                         ]);
                     }
+
+                    if ($line['Estado Matrícula']=='Promociona a FCT')
+                    {
+
+                    }
                 }
             });
             DB::commit();
