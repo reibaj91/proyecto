@@ -56,6 +56,7 @@
                                 <span class="bar"></span>
                                 <label for="fecha">Fecha Nacimiento</label>
                             </div>
+                            <label for="sexo"><h4>Sexo</h4></label>
                             <div class="form-animate-radio" style="padding-left:3em;">
                                 <label class="radio">
                                     <input id="sexo" type="radio" name="sexo" value="H" {{  $alumnos->sexo == 'H' ? 'checked' : '' }}/>

@@ -132,21 +132,28 @@
                         "_token": "{{Session::token()}}"
                     },
                     success: function (data) {
-                        if(data!='c'){
+                        if(data=='c'){
+                            swal(
+                                'No se ha podido borrar '+nombre+'!',
+                                'Este etapa esta asignada a algún curso',
+                                'warning'
+                            )
+                        } else if(data=='tienesubestapa') {
+                            swal(
+                                'No se ha podido borrar ' + nombre + '!',
+                                'Este etapa tiene subetapa asignada',
+                                'warning'
+                            )
+                        }else {
                             $("#"+id).remove();
                             swal(
                                 'Borrado!',
                                 'Has borrado a '+nombre,
                                 'success'
                             )
-                        } else {
-                            swal(
-                                'No se ha podido borrar '+nombre+'!',
-                                'Este etapa esta asignada a algún curso',
-                                'warning'
-                            )
                         }
-                    }
+
+                        }
                 });
             }
         })

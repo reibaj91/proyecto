@@ -249,7 +249,7 @@ class AlumnosController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nia' => 'required|max:8|unique:alumnos,nia',
+            'nia' => 'required|numeric|unique:alumnos,nia',
             'nombre' => 'required|max:255',
             'dni' => 'nullable|max:9|unique:alumnos,dni',
             'fecha' => 'required|date',
@@ -263,12 +263,12 @@ class AlumnosController extends Controller
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
-            'nia' => 'required|max:8|unique:alumnos,nia,"'. $data['id'].'",nia',
+            'nia' => 'required|numeric|unique:alumnos,nia,"'. $data['id'].'",nia',
             'nombre' => 'required|max:255',
             'dni' => 'required|max:9|unique:alumnos,dni,"'. $data['id'].'",nia',
             'fecha' => 'required|date',
-            'telefono' => 'required',
-            'telefono_urgencia' => 'nullable',
+            'telefono' => 'required|numeric',
+            'telefono_urgencia' => 'nullable|numeric',
             'email' => 'email|required|unique:alumnos,email,"'. $data['id'].'",nia',
             'seccion' => 'required|max:7',
         ]);
