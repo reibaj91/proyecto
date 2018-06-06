@@ -42,8 +42,8 @@ class EtapasController extends Controller
         $profesores = DB::table('profesores')
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
-                    ->from('profesores_perfiles')
-                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->from('perfiles_profesor')
+                    ->whereRaw('profesores.idUsuario = perfiles_profesor.idUsuario')
                     ->where('idPerfil', '=', 3);
             })
             ->get();
@@ -61,8 +61,8 @@ class EtapasController extends Controller
         $profesores = DB::table('profesores')
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
-                    ->from('profesores_perfiles')
-                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->from('perfiles_profesor')
+                    ->whereRaw('profesores.idUsuario = perfiles_profesor.idUsuario')
                     ->where('idPerfil', '=', 3);
             })
             ->get();
@@ -94,7 +94,7 @@ class EtapasController extends Controller
             if($etapa->coordinador != $request->coordinador)
             {
                 if($etapa->coordinador!=null){
-                    $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$etapa->coordinador.' and idPerfil=3');
+                    $deleted = DB::delete('delete from perfiles_profesor where idUsuario='.$etapa->coordinador.' and idPerfil=3');
                 }
                 if($request->coordinador!=null) {
                     ProfesoresPerfiles::create([
@@ -195,7 +195,7 @@ class EtapasController extends Controller
         try {
             DB::beginTransaction();
             if($etapas->coordinador!=null) {
-                $delete = DB::delete('delete from profesores_perfiles where idUsuario=' . $etapas->coordinador . ' and idPerfil=3');
+                $delete = DB::delete('delete from perfiles_profesor where idUsuario=' . $etapas->coordinador . ' and idPerfil=3');
             }
             $etapas->delete();
 

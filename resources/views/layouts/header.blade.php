@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default header navbar-fixed-top">
     <div class="col-md-12 nav-wrapper">
         <div class="navbar-header" style="width:100%;">
-            @if(App\user::perfiles()->first())
+            @if(App\User::perfiles()->first())
             <div class="opener-left-menu is-open">
                 <span class="top"></span>
                 <span class="middle"></span>

@@ -23,7 +23,6 @@ class ProfesoresPerfilesController extends Controller
     public function asignar(){
         $profesores = User::administrador()->get();
 
-
         return view('profesores-perfiles.asignar',[
             'profesores' => $profesores
         ]);
@@ -36,7 +35,7 @@ class ProfesoresPerfilesController extends Controller
         try {
             DB::beginTransaction();
 
-            $deleted = DB::delete('delete from profesores_perfiles where idPerfil=4');
+            $deleted = DB::delete('delete from perfiles_profesor where idPerfil=4');
 
             DB::commit();
             Session::flash('message', "Gestor eliminado con éxito");

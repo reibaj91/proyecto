@@ -19,7 +19,7 @@ class Perfiles extends Model
     ];
 
 
-    public function profesores_perfiles(){
+    public function perfiles_profesor(){
         return $this->hasMany(ProfesoresPerfiles::class, 'idPerfil','idPerfil');
     }
 

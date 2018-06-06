@@ -113,8 +113,8 @@ class SeccionesController extends Controller
         $tutores = DB::table('profesores')
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
-                    ->from('profesores_perfiles')
-                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->from('perfiles_profesor')
+                    ->whereRaw('profesores.idUsuario = perfiles_profesor.idUsuario')
                     ->where('idPerfil', '=', 2);
             })
             ->get();
@@ -134,8 +134,8 @@ class SeccionesController extends Controller
         $tutores = DB::table('profesores')
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
-                    ->from('profesores_perfiles')
-                    ->whereRaw('profesores.idUsuario = profesores_perfiles.idUsuario')
+                    ->from('perfiles_profesor')
+                    ->whereRaw('profesores.idUsuario = perfiles_profesor.idUsuario')
                     ->where('idPerfil', '=', 2);
             })
             ->get();
@@ -195,7 +195,7 @@ class SeccionesController extends Controller
             if($tutor != $request->tutor)
             {
                 if($tutor!=null){
-                    $deleted = DB::delete('delete from profesores_perfiles where idUsuario='.$tutor.' and idPerfil=2');
+                    $deleted = DB::delete('delete from perfiles_profesor where idUsuario='.$tutor.' and idPerfil=2');
                 }
 
                 if ($request->tutor!=null)

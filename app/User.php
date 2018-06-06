@@ -40,19 +40,19 @@ class User extends Authenticatable
 
     public function scopePerfiles($query){
         return $query->whereHas('perfil', function ($query)  {
-            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->whereIn('profesores_perfiles.idPerfil', [1,4]);
+            $query->where('perfiles_profesor.idUsuario', '=', Auth::id())->whereIn('perfiles_profesor.idPerfil', [1,4]);
         });
     }
 
     public function scopeGestor($query){
         return $query->whereHas('perfil', function ($query)  {
-            $query->where('profesores_perfiles.idUsuario', '=', Auth::id())->where('profesores_perfiles.idPerfil', '=', 4);
+            $query->where('perfiles_profesor.idUsuario', '=', Auth::id())->where('perfiles_profesor.idPerfil', '=', 4);
         });
     }
 
     public function scopeAdministrador($query){
         return $query->whereDoesntHave('perfil', function ($query)  {
-            $query->whereIn('profesores_perfiles.idPerfil', '=', [1,4]);
+            $query->where('perfiles_profesor.idPerfil', '=', [1,4]);
         });
     }
 
@@ -72,7 +72,7 @@ class User extends Authenticatable
         return $this->hasMany('App/Etapas');
     }
 
-    public function profesores_perfiles()
+    public function perfiles_profesor()
     {
         return $this->hasMany('App/ProfesoresPerfiles');
     }

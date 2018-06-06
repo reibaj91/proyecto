@@ -33,7 +33,7 @@ class PerfilApp extends Model
 
     public function scopeAplicacionesUsuario($query){
         return $query->whereHas('perfiles',function ($query){
-           $query->whereHas('profesores_perfiles',function ($query){
+           $query->whereHas('perfiles_profesor',function ($query){
                $query->where('idUsuario',Auth::id());
            }) ;
         });
