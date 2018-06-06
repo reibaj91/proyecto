@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function scopeAdministrador($query){
         return $query->whereDoesntHave('perfil', function ($query)  {
-            $query->where('perfiles_profesor.idPerfil', '=', [1,4]);
+            $query->whereIn('perfiles_profesor.idPerfil',  [1,4]);
         });
     }
 

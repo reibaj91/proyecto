@@ -51,7 +51,7 @@
                                <label for="dni">DNI</label>
                            </div>
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="date" class="form-text" value="{{old('fecha')}}" id="fecha" name="fecha" required aria-required="true">
+                               <input onclick="poner()" onblur="quitar()" style="color:white;" type="date" class="form-text" value="{{old('fecha')}}" id="fecha" name="fecha" required aria-required="true">
                                <span class="bar"></span>
                                <label for="fecha">Fecha Nacimiento</label>
                            </div>
@@ -107,5 +107,15 @@
         $(document).ready(function(){
             $('#seccion').select2();
         });
+
+        function poner() {
+            document.getElementById("fecha").style.color = "#999";
+        }
+
+        function quitar() {
+            fecha=$("#fecha").val();
+            if(fecha=="")
+                document.getElementById("fecha").style.color = "white";
+        }
     </script>
 @endsection
