@@ -123,8 +123,8 @@ class EtapasController extends Controller
     {
 
         return Validator::make($data, [
+            'codigo' => 'required|max:7|unique:etapas,idEtapaColegio',
             'nombre' => 'required|max:255|unique:etapas,nombre',
-            'codigo' => 'max:7',
         ]);
     }
 
@@ -173,6 +173,7 @@ class EtapasController extends Controller
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
+            'codigo' => 'required|max:7|unique:etapas,idEtapaColegio,'. $data['id'].',codEtapa',
             'nombre' => 'required|max:255|unique:etapas,nombre,' . $data['id'].',codEtapa',
         ]);
     }
