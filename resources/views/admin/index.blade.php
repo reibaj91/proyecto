@@ -5,6 +5,9 @@
             <div class="col-md-12 text-center">
                 <h2>Bienvenido: {{Auth::user()->nombre}}</h2>
             </div>
+            <div class="text-center">
+                <img src="/asset/img/index.png">
+            </div>
         </div>
     </div>
 @endsection
