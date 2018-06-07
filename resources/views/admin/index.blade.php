@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('cuerpo')
+    <style>
+        html{
+            background-color: white;
+        }
+    </style>
     <div id="content">
         <div class="col-md-12" style="background-color: white">
             <div class="col-md-12 text-center">
