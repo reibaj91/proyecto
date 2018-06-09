@@ -185,6 +185,10 @@ class EtapasController extends Controller
         $etapapp = Etapas::where('etapapp','=',$etapas->codEtapa)->get();
         $cursos = Cursos::where('codEtapa','=',$etapas->codEtapa)->get();
 
+        if(count($cursos)!=0 && $etapapp!='[]'){
+            return 'cursoyetapa';
+        }
+
         if(count($cursos)!=0){
             return 'c';
         }

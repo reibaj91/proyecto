@@ -121,7 +121,7 @@ class AplicacionesController extends Controller
         return Validator::make($data, [
             'idapp' => 'required|numeric|min:1|unique:aplicaciones,idaplicacion,'.$data['id'].',idaplicacion',
             'nombre' => 'required|max:255|unique:aplicaciones,nombre,'.$data['id'].',idaplicacion',
-//            'icono' => 'nullable|mimes:jpeg,bmp,png|dimensions:max_width=100,max_height=100,min_width=50,min_height=50',
+            'icono' => 'nullable|mimes:jpeg,bmp,png|dimensions:max_width=100,max_height=100,min_width=50,min_height=50',
             'url' => 'required|max:255|unique:aplicaciones,URL,'.$data['id'].',idaplicacion',
             'perfil' => 'required|min:1'
         ],$mesanje);
@@ -133,7 +133,7 @@ class AplicacionesController extends Controller
             'icono.dimensions'=>'El tamaño de los iconos debe ser entre 50x50 y 100x100 pixeles'];
 
         return Validator::make($data, [
-            'idapp' => 'required|numeric|min:1|unique:aplicaciones,idaplicacion',
+            'idapp' => 'required|numeric|min:0|unique:aplicaciones,idaplicacion',
             'nombre' => 'required|max:255|unique:aplicaciones,nombre',
             'icono' => 'required|mimes:jpeg,bmp,png|dimensions:max_width=100,max_height=100,min_width=50,min_height=50',
             'url' => 'required|max:255|unique:aplicaciones,URL',
@@ -199,11 +199,11 @@ class AplicacionesController extends Controller
 
         $aplicaciones = Aplicaciones::findOrFail($request->id);
 
-        $perfilapp=PerfilApp::where('idaplicacion',$aplicaciones->idaplicacion)->get();
-
-        if(count($perfilapp)!=0){
-            return 'pa';
-        }
+//        $perfilapp=PerfilApp::where('idaplicacion',$aplicaciones->idaplicacion)->get();
+//
+//        if(count($perfilapp)!=0){
+//            return 'pa';
+//        }
 
         try {
             DB::beginTransaction();
@@ -218,7 +218,7 @@ class AplicacionesController extends Controller
             return redirect(route('aplicaciones'));
 
         } catch (\Exception $e) {
-            dd($e);
+//            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 

@@ -74,7 +74,6 @@ class SeccionesController extends Controller
         }
 
         if ($secciones != "[]") {
-            if (count)
             DB::table('secciones')->delete();
         }
 
@@ -95,7 +94,7 @@ class SeccionesController extends Controller
             return redirect(route('secciones'));
 
         } catch (\Exception $e) {
-            dd($e);
+//            dd($e);
             Session::flash('message', "No se ha podido importar las secciones");
             DB::rollBack();
 
@@ -151,18 +150,12 @@ class SeccionesController extends Controller
 
     protected function validatorEdit(array $data)
     {
-        $mensajes = [
-//            'name.required' => "Debe escribir el nombre del profesor",
-//            'email.required' => "Debe introducir el correo del profesor",
-//            'email.email' => "El correo debe tener un formato correcto",
-//            'email.email' => "El correo debe ser unico",
-        ];
-
 
         return Validator::make($data, [
             'seccion' => 'required|max:255|unique:secciones,idSeccion, "'.$data['idSeccion'].'" ,idSeccion',
             'nombre' => 'required|unique:secciones,nombre, "'.$data['idSeccion'].'" ,idSeccion',
-        ], $mensajes);
+            'idSeccionColegio' => 'nullable|max:8|unique:secciones,idSeccionColegio,"'.$data['idSeccion'].'" ,idSeccion',
+        ]);
     }
 
 
@@ -222,11 +215,14 @@ class SeccionesController extends Controller
 
     protected function validator(array $data)
     {
+        $mesanje = [
+            'seccion.required'=>'El campo Código Sección de Rayuela es obligatorio'];
+
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:secciones,nombre',
             'seccion' => 'required|max:7|unique:secciones,idSeccion',
             'idSeccionColegio' => 'nullable|max:8|unique:secciones,idSeccionColegio',
-        ]);
+        ],$mesanje);
     }
 
     public function preValidar(Request $request)

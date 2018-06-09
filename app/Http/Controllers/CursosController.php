@@ -74,13 +74,11 @@ class CursosController extends Controller
             }
         }
 
-
         $curso=Cursos::all();
 
         if ($curso!="[]"){
             DB::table('cursos')->delete();
         }
-
 
         try {
             DB::beginTransaction();
@@ -100,7 +98,6 @@ class CursosController extends Controller
             return redirect(route('cursos'));
 
         } catch (\Exception $e) {
-            dd($e);
             Session::flash('message', "No se ha podido importar los cursos");
             DB::rollBack();
 
@@ -130,18 +127,10 @@ class CursosController extends Controller
 
     protected function validatorEdit(array $data)
     {
-        $mensajes = [
-//            'name.required' => "Debe escribir el nombre del profesor",
-//            'email.required' => "Debe introducir el correo del profesor",
-//            'email.email' => "El correo debe tener un formato correcto",
-//            'email.email' => "El correo debe ser unico",
-        ];
-
-
         return Validator::make($data, [
-            'Curso' => 'required|max:255|unique:cursos,codCursoColegio, "'.$data['idCurso'].'" ,idCurso',
+            'Curso' => 'required|max:255|max:8|unique:cursos,codCursoColegio, "'.$data['idCurso'].'" ,idCurso',
             'nombre' => 'required|unique:cursos,nombre, "'.$data['idCurso'].'" ,idCurso',
-        ], $mensajes);
+        ]);
     }
 
     public function preValidarEdit(Request $request)
@@ -190,7 +179,7 @@ class CursosController extends Controller
 
         return Validator::make($data, [
             'nombre' => 'required|max:255|unique:cursos,nombre',
-            'Curso' => 'required|max:255|unique:cursos,idCurso',
+            'Curso' => 'required|max:255|max:8|unique:cursos,codCursoColegio',
         ], $mensajes);
     }
 
@@ -221,7 +210,7 @@ class CursosController extends Controller
             return redirect( route('cursos.crear'));
 
         } catch (\Exception $e) {
-            dd($e);
+//            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 

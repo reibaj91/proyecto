@@ -118,7 +118,7 @@ class PerfilesController extends Controller
     {
         return Validator::make($data, [#validacion del alta
             'idperfil' => 'required|numeric|min:1|unique:perfiles,idPerfil',
-            'nombre' => 'required|max:15|unique:perfiles,idPerfil',
+            'nombre' => 'required|max:25|unique:perfiles,idPerfil',
         ]);
     }
 
@@ -127,8 +127,7 @@ class PerfilesController extends Controller
     {
 
         return Validator::make($data, [
-            'nombre' => 'required|max:15|unique:perfiles,idPerfil,"'. $data['id'].'",idPerfil',
-
+            'nombre' => 'required|max:25|unique:perfiles,idPerfil,"'. $data['id'].'",idPerfil',
         ]);
     }
 

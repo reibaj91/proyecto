@@ -36,7 +36,7 @@
                         @csrf
                        <div class="col-md-12">
                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                               <input type="text" class="form-text" id="idapp" name="idapp" required aria-required="true" value="{{old('nombre')}}">
+                               <input type="text" class="form-text" id="idapp" name="idapp" required aria-required="true" value="{{old('idapp')}}">
                                <span class="bar"></span>
                                <label for="idapp">Número Identificación de la Aplicación</label>
                            </div>

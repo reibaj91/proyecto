@@ -38,31 +38,39 @@
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 162px;">Nombre
+                                                    style="width: 160px;">Código de Etapa del Colegio
+                                                </th>
+                                                <th class="sorting_asc text-center" tabindex="0"
+                                                    aria-controls="datatables-example"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 160px;">Nombre
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: 264px;">Coordinador
+                                                    style="width: 250px;">Coordinador
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
-                                                    style="width: 123px;">Etapa a la que pertenece
+                                                    style="width: 115px;">Etapa a la que pertenece
                                                 </th>
                                                 <th class="sorting text-center" tabindex="0"
                                                     aria-controls="datatables-example"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
-                                                    style="width: 123px;">Opciones
+                                                    style="width: 140px;">Opciones
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($etapas as $e)
                                                 <tr role="row" class="odd" id="{{$e->codEtapa}}">
+                                                    <td class="sorting_1 text-center"
+                                                        style="vertical-align: middle">{{$e->idEtapaColegio}}</td>
                                                     <td class="sorting_1 text-center"
                                                         style="vertical-align: middle">{{$e->nombre}}</td>
                                                     <td class="text-center" style="vertical-align: middle">
@@ -135,13 +143,19 @@
                         if(data=='c'){
                             swal(
                                 'No se ha podido borrar '+nombre+'!',
-                                'Este etapa esta asignada a algún curso',
+                                'Esta etapa esta asignada a algún curso',
                                 'warning'
                             )
                         } else if(data=='tienesubestapa') {
                             swal(
                                 'No se ha podido borrar ' + nombre + '!',
-                                'Este etapa tiene subetapa asignada',
+                                'Esta etapa tiene subetapa asignada',
+                                'warning'
+                            )
+                        }else if(data=='cursoyetapa') {
+                            swal(
+                                'No se ha podido borrar ' + nombre + '!',
+                                'Esta etapa tiene subetapa y curso asignada',
                                 'warning'
                             )
                         }else {
