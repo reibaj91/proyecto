@@ -56,6 +56,12 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeNoAdministrador($query){
+        return $query->whereDoesntHave('perfil', function ($query)  {
+            $query->whereIn('perfiles_profesor.idPerfil',  [1]);
+        });
+    }
+
 
     public function perfil(){
         return $this->hasMany(ProfesoresPerfiles::class, 'idUsuario', 'idUsuario');

@@ -20,10 +20,10 @@ class ProfesoresPerfiles extends Model
     ];
 
     public function perfiles(){
-        return $this->belongsTo('App/Perfiles');
+        return $this->hasOne(Perfiles::class,'idPerfil','idPerfil');
     }
 
     public function profesores(){
-        return $this->belongsTo('App/User');
+        return $this->hasOne(User::class, 'idUsuario','idUsuario');
     }
 }

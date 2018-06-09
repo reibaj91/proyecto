@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PerfilApp;
 use App\Perfiles;
 use App\ProfesoresPerfiles;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -28,6 +29,14 @@ class PerfilesController extends Controller
 
             Route::post('store', 'PerfilesController@store')->name('perfiles.store');
             Route::post('pre-validar', 'PerfilesController@preValidar')->name('perfiles.pre-validar');
+
+
+            Route::post('asignar', 'PerfilesController@asignar')->name('perfiles.asignar-usuario');
+            Route::post('lista', 'PerfilesController@lista')->name('perfiles.lista');
+
+            Route::post('borrarPefil', 'PerfilesController@borrarPefil')->name('perfiles.borrarPefil');
+
+            Route::get('asignarPerfil','PerfilesController@asignarPerfiles')->name('perfiles.asignar');
         });
     }
 
@@ -118,7 +127,7 @@ class PerfilesController extends Controller
     {
         return Validator::make($data, [#validacion del alta
             'idperfil' => 'required|numeric|min:1|unique:perfiles,idPerfil',
-            'nombre' => 'required|max:25|unique:perfiles,idPerfil',
+            'nombre' => 'required|max:25|unique:perfiles,nombre',
         ]);
     }
 
@@ -174,4 +183,62 @@ class PerfilesController extends Controller
         }
 
     }
+
+    public function asignarPerfiles(){
+
+        $perfiles=Perfiles::whereNotIn('idPerfil',[1,2,3])->get();
+        $profesores=User::noAdministrador()->get();
+
+
+        return view('profesores-perfiles.asignar',[
+            'perfiles' => $perfiles,
+            'profesores' => $profesores,
+        ]);
+
+    }
+
+    public function lista(){
+        $profesorPerfil=ProfesoresPerfiles::with('profesores')->with('perfiles')->whereNotIn('idPerfil',[1,2,3])->get();
+
+        return view('profesores-perfiles.tabla-perfiles-profesores',[
+            'profesorPerfil' => $profesorPerfil
+        ]);
+
+    }
+
+    public function asignar(Request $request){
+
+        $existe=ProfesoresPerfiles::where('idUsuario',$request->usuario)->where('idPerfil',$request->perfil)->first();
+
+        if($existe!=null){
+            return 'existe';
+        }
+
+        try {
+            DB::beginTransaction();
+            ProfesoresPerfiles::create([
+                'idUsuario' => $request->usuario,
+                'idPerfil' => $request->perfil,
+
+            ]);
+
+            DB::commit();
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return back()->withInput();
+        }
+
+    }
+
+    public function borrarPefil(Request $request){
+
+
+        DB::delete('delete from perfiles_profesor where idUsuario='.$request->idUsuario.' and idPerfil='.$request->idPerfil);
+
+
+    }
+
 }

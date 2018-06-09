@@ -3,7 +3,8 @@
     <div class="col-md-12 nav-wrapper">
         <div class="navbar-header" style="width:100%;">
             <a href="{{route('home')}}" class="navbar-brand">
-                <b>EVG</b>
+                <span  style="float:left; margin-top: 15px; margin-right: 5px;"><b>EVG</b></span>
+                <div style="float:left; margin-top: 3px;"><img src="/asset/img/escudo.png" style="width: 48%"></div>
             </a>
 
             <ul class="nav navbar-nav navbar-right user-nav">

@@ -62,16 +62,11 @@
                 </ul>
             </li>
             @unless(App\user::gestor()->first())
-                <li class="ripple"><a href="{{route('perfiles')}}"><span class="fa fa-users"></span>Perfiles</a></li>
-                <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Gestor <span
+                <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-users"></span> Perfiles <span
                                 class="fa-angle-right fa right-arrow text-right"></span> </a>
                     <ul class="nav nav-list tree">
-                        @unless(App\ProfesoresPerfiles::where('idPerfil',4)->first())
-                            <li><a href="{{route('gestor.asignar')}}">Asignar Gestor</a></li>
-                        @endunless
-                        @if(App\ProfesoresPerfiles::where('idPerfil',4)->first())
-                            <li><a href="#" onclick="eliGestor()">Eliminar Gestor</a></li>
-                        @endif
+                        <li><a href="{{route('perfiles.asignar')}}">Asignar Perfiles</a></li>
+                        <li><a href="{{route('perfiles')}}">Listado de Perfiles</a></li>
                     </ul>
                 </li>
                 <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones <span
@@ -94,7 +89,8 @@
         <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
             <ul class="nav nav-list">
                 <li class="active ripple">
-                    <a onclick="inicio()" class="tree-toggle nav-header"><span class="fa-undo fa"></span> Inicio Curso</a>
+                    <a onclick="inicio()" class="tree-toggle nav-header"><span class="fa-undo fa"></span> Inicio
+                        Curso</a>
                 </li>
                 <li class="active ripple">
                     <a class="tree-toggle nav-header"><span class="fa-user fa"></span> Profesores
@@ -146,7 +142,8 @@
                     </ul>
                 </li>
                 @unless(App\user::gestor()->first())
-                    <li class="ripple"><a href="{{route('perfiles')}}"><span class="fa fa-users"></span>Perfiles</a></li>
+                    <li class="ripple"><a href="{{route('perfiles')}}"><span class="fa fa-users"></span>Perfiles</a>
+                    </li>
                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Gestor <span
                                     class="fa-angle-right fa right-arrow text-right"></span> </a>
                         <ul class="nav nav-list tree">
@@ -158,7 +155,8 @@
                             @endif
                         </ul>
                     </li>
-                    <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones <span
+                    <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-adn"></span> Aplicaciones
+                            <span
                                     class="fa-angle-right fa right-arrow text-right"></span> </a>
                         <ul class="nav nav-list tree">
                             <li><a href="{{route('aplicaciones.nueva')}}">Nuevo</a></li>
