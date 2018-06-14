@@ -40,18 +40,22 @@ class PerfilesController extends Controller
         });
     }
 
+//    Nos muestra la vista con un listado de todos los perfiles para borrar y editar
     public function index(){
         $perfiles = Perfiles::all();
 
         return view('perfiles.perfiles')->with('perfiles',$perfiles);
     }
 
+//    Nos muestra la vista para crear nuevos perfiles
     public function nuevo()
     {
 
         return view('perfiles.alta');
     }
 
+
+//    Nos muestra la vista para editar un perfil
     public function editar($id)
     {
         $perfiles = Perfiles::where('idPerfil', $id)->first();
@@ -60,6 +64,7 @@ class PerfilesController extends Controller
         ]);
     }
 
+//    Funcion para editar un perfil
     public function edit(Request $request)
     {
 
@@ -90,6 +95,7 @@ class PerfilesController extends Controller
         return redirect(route('perfiles'));
     }
 
+//    Funcion que llama al validator de la creacion de nuevos perfiles
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -97,6 +103,8 @@ class PerfilesController extends Controller
         return response("Válido", 200);
     }
 
+
+//    Funcion para crear nuevos perfiles
     public function store(Request $request)
     {
 
@@ -123,6 +131,7 @@ class PerfilesController extends Controller
         }
     }
 
+//    Funcion para validar los datos del formulario de crear perfiles
     protected function validator(array $data)
     {
         return Validator::make($data, [#validacion del alta
@@ -131,7 +140,7 @@ class PerfilesController extends Controller
         ]);
     }
 
-
+//    Funcion para validar los datos del formulario de editar los perfiles
     protected function validatorEdit(array $data)
     {
 
@@ -140,6 +149,7 @@ class PerfilesController extends Controller
         ]);
     }
 
+//    Funcion para borrar perfiles
     public function delete(Request $request){
 
         if($request->id ==1 || $request->id ==2 || $request->id ==3 || $request->id ==4 || $request->id ==5 || $request->id ==6){
@@ -184,6 +194,7 @@ class PerfilesController extends Controller
 
     }
 
+//    Nos muestra la vista para asignar perfiles a usuarios
     public function asignarPerfiles(){
 
         $perfiles=Perfiles::whereNotIn('idPerfil',[1,2,3])->get();
@@ -197,6 +208,7 @@ class PerfilesController extends Controller
 
     }
 
+//    Nos carga en la tabla de la vista de asignar perfiles todos los usuarios con sus perfiles
     public function lista(){
         $profesorPerfil=ProfesoresPerfiles::with('profesores')->with('perfiles')->whereNotIn('idPerfil',[1,2,3])->get();
 
@@ -206,6 +218,7 @@ class PerfilesController extends Controller
 
     }
 
+//    Funcion para crear la asignacion de usuario y perfiles
     public function asignar(Request $request){
 
         $existe=ProfesoresPerfiles::where('idUsuario',$request->usuario)->where('idPerfil',$request->perfil)->first();
@@ -233,6 +246,8 @@ class PerfilesController extends Controller
 
     }
 
+
+//    Funcion para borrar perfiles
     public function borrarPefil(Request $request){
 
 

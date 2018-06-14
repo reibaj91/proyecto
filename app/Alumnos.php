@@ -8,10 +8,10 @@ use Carbon\Carbon;
 class Alumnos extends Model
 {
     protected $table = 'alumnos';
-
     protected $primaryKey = 'nia';
     public $incrementing = false;
 
+//    Campo "virtual" que nos permite dar formato a la fecha
     protected $appends = [
         'fechaFormateada'
     ];
@@ -30,10 +30,11 @@ class Alumnos extends Model
         'updated_at'
     ];
 
+//    Relacion con la tabla secciones
     public function seccion(){
         return $this->belongsTo('App/Secciones');
     }
-
+//    Funcion para formatear la fecha
     public function getFechaFormateadaAttribute() {
         return Carbon::parse($this->fechaNacimiento)->format('d/m/Y');
     }

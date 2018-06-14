@@ -27,6 +27,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//    Nos saca la vista del login
     public function index()
     {
         $user = User::all();

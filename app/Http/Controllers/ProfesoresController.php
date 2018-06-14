@@ -37,6 +37,7 @@ class ProfesoresController extends Controller
     }
 
 
+//    Nos muestra la vista con todos los usuarios
     public function index()
     {
         $profesores = User::all();
@@ -44,12 +45,14 @@ class ProfesoresController extends Controller
         return view('profesores.profesores', compact('profesores'));
     }
 
+//    Nos muestra la vista para importar los usuarios del excel
     public function importar()
     {
 
         return view('profesores.importar');
     }
 
+//    Nos muestra la vista para editar un usuario
     public function editar($id)
     {
         $user = User::where('idUsuario', $id)->first();
@@ -59,6 +62,7 @@ class ProfesoresController extends Controller
         ]);
     }
 
+//    Funcion para editar usuarios
     public function edit(Request $request){
 
         $this->validatorEdit($request->all())->validate();
@@ -93,12 +97,14 @@ class ProfesoresController extends Controller
     }
 
 
+//    Nos muestra la vista para crear nuevos usuarios
     public function alta()
     {
 
         return view('profesores.alta');
     }
 
+//    Funcion que nos permite importar los usarios del excel
     public function import(Request $request)
     {
         if($request->file==null){
@@ -184,6 +190,7 @@ class ProfesoresController extends Controller
     }
 
 
+//    Funcion para validar los datos recogidos en el formulario de crear usuarios
     protected function validator(array $data)
     {
 
@@ -193,6 +200,7 @@ class ProfesoresController extends Controller
         ]);
     }
 
+//    Funcion que llama al validator de crear usuarios
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -200,6 +208,7 @@ class ProfesoresController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para validar los datos recogidos en el formulario de editar usuarios
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
@@ -208,6 +217,7 @@ class ProfesoresController extends Controller
         ]);
     }
 
+//    Funcion que llama al validator de editar usuarios
     public function preValidarEdit(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -215,6 +225,7 @@ class ProfesoresController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para crear nuevos usuarios
     public function store(Request $request)
     {
 
@@ -240,6 +251,7 @@ class ProfesoresController extends Controller
         }
     }
 
+//    Funcion para eliminar usuarios
     public function delete(Request $request){
 
         $user = User::findOrFail($request->id);

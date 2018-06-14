@@ -19,10 +19,12 @@ class Perfiles extends Model
     ];
 
 
+//    Relacion con la tabla usuariosPerfiles
     public function perfiles_profesor(){
         return $this->hasMany(ProfesoresPerfiles::class, 'idPerfil','idPerfil');
     }
 
+//    Relacion con la tabla perfilapp
     public function perfilapp(){
         return $this->hasMany(PerfilApp::class, 'idPerfil','idPerfil');
     }

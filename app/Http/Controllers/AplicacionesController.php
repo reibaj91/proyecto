@@ -30,12 +30,14 @@ class AplicacionesController extends Controller
         });
     }
 
+//    Vista con todas las aplicacciones en la que podemos editar y borra
     public function index(){
         $aplicaciones = Aplicaciones::all();
 
         return view('aplicaciones.aplicaciones')->with('aplicaciones',$aplicaciones);
     }
 
+//    Vista para crear las aplicaciones
     public function nueva()
     {
         $perfiles = Perfiles::all();
@@ -43,6 +45,7 @@ class AplicacionesController extends Controller
         return view('aplicaciones.alta')->with('perfiles',$perfiles);
     }
 
+//    Vista para editar las aplicaciones
     public function editar($id)
     {
         $aplicaciones = Aplicaciones::where('idaplicacion', $id)->first();
@@ -55,6 +58,8 @@ class AplicacionesController extends Controller
         ]);
     }
 
+
+//    funcion para editar las aplicaciones
     public function edit(Request $request)
     {
 
@@ -113,6 +118,8 @@ class AplicacionesController extends Controller
         return redirect(route('aplicaciones'));
     }
 
+
+//    funcion para validar el formulario de edicion
     protected function validatorEdit(array $data)
     {
         $mesanje = [
@@ -127,6 +134,7 @@ class AplicacionesController extends Controller
         ],$mesanje);
     }
 
+//    funcion para validar el formulario de creacion de aplicaciones
     protected function validator(array $data)
     {
         $mesanje = [
@@ -141,6 +149,7 @@ class AplicacionesController extends Controller
         ],$mesanje);
     }
 
+//    funcion que llama al validar
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -148,6 +157,7 @@ class AplicacionesController extends Controller
         return response("Válido", 200);
     }
 
+//    funcion para crear las aplicaciones
     public function store(Request $request)
     {
 
@@ -195,15 +205,12 @@ class AplicacionesController extends Controller
         }
     }
 
+
+//    funcion para borrar aplicaciones
     public function delete(Request $request){
 
         $aplicaciones = Aplicaciones::findOrFail($request->id);
 
-//        $perfilapp=PerfilApp::where('idaplicacion',$aplicaciones->idaplicacion)->get();
-//
-//        if(count($perfilapp)!=0){
-//            return 'pa';
-//        }
 
         try {
             DB::beginTransaction();
@@ -218,7 +225,6 @@ class AplicacionesController extends Controller
             return redirect(route('aplicaciones'));
 
         } catch (\Exception $e) {
-//            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 

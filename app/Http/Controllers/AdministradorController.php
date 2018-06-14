@@ -16,16 +16,18 @@ class AdministradorController extends Controller
         });
     }
 
+//    Nos muestra la vista principal al acceder a nuestra aplicacion
     public function index()
     {
         return view('admin.index');
     }
 
+
+//    Esta funcion borra todos los alumnos de la aplicacion
     public function inicio()
     {
 
         DB::table('alumnos')->delete();
-
 
     }
 

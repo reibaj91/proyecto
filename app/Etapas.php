@@ -23,22 +23,27 @@ class Etapas extends Model
         'updated_at'
     ];
 
+//    Relacion Reflexiva
     public function etapaPrincipal(){
         return $this->hasOne(Etapas::class, 'codEtapa', 'etapapp');
     }
 
+//    Relacion con la tabla usuarios
     public function nombreCoordinador(){
         return $this->hasOne(User::class, 'idUsuario', 'coordinador');
     }
 
+//    Relacion con la tabla cursos
     public function cursos(){
         return $this->hasMany('App/Cursos');
     }
 
+//    Relacion con la tabla ususarios
     public function profesores(){
         return $this->belongsTo('App/User');
     }
 
+//    Relacion reflexiva
     public function subetapas(){
         return $this->hasMany('App/Etapas');
     }

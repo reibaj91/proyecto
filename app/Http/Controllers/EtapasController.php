@@ -32,12 +32,14 @@ class EtapasController extends Controller
         });
     }
 
+//    Nos muestra la vista con todas las etapas para poder borrar y editar
     public function index(){
         $etapas = Etapas::all();
 
         return view('etapas.etapas', compact('etapas'));
     }
 
+//    Nos muestra la vista para crear etapa
     public function create() {
         $profesores = DB::table('profesores')
             ->whereNotExists(function ($query) {
@@ -54,6 +56,7 @@ class EtapasController extends Controller
         return view ('etapas.alta')->with('profesores',$profesores)->with('etapas',$etapas);
     }
 
+//    Nos muestra la vista de editar etapas
     public function editar($codEtapa)
     {
         $etapas = Etapas::where('codEtapa', $codEtapa)->first();
@@ -73,6 +76,7 @@ class EtapasController extends Controller
         ]);
     }
 
+//    Funcion para editar las etapas
     public function edit(Request $request){
 
         $this->validatorEdit($request->all())->validate();
@@ -119,6 +123,7 @@ class EtapasController extends Controller
         return redirect(route('etapas'));
     }
 
+//    funcion para validar los datos del formulario de crear etapas
     protected function validator(array $data)
     {
 
@@ -129,6 +134,7 @@ class EtapasController extends Controller
     }
 
 
+//    Funcion que llama al validator
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -136,6 +142,7 @@ class EtapasController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para crear etapas nuevas
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -170,6 +177,7 @@ class EtapasController extends Controller
         }
     }
 
+//    funcion para validar los datos que nos llegan del formulario de editar etapas
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
@@ -178,6 +186,7 @@ class EtapasController extends Controller
         ]);
     }
 
+//    Funcion para borrar etapas
     public function delete(Request $request){
 
 

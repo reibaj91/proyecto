@@ -31,18 +31,23 @@ class CursosController extends Controller
         });
     }
 
+
+//    Nos muestra la vista con todos los cursos
     public function index(){
         $cursos = Cursos::all();
 
         return view('cursos.cursos')->with('cursos',$cursos);
     }
 
+//    Nos muestra la vista para importar los cursos
     public function importar()
     {
 
         return view('cursos.importar');
     }
 
+
+//    Funcion para importar los cursos desde el excel
     public function import(Request $request)
     {
         if($request->file==null){
@@ -83,7 +88,6 @@ class CursosController extends Controller
         try {
             DB::beginTransaction();
             (new FastExcel)->import($path, function ($line) {
-//                dd($line);
                 if ($line['CodigoColegio'] != "") {
                     return Cursos::create([
                         'codCursoColegio' => $line['CodigoColegio'],
@@ -107,6 +111,8 @@ class CursosController extends Controller
         return redirect(route('cursos'));
     }
 
+
+//    Nos muestra la vista para crear los cursos
     public function crear() {
 
         $etapas=Etapas::all();
@@ -114,6 +120,8 @@ class CursosController extends Controller
         return view ('cursos.alta')->with('etapas',$etapas);
     }
 
+
+//    Nos muestra la vista para editar los cursos
     public function editar($id)
     {
         $curso = Cursos::where('idCurso', $id)->first();
@@ -125,6 +133,8 @@ class CursosController extends Controller
         ]);
     }
 
+
+//    Funcion para la validacion del formulario de editar cursos
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
@@ -133,6 +143,7 @@ class CursosController extends Controller
         ]);
     }
 
+//    Funcion que llama al validator edit
     public function preValidarEdit(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -140,6 +151,7 @@ class CursosController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para editar los cursos
     public function edit(Request $request){
 
 
@@ -168,6 +180,7 @@ class CursosController extends Controller
 
     }
 
+//    Validaciones del formulario de crear Cursos
     protected function validator(array $data)
     {
         $mensajes = [
@@ -183,6 +196,7 @@ class CursosController extends Controller
         ], $mensajes);
     }
 
+//    Funcion que llama al validator
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -190,6 +204,8 @@ class CursosController extends Controller
         return response("Válido", 200);
     }
 
+
+//    Funcion para crear los cursos
     public function store(Request $request)
     {
 
@@ -210,7 +226,6 @@ class CursosController extends Controller
             return redirect( route('cursos.crear'));
 
         } catch (\Exception $e) {
-//            dd($e);
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 
@@ -218,7 +233,7 @@ class CursosController extends Controller
         }
     }
 
-
+//    funcion para borrar cursos
     public function delete(Request $request){
 
         $curso = Cursos::where('idCurso',$request->id)->first();

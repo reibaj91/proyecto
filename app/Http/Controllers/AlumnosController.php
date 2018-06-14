@@ -36,6 +36,7 @@ class AlumnosController extends Controller
         });
     }
 
+    //Nos muestra la vista con el listado de todos los alumnos para poder editar y borrar
     public function index()
     {
         $alumnos = Alumnos::all();
@@ -43,18 +44,21 @@ class AlumnosController extends Controller
         return view('alumnos.alumnos', compact('alumnos'));
     }
 
+//    Vista para importar alumnos
     public function importar()
     {
 
         return view('alumnos.importar');
     }
 
+//    Vista para la importación parcial
     public function importarparcial()
     {
 
         return view('alumnos.importarparcial');
     }
 
+//    Vista para crear un nuevo alumno, nos cargará todas las secciones
     public function nuevo()
     {
         $secciones = Secciones::all();
@@ -62,6 +66,7 @@ class AlumnosController extends Controller
         return view('alumnos.alta')->with('secciones', $secciones);
     }
 
+//    Vista para editar los datos de un alumno concreto
     public function editar($id)
     {
         $alumnos = Alumnos::where('nia', $id)->first();
@@ -72,13 +77,11 @@ class AlumnosController extends Controller
         ]);
     }
 
+//    Funcion para editar los datos de un alumno
     public function edit(Request $request)
     {
-
         $this->validatorEdit($request->all())->validate();
-
         $alumnos = Alumnos::findOrFail($request->id);
-
 
         try {
             DB::beginTransaction();
@@ -103,22 +106,21 @@ class AlumnosController extends Controller
 
             Session::flash('message', "No se ha podido editar al alumno");
             DB::rollBack();
-
             return back()->withInput();
         }
 
         return redirect(route('alumnos'));
     }
 
+
+//    funcion para la importación completa de todos los alumnos desde un xlsx
     public function importTotal(Request $request)
     {
         if($request->file==null){
             Session::flash('message', "Debe seleccionar un archivo");
             DB::rollBack();
-
             return back()->withInput();
         }
-
         $file = $request->file('file');
 
         $request->validate([
@@ -161,11 +163,6 @@ class AlumnosController extends Controller
                             'sexo' => $line['Sexo'],
                         ]);
                     }
-
-                    if ($line['Estado Matrícula']=='Promociona a FCT')
-                    {
-
-                    }
                 }
             });
             DB::commit();
@@ -185,6 +182,7 @@ class AlumnosController extends Controller
     }
 
 
+//    funcion para la importacion de determinados alumnos y borrando otros
     public function importParcial(Request $request)
     {
         if($request->file==null){
@@ -246,6 +244,7 @@ class AlumnosController extends Controller
         return redirect(route('alumnos'));
     }
 
+//    funcion para validar los datos que llegan del formulario de alta del alumno
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -260,6 +259,7 @@ class AlumnosController extends Controller
         ]);
     }
 
+    //    funcion para validar los datos que llegan del formulario de edición del alumno
     protected function validatorEdit(array $data)
     {
         return Validator::make($data, [
@@ -274,6 +274,7 @@ class AlumnosController extends Controller
         ]);
     }
 
+    //funcion que llama a la funcion de validación
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -281,6 +282,8 @@ class AlumnosController extends Controller
         return response("Válido", 200);
     }
 
+
+    //funcion para crear los nuevos alumnos
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -312,6 +315,8 @@ class AlumnosController extends Controller
         }
     }
 
+
+//    funcion que borra al alumno seleccionado desde el listado
     public function delete(Request $request){
 
         $alumnos = Alumnos::findOrFail($request->id);

@@ -22,10 +22,12 @@ class Aplicaciones extends Model
         'updated_at'
     ];
 
+//    Relacion con la tabla Perfilapp
     public function perfiles(){
         return $this->hasMany(PerfilApp::class, 'idaplicacion', 'idaplicacion');
     }
 
+//    Funcion con una consulta para ser reutilizada y agilizar los procesos
     public function scopeChecked($query,$idapp,$idperfil){
         return $query->join('perfilapp','perfilapp.idaplicacion','=','aplicaciones.idaplicacion')->where('perfilapp.idaplicacion','=',$idapp)->where('perfilapp.idperfil','=',$idperfil);
     }

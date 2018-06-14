@@ -19,10 +19,12 @@ class ProfesoresPerfiles extends Model
         'updated_at'
     ];
 
+//    Relacion con la tabla perfiles
     public function perfiles(){
         return $this->hasOne(Perfiles::class,'idPerfil','idPerfil');
     }
 
+//    Relacion con la tabla de usuarios
     public function profesores(){
         return $this->hasOne(User::class, 'idUsuario','idUsuario');
     }

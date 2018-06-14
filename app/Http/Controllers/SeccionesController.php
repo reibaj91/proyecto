@@ -34,6 +34,7 @@ class SeccionesController extends Controller
         });
     }
 
+//    Nos muestra la vista con el listado de todas las secciones para editar y eliminar
     public function index()
     {
         $secciones = Secciones::all();
@@ -41,12 +42,14 @@ class SeccionesController extends Controller
         return view('secciones.secciones')->with('secciones', $secciones);
     }
 
+//    Nos muestra la vista para importar secciones del excel
     public function importar()
     {
 
         return view('secciones.importar');
     }
 
+//    Funcion para importar las secciones del excel
     public function import(Request $request)
     {
         if($request->file==null){
@@ -106,6 +109,7 @@ class SeccionesController extends Controller
 
 
 
+//    Nos muestra la vista para crear nuevas secciones
     public function crear()
     {
         $cursos = Cursos::all();
@@ -125,7 +129,7 @@ class SeccionesController extends Controller
     }
 
 
-
+//    Nos muestra la vista para editar una seccion
     public function editar($id)
     {
         $secciones = Secciones::where('idSeccion', $id)->first();
@@ -147,7 +151,7 @@ class SeccionesController extends Controller
     }
 
 
-
+//    Funcion para la validacion del formulario de editar una seccion
     protected function validatorEdit(array $data)
     {
 
@@ -159,7 +163,7 @@ class SeccionesController extends Controller
     }
 
 
-
+//    Funcion que llama al validator del editar secciones
     public function preValidarEdit(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -167,6 +171,7 @@ class SeccionesController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para editar secciones
     public function edit(Request $request)
     {
 
@@ -213,6 +218,7 @@ class SeccionesController extends Controller
 
     }
 
+//    Funcion para validar los datos recogidos del formulario de crear secciones
     protected function validator(array $data)
     {
         $mesanje = [
@@ -225,6 +231,7 @@ class SeccionesController extends Controller
         ],$mesanje);
     }
 
+//    Funcion que llama al validator de la creacion de secciones
     public function preValidar(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -232,6 +239,7 @@ class SeccionesController extends Controller
         return response("Válido", 200);
     }
 
+//    Funcion para la creacion de las secciones
     public function store(Request $request)
     {
 
@@ -264,14 +272,6 @@ class SeccionesController extends Controller
             return redirect(route('secciones.crear'));
 
         } catch (\Exception $e) {
-//            if ($request->tutor==null){
-//                Session::flash('error', "Falta el campo tutor");
-//                return back()->withInput();
-//            }
-//            if($request->curso==null){
-//                Session::flash('error', "Falta el campo curso");
-//                return back()->withInput();
-//            }
             $request->session()->flash('error', "Error al realizar la operación" . $e->getMessage());
             DB::rollBack();
 
@@ -279,7 +279,7 @@ class SeccionesController extends Controller
         }
     }
 
-
+//    Funcion para eliminar una seccion
     public function delete(Request $request)
     {
 

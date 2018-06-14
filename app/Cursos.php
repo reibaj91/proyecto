@@ -22,11 +22,12 @@ class Cursos extends Model
     ];
 
 
-
+//    Relacion con la tabla de etapas
     public function Etapa(){
         return $this->hasOne(Etapas::class, 'codEtapa', 'codEtapa');
     }
 
+//    Relacion con la tabla secciones
     public function seccion(){
         return $this->hasMany('App/Secciones');
     }
